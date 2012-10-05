@@ -44,7 +44,7 @@ class APP
             }
         }
 
-        self::call_action( 'pages', 'error_404', array() );
+        self::call_action( 'errors', 'notfound_404', array() );
     }
 
     public static function add_controller( $name, $object )

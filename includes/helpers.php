@@ -35,6 +35,10 @@ function is_url($controller)
        return false;
    }
 }
+function url($path, $data=array())
+{
+  echo APP::url($path, $data);
+}
 
 function bodyclass()
 {

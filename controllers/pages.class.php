@@ -14,5 +14,12 @@ class PagesController extends Controller
          */
         return new TemplateResponse('home');
     }        
+
+    function secure()
+    {
+        login_required();
+
+        return new TemplateResponse('secure');
+    }
 }
 ?>

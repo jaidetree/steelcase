@@ -66,6 +66,7 @@ ActiveRecord\Config::initialize(function($cfg)
     ));
 });
 
+Auth::init()->set_driver( new StandardAuth() );
 /** 
  * Load our Controllers 
  */

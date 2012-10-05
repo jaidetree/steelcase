@@ -5,12 +5,12 @@ class StandardAuth extends AuthDriver
 
     public function __construct()
     {
-        $this->valid_session = $this->validate_session();
+        session_start();
     }
 
     public function start()
     {
-        session_start();
+        $this->valid_session = $this->validate_session();
     }
 
     public function is_logged_in()
@@ -30,7 +30,7 @@ class StandardAuth extends AuthDriver
         $bcrypt = new Bcrypt(5);
 
         $token = $_SESSION['user']['token'];
-        $time = $_SESION['user']['time'];
+        $time = $_SESSION['user']['time'];
 
         if($bcrypt->verify('tiktok' . $time, $token))
         {
@@ -39,7 +39,6 @@ class StandardAuth extends AuthDriver
         else
         {
             unset($_SESSION['user']);
-            session_unregister('user');
             return false;
         }
     }
@@ -49,7 +48,7 @@ class StandardAuth extends AuthDriver
         $bcrypt = new Bcrypt(15);
         $user = User::find('first', array(
             'conditions' => array( 
-                "LCASE(`username`) = LCASE('?') OR LCASE(`email`) = LCASE('?')", 
+                "LCASE(`username`) = LCASE(?) OR LCASE(`email`) = LCASE(?)", 
                 $name, 
                 $name))
         );
@@ -61,8 +60,8 @@ class StandardAuth extends AuthDriver
              * That email or username has no match
              * That's probably bad...
              */
-            new Message('error', 'Username or email not found in our database.');
-            Context::response(new TemplateResponse('accounts.login', array( 
+            send_message('error', 'Username or email not found in our database.');
+            Context::response(new TemplateResponse('account/login', array( 
                 'status' => 'error' 
             )));
             return false;
@@ -81,8 +80,8 @@ class StandardAuth extends AuthDriver
             /**
              * Passwords didn't match.
              */
-            new Message('error', 'Password does not match.');
-            Context::response(new TemplateResponse('accounts.login', array( 
+            send_message('error', 'Password does not match.');
+            Context::response(new TemplateResponse('account/login', array( 
                 'status' => 'error' 
             )));
             return false;
