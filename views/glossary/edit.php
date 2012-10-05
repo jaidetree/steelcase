@@ -4,7 +4,7 @@
     <table>
         <tr>
             <td class="label">Term</td>
-            <td><input name="name" value="<?php echo $term->name ?>"/></td>
+            <td><input type="text" name="name" value="<?php echo $term->name ?>"/></td>
         </tr>
         <tr>
             <td class="label">Definition</td>
