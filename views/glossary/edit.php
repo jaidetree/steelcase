@@ -1,6 +1,6 @@
 <?php echo render('_header') ?>
 <h1>Glossary Edit Item <?php echo $term->name ?></h1>
-<form action="<?php url('glossary.edit',array($term->slug)); ?>" method="post">
+<form action="<?php url('glossary.update',array($term->slug)); ?>" method="post">
     <table>
         <tr>
             <td class="label">Term</td>
