@@ -50,6 +50,6 @@ form td.label{
 }
 
 form input[type='text'],
-form input[type='textarea']{
+form textarea {
 	width:350px;
 }
