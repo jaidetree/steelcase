@@ -18,8 +18,8 @@
         <td><?php echo $term->user_id ?></td>
         <td><?php echo $term->created_at->format("F j, Y") ?></td>
         <td><?php echo $term->updated_at->format("F j, Y") ?></td>
-        <td><a href="<?php url('glossary.edit', array($term->id)) ?>">Edit</a></td>
-        <td><a href="<?php url('glossary.delete', array($term->id)) ?>">&times;</a></td>
+        <td><a href="<?php url('glossary.edit', array($term->slug)) ?>">Edit</a></td>
+        <td><a href="<?php url('glossary.delete', array($term->slug)) ?>">&times;</a></td>
     </tr>
     <?php endforeach; ?>
 </table>
