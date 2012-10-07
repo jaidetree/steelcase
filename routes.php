@@ -12,7 +12,7 @@ $routes = array(
     array( '^glossary/([-a-z]+)/$', 'glossary.show'),
     array( '^glossary/([-a-z]+)/delete/$', 'glossary.delete'),
     array( '^glossary/([-a-z]+)/edit/$', 'glossary.edit'),
-    array( '^glossary/([-a-z]+)/add/$', 'glossary.add'),
+    array( '^glossary/([-a-z]+)/add', 'glossary.add'),
     array( '^glossary/([-a-z]+)/update/$', 'glossary.update'),
 
     array( '^trainee/$', 'trainee.index'),

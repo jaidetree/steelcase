@@ -1,9 +1,9 @@
 <?php echo render('_header') ?>
 <h1>Glossary Index</h1>
+<div class="add-new"><a href="<?php url('glossary.add', array("new")) ?>">Add new glossary item</a></div>
 <table>
     <tr>
         <th>Term</th>
-        <th>Slug</th>
         <th>Definition</th>
         <th>User</th>
         <th>Created At</th>
@@ -13,7 +13,6 @@
     <?php foreach($terms as $term): ?>
     <tr>
         <td><?php echo $term->name ?></td>
-        <td><?php echo $term->slug ?></td>
         <td><?php echo $term->description ?></td>
         <td><?php echo $term->user_id ?></td>
         <td><?php echo $term->created_at->format("F j, Y") ?></td>
@@ -22,5 +21,6 @@
         <td><a href="<?php url('glossary.delete', array($term->slug)) ?>">&times;</a></td>
     </tr>
     <?php endforeach; ?>
+
 </table>
 <?php echo render('_footer') ?>
