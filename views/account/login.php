@@ -1,12 +1,6 @@
 <?php echo render('_header') ?>
 <h1>Login</h1>
-<?php if( Messenger::has_any() ): ?>
-    <ul class="messages">
-        <?php foreach( Messenger::all() as $message ): ?>
-        <li><?php $message->get('text') ?></li>
-        <?php endforeach; ?>
-    </ul>
-<?php endif; ?>
+<?php echo render('_status') ?>
 <form method="post" action="<?php url('account.login') ?>">
     <fieldset>
         <ul>

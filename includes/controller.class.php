@@ -7,11 +7,11 @@ class Controller
 
         if( Context::has_response() )
         {
-            Context::response()->render();
+            (string)Context::response();
         }
         else
         {
-            $response->render();
+            (string)$response;
         }
     }
 }

@@ -1,6 +1,7 @@
 <?php echo render('_header') ?>
 <h1>Glossary Index</h1>
-<div class="add-new"><a href="<?php url('glossary.add', array("new")) ?>">Add new glossary item</a></div>
+<div class="add-new"><a href="<?php url('glossary.add') ?>">Add new glossary item</a></div>
+<?php echo render('_status') ?>
 
 <table cellpadding="0" cellspacing="0" border="0" class="display" id="assetlist">
     <thead>
@@ -21,7 +22,7 @@
             <td><?php echo $term->user_id ?></td>
             <td><?php echo $term->created_at->format("F j, Y") ?></td>
             <td><?php echo $term->updated_at->format("F j, Y") ?></td>
-            <td><a href="<?php url('glossary.edit', array($term->slug)) ?>">Edit</a> | <a href="<?php url('glossary.delete', array($term->slug)) ?>">&times;</a></td>
+            <td><a href="<?php url('glossary.edit', array($term->slug)) ?>">Edit</a> | <a href="<?php url('glossary.delete', array($term->slug)) ?>" class="delete">&times;</a></td>
         </tr>
     <?php endforeach; ?>
     </tbody>

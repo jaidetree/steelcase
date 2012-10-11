@@ -1,7 +1,16 @@
 <?php
-abstract class Response
+class Response
 {
-    abstract public function render();
+    public function render() 
+    {
+        return "";
+    }
+
+    public function __toString()
+    {
+        $this->render();
+        return '';
+    }
 }
 
 class TemplateResponse extends Response
@@ -24,7 +33,7 @@ class RedirectResponse extends Response
 {
     private $location;
 
-    public function __construct($location, $data=array())
+    public function __construct($location, $data=array(), $status=301)
     {
         if( $data || preg_match('/^[a-z]+\.[a-z]+$/', $location)  )
         {
@@ -43,7 +52,7 @@ class RedirectResponse extends Response
 
     public function render()
     {
-        header("Location: " . $this->location);
+        header("Location: " . $this->location, True, $status);
         die();
     }
 }
@@ -57,6 +66,19 @@ class Error404Response extends TemplateResponse
     {
         header('HTTP/1.0 404 Not Found');
         parent::render();
+    }
+}
+class JSONResponse extends Response
+{
+    private $_data = array();
+
+    public function __construct($data) 
+    {
+        $this->_data = $data;
+    }
+    public function render()
+    {
+        echo json_encode($this->_data);
     }
 }
 ?>

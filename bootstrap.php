@@ -37,7 +37,9 @@ $files = array(
     "context.class.php",
     "messenger.class.php",
     "auth.php",
-    "standardauth.class.php"
+    "standardauth.class.php",
+    "html.php",
+    "fields.php",
 );
 
 /**

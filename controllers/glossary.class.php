@@ -3,52 +3,88 @@ class GlossaryController extends Controller
 {
     public function index()
     {
+        @login_required();
+
         $terms = Glossary::find('all', array('order' => 'name ASC'));
         return new TemplateResponse('glossary/index', array( 'terms' => $terms ));
     }   
 
     public function add()
     {
+        @login_required();
+        /**
+         * Do we have post data?
+         * @todo Show error messages using our error messages.
+         */
+        if( $_POST ) 
+        {
+            /**
+             * Let's validate/sanitize the post data.
+             * Needs to be streamlined in some way.
+             */
+            $_POST['name'] = strip_tags($_POST['name']);
+            $_POST['slug'] = slugify($_POST['name']);
+            $_POST['description'] = strip_tags($_POST['description']);
+            $_POST['created_at'] = time();
+            $_POST['user_id'] = Auth::user('id');
+            $term = new Glossary($_POST);
+            $term->save();
 
-        $term = new Glossary();
+            send_message('success', "Term was successfully created.");
 
-        $term->name = "";
-        $term->slug = "new";
-        $term->description = "";
-        $term->save();
-
-        $term = Glossary::find_by_slug($slug);
-
-        return new TemplateResponse('glossary/edit', array( 'term' => $term ));
+            return new RedirectResponse('glossary.index');
+        }else{
+            /**
+             * No post data so show the add form.
+             */
+            return new TemplateResponse('glossary/add');
+        }
     }
 
     public function edit($slug)
     {
-        $term = Glossary::find_by_slug($slug);
+        @login_required();
 
-        return new TemplateResponse('glossary/edit', array( 'term' => $term ));
+        $term = Glossary::find_by_slug($slug);
+        if( $_POST ) 
+        {
+
+            $term->name = strip_tags($_POST['name']);
+            $term->slug = slugify($_POST['name']);
+            $term->description = strip_tags($_POST['description']);
+            $term->updated_at = time();
+            $term->user_id = Auth::user('id');
+
+            $term->save();
+
+            send_message('success', "Term was successfully updated.");
+
+            return new RedirectResponse('glossary.edit', array( $term->slug ));
+        }
+        else
+        { 
+            return new TemplateResponse('glossary/edit', array('term' => $term));
+        }
     }
 
     public function delete($slug)
     {
-        $term = Glossary::find_by_slug($slug);
+        if( $_SERVER['REQUEST_METHOD'] !== "DELETE") 
+        {
+            return new Error404Response();
+        }
+        if( Auth::is_logged_in() ) 
+        {
 
-        $term->delete(); 
+            $term = Glossary::find_by_slug($slug);
+            $term->delete(); 
+            return new JSONResponse(array( 'status' => 'success' ));
+        }
+        else 
+        {
+            return new JSONResponse(array( 'status' => 'fail', 'message' => 'You are not logged in!'));
+        }
 
-        $terms = Glossary::find('all', array('order' => 'name ASC'));
-        return new TemplateResponse('glossary/index', array( 'terms' => $terms ));
-    }
-    public function update($slug)
-    {
-
-        $term = Glossary::find_by_slug($slug);
-
-        $term->name = $_POST['name'];
-        $term->description = $_POST['description'];
-        $term->save();
-
-        $terms = Glossary::find('all', array('order' => 'name ASC'));
-        return new TemplateResponse('glossary/index', array( 'terms' => $terms ));
     }
 }
 ?>

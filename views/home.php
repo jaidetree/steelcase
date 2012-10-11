@@ -7,4 +7,6 @@
         <li>Controller-&gt;render</li>
         <li>Response-&gt;render</li>
     </ul>
+    <pre>
+    </pre>
 <?php echo render('_footer.php') ?>

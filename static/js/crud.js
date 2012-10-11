@@ -11,17 +11,30 @@
             {
                 return false;
             }
-            
-            var href = $(this).attr('href');
+
+            var href = $(this).attr('href'), 
+                $self = $(this);
+
             $.ajax({
-              url: "href",
+              url: href,
               context: $(this).parents('').get(),
+              type: 'delete',
+              dataType: 'json'
             }).done(function(data) { 
                 if( data.status && data.status == "success" ) 
                 {
-                  $(this).pare;
+                  $self.parents('tr').fadeOut(function(){ $(this).remove(); });
                 }
             });
         });
+
+        /**
+         * Remove status messages after a few seconds.
+         */
+
+         $('ul.messages li').each(function(index){ 
+
+            $(this).delay(1000 * ( index + 2 )).fadeOut(function(){ $(this).remove(); });
+         });
     });
 })(jQuery);
