@@ -46,9 +46,13 @@
         "sPaginationType": "full_numbers",
         "aaSorting": [ [0,'asc'] ],
         "aoColumnDefs": [
-            { "sType": 'string-case', "aTargets": [ 2 ] }
-        ]
-    
+                { "sType": 'string-case', "aTargets": [ 2 ] }
+            ],
+        "aoColumns": [
+                null, null,
+                null, null,
+                null, { "bSortable": false }
+            ]
     } );    
     
 </script>
