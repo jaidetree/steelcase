@@ -78,6 +78,7 @@ class JSONResponse extends Response
     }
     public function render()
     {
+        header('Content-Type: text/json');
         echo json_encode($this->_data);
     }
 }
