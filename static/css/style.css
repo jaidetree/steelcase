@@ -37,6 +37,21 @@ table th,
 table td{
 	padding:10px;
 }
+table td.actions{
+	text-align:center;
+}
+a.edit,
+a.delete{
+	width:20px;
+	height:20px;
+	display:inline-block;
+}
+a.edit{
+	background-image: url('../images/datatable/edit.png');
+}
+a.delete{
+	background-image: url('../images/datatable/delete.png');
+}
 /* -- Table Styles */
 table.display {
 	margin-bottom: 2em;

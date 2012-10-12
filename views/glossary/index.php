@@ -22,13 +22,14 @@
             <td><?php echo $term->user_id ?></td>
             <td><?php echo $term->created_at->format("F j, Y") ?></td>
             <td><?php echo $term->updated_at->format("F j, Y") ?></td>
-            <td><a href="<?php url('glossary.edit', array($term->slug)) ?>">Edit</a> | <a href="<?php url('glossary.delete', array($term->slug)) ?>" class="delete">&times;</a></td>
+            <td class="actions">
+                <a class="edit" href="<?php url('glossary.edit', array($term->slug)) ?>"></a>
+                <a class="delete" href="<?php url('glossary.delete', array($term->slug)) ?>" class="delete"></a>
+            </td>
         </tr>
     <?php endforeach; ?>
     </tbody>
-
 </table>
-
 
 <script type="text/javascript" charset="utf-8">
 
