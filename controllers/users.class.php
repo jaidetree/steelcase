@@ -5,8 +5,8 @@ class UsersController extends Controller
     {
         @login_required();
 
-        $terms = User::find('all', array('order' => 'name ASC'));
-        return new TemplateResponse('users/index', array( 'terms' => $terms ));
+        $users = User::find('all', array('order' => 'id DESC'));
+        return new TemplateResponse('users/index', array( 'users' => $users ));
     }   
 
     public function add()
