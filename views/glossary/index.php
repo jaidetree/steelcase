@@ -19,7 +19,7 @@
         <tr>
             <td><?php echo $term->name ?></td>
             <td><?php echo $term->description ?></td>
-            <td><?php echo $term->user_id ?></td>
+            <td><?php echo $term->user->username ?></td>
             <td><?php echo $term->created_at->format("F j, Y") ?></td>
             <td><?php echo $term->updated_at->format("F j, Y") ?></td>
             <td class="actions">
