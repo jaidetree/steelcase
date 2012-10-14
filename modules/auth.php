@@ -44,6 +44,11 @@ class Auth
         return self::$driver->logout();
     }
 
+    public static function encrypt($password)
+    {
+        return self::$driver->encrypt($password);
+    }
+
     public static function user($key=false, $default=false)
     {
         if( ! $key )

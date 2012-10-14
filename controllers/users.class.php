@@ -15,7 +15,6 @@ class UsersController extends Controller
         @login_required();
         /**
          * Do we have post data?
-         * @todo Show error messages using our error messages.
          */
         if( $_POST ) 
         {
@@ -23,13 +22,35 @@ class UsersController extends Controller
              * Let's validate/sanitize the post data.
              * Needs to be streamlined in some way.
              */
-            $_POST['name'] = strip_tags($_POST['name']);
-            $_POST['slug'] = slugify($_POST['name']);
-            $_POST['description'] = strip_tags($_POST['description']);
-            $_POST['created_at'] = time();
-            $_POST['user_id'] = Auth::user('id');
-            $term = new User($_POST);
-            $term->save();
+            $_POST['username'] = strip_tags($_POST['username']);
+            $_POST['email'] = strip_tags($_POST['email']);
+            $_POST['type'] = intval($_POST['type']);
+            $_POST['status'] = intval($_POST['status']);
+            $_POST['password'] = strip_tags($_POST['password']);
+            $_POST['confirm'] = strip_tags($_POST['confirm']);
+
+            $user = new User();
+            $user->username = $_POST['username'];
+            $user->email = $_POST['email'];
+            $user->type = $_POST['type'];
+            $user->status = $_POST['status'];
+
+            /**
+             * If new user we need to set a password.
+             */
+            if( ! $user->id && $_POST['password'] && $_POST['confirm'] && $_POST['password'] == $_POST['confirm'] )
+            {
+                $user->password = Auth::encrypt($_POST['password']);
+            }
+            else
+            {
+                send_message('error', "Passswords do not match. Correct the mistake and try again.");
+                return new TemplateResponse('users/add', array('user' => $user));
+            }
+
+
+
+            $user->save();
 
             send_message('success', "User was successfully created.");
 
@@ -46,47 +67,64 @@ class UsersController extends Controller
     {
         @login_required();
 
-        $user = User::find_by_id($user_id);
+        $user = User::find($user_id);
+
         if( $_POST ) 
         {
+            $_POST['username'] = strip_tags($_POST['username']);
+            $_POST['email'] = strip_tags($_POST['email']);
+            $_POST['type'] = intval($_POST['type']);
+            $_POST['status'] = intval($_POST['status']);
 
-            $user->name = strip_tags($_POST['name']);
-            $user->slug = slugify($_POST['name']);
-            $user->description = strip_tags($_POST['description']);
-            $user->updated_at = time();
-            $user->user_id = Auth::user('id');
+            $user->username = $_POST['username'];
+            $user->email = $_POST['email'];
+            $user->type = $_POST['type'];
+            $user->status = $_POST['status'];
 
             $user->save();
 
             send_message('success', "Term was successfully updated.");
 
-            return new RedirectResponse('users.edit', array( $term->slug ));
+            return new RedirectResponse('users.index');
         }
         else
         { 
-            return new TemplateResponse('users/edit', array('term' => $term));
+            return new TemplateResponse('users/edit', array('user' => $user));
         }
     }
 
-    public function delete($id)
+    public function reset($user_id)
     {
-        if( $_SERVER['REQUEST_METHOD'] !== "DELETE") 
+        if( $_SERVER['REQUEST_METHOD'] !== "PUT") 
         {
             return new Error404Response();
         }
         if( Auth::is_logged_in() ) 
         {
+            if( Auth::user('type') <= 1 )
+            {
+                $password = substr(md5(time(true)), -12, 10);
+                $user = User::find($user_id);
 
-            $user = User::find_by_id($id);
-            $user->status = 3;
-            $user->save();
-            return new JSONResponse(array( 'status' => 'success' ));
+                if( $user->type == 0 && Auth::user('type') != 0 )
+                {
+                    return new JSONResponse(array( 'status' => 'fail', 'message' => 'You do not have permission to reset a super admin user password!'));
+                }
+
+                $user->password = Auth::encrypt($password); 
+                $user->save();
+
+                return new JSONResponse(array( 'status' => 'success', 'password' => $password ));
+            }
+            else
+            {
+                return new JSONResponse(array( 'status' => 'fail', 'message' => 'You do not have permission to reset passwords!'));
+            }
         }
-        else 
+        else
         {
             return new JSONResponse(array( 'status' => 'fail', 'message' => 'You are not logged in!'));
         }
-
     }
 }
 ?>

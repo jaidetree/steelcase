@@ -24,7 +24,7 @@
             <td><?php echo $term->updated_at->format("F j, Y") ?></td>
             <td class="actions">
                 <a class="edit" href="<?php url('glossary.edit', array($term->slug)) ?>"></a>
-                <a class="delete" href="<?php url('glossary.delete', array($term->slug)) ?>" class="delete"></a>
+                <a class="delete" href="<?php url('glossary.delete', array($term->slug)) ?>"></a>
             </td>
         </tr>
     <?php endforeach; ?>

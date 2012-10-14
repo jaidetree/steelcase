@@ -7,7 +7,8 @@ class User extends ActiveRecord\Model
 
     static $type_choices = array(
         0 => 'Super Admin',
-        1 => 'Admin'
+        1 => 'Admin',
+        2 => 'Restricted'
     );
 
     static $status_choices = array(

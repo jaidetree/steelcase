@@ -22,7 +22,7 @@
             <td><?php echo $user->status_name() ?></td>
             <td class="actions">
                 <a class="edit" href="<?php url('users.edit', array($user->id)) ?>"></a>
-                <a class="delete" href="<?php url('users.delete', array($user->id)) ?>" class="delete"></a>
+                <a class="reset-password" href="<?php url('users.reset', array($user->id)) ?>"></a>
             </td>
         </tr>
     <?php endforeach; ?>
@@ -49,8 +49,7 @@
             ],
         "aoColumns": [
                 null, null,
-                null, null,
-                null, { "bSortable": false }
+                null, null, { "bSortable": false }
             ]
     } );    
     

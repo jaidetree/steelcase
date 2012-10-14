@@ -10,29 +10,29 @@ $routes = array(
     
     array( '^glossary/$', 'glossary.index'),
     array( '^glossary/add/$', 'glossary.add'),
-    array( '^glossary/([-a-z0-9]+)/$', 'glossary.show'),
-    array( '^glossary/([-a-z0-9]+)/delete/$', 'glossary.delete'),
-    array( '^glossary/([-a-z0-9]+)/edit/$', 'glossary.edit'),
+    array( '^glossary/([-a-z]+)/$', 'glossary.show'),
+    array( '^glossary/([-a-z]+)/delete/$', 'glossary.delete'),
+    array( '^glossary/([-a-z]+)/edit/$', 'glossary.edit'),
 
-    array( '^trainee/$', 'trainee.index'),
-    array( '^trainee/([-a-z0-9]+)/$', 'trainee.show'),
-    array( '^trainee/([-a-z0-9]+)/edit/$', 'trainee.edit'),
-    array( '^trainee/add/$', 'trainee.add'),
-    array( '^trainee/([-a-z0-9]+)/update/$', 'trainee.update'),
+    array( '^trainees/$', 'trainees.index'),
+    array( '^trainees/([0-9]+)/$', 'trainees.show'),
+    array( '^trainees/([0-9]+)/edit/$', 'trainees.edit'),
+    array( '^trainees/add/$', 'trainees.add'),
+    array( '^trainees/([0-9]+)/update/$', 'trainees.update'),
 
-    array( '^performance/([-a-z0-9]+)/$', 'performance.show'),
-    array( '^performance/([-a-z0-9]+)/edit/$', 'performance.edit'),
-    array( '^performance/([-a-z0-9]+)/update/$', 'performance.update'),
+    array( '^performance/([-a-z]+)/$', 'performance.show'),
+    array( '^performance/([-a-z]+)/edit/$', 'performance.edit'),
+    array( '^performance/([-a-z]+)/update/$', 'performance.update'),
 
-    array( '^module/([-a-z0-9]+)/$', 'module.show'),
-    array( '^module/([-a-z0-9]+)/edit/$', 'module.edit'),
-    array( '^module/([-a-z0-9]+)/update/$', 'module.update'),
+    array( '^module/([-a-z]+)/$', 'module.show'),
+    array( '^module/([-a-z]+)/edit/$', 'module.edit'),
+    array( '^module/([-a-z]+)/update/$', 'module.update'),
 
     array( '^log/([-a-z]+)/$', 'log.show'),
-
+    
     array( '^users/$', 'users.index'),
     array( '^users/add/$', 'users.add'),
-    array( '^users/([0-9]+)/delete/$', 'users.delete'),
     array( '^users/([0-9]+)/edit/$', 'users.edit'),
+    array( '^users/([0-9]+)/reset/$', 'users.reset'),
 );
 ?>
