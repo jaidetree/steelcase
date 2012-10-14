@@ -3,6 +3,8 @@
  * This page basically loads everything.
  */
 error_reporting( E_ALL & ~E_NOTICE );
+@ini_set("display_errors", 1);
+
 define( 'ROOT', dirname( __FILE__ ) . '/' );
 
 require_once ROOT . "includes/app.class.php";
