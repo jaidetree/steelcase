@@ -29,5 +29,10 @@ $routes = array(
     array( '^module/([-a-z]+)/update/$', 'module.update'),
 
     array( '^log/([-a-z]+)/$', 'log.show'),
+    
+    array( '^users/$', 'users.index'),
+    array( '^users/add/$', 'users.add'),
+    array( '^users/([0-9]+)/edit/$', 'users.edit'),
+    array( '^users/([0-9]+)/reset/$', 'users.reset'),
 );
 ?>

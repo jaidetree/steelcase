@@ -1,30 +1,28 @@
 <?php echo render('_header') ?>
-<h1>Glossary Index</h1>
-<div class="add-new"><a href="<?php url('glossary.add') ?>">Add new glossary item</a></div>
+<h1>Users Index</h1>
+<div class="add-new"><a href="<?php url('users.add') ?>">Add New User</a></div>
 <?php echo render('_status') ?>
 
 <table cellpadding="0" cellspacing="0" border="0" class="display" id="assetlist">
     <thead>
         <tr>
-            <th>Term</th>
-            <th>Definition</th>
-            <th>User</th>
-            <th>Created At</th>
-            <th>Updated At</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Type</th>
+            <th>Status</th>
             <th>Actions</th>
         </tr>
     </thead>
     <tbody>
-    <?php foreach($terms as $term): ?>
+    <?php foreach($users as $user): ?>
         <tr>
-            <td><?php echo $term->name ?></td>
-            <td><?php echo $term->description ?></td>
-            <td><?php echo $term->user->username ?></td>
-            <td><?php echo $term->created_at->format("F j, Y"); ?></td>
-            <td><?php echo $term->updated_at->format("F j, Y"); ?></td>
+            <td><?php echo $user->username ?></td>
+            <td><?php echo $user->email ?></td>
+            <td><?php echo $user->type_name() ?></td>
+            <td><?php echo $user->status_name() ?></td>
             <td class="actions">
-                <a class="edit" href="<?php url('glossary.edit', array($term->slug)) ?>"></a>
-                <a class="delete" href="<?php url('glossary.delete', array($term->slug)) ?>"></a>
+                <a class="edit" href="<?php url('users.edit', array($user->id)) ?>"></a>
+                <a class="reset-password" href="<?php url('users.reset', array($user->id)) ?>"></a>
             </td>
         </tr>
     <?php endforeach; ?>
@@ -51,8 +49,7 @@
             ],
         "aoColumns": [
                 null, null,
-                null, null,
-                null, { "bSortable": false }
+                null, null, { "bSortable": false }
             ]
     } );    
     
