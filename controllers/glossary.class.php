@@ -59,7 +59,7 @@ class GlossaryController extends Controller
 
             send_message('success', "Term was successfully updated.");
 
-            return new RedirectResponse('glossary.edit', array( $term->slug ));
+            return new RedirectResponse('glossary.index', array( $term->slug ));
         }
         else
         { 
