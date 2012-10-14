@@ -14,11 +14,11 @@ $routes = array(
     array( '^glossary/([-a-z]+)/delete/$', 'glossary.delete'),
     array( '^glossary/([-a-z]+)/edit/$', 'glossary.edit'),
 
-    array( '^trainee/$', 'trainee.index'),
-    array( '^trainee/([-a-z]+)/$', 'trainee.show'),
-    array( '^trainee/([-a-z]+)/edit/$', 'trainee.edit'),
-    array( '^trainee/add/$', 'trainee.add'),
-    array( '^trainee/([-a-z]+)/update/$', 'trainee.update'),
+    array( '^trainees/$', 'trainees.index'),
+    array( '^trainees/([0-9]+)/$', 'trainees.show'),
+    array( '^trainees/([0-9]+)/edit/$', 'trainees.edit'),
+    array( '^trainees/add/$', 'trainees.add'),
+    array( '^trainees/([0-9]+)/update/$', 'trainees.update'),
 
     array( '^performance/([-a-z]+)/$', 'performance.show'),
     array( '^performance/([-a-z]+)/edit/$', 'performance.edit'),

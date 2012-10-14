@@ -18,7 +18,7 @@
         <tr>
             <td><?php echo $trainee->employee_id ?></td>
             <td><?php echo $trainee->created_at->format("F j, Y") ?></td>
-            <td><?php echo $trainee->last_visited_at ?></td>
+            <td><?php echo $trainee->last_visited_at() ?></td>
             <td><?php echo $trainee->status ?></td>
             <td class="actions">
                 <a class="edit" href="<?php url('trainees.edit', array($trainee->id)) ?>"></a>

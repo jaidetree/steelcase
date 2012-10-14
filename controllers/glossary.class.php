@@ -22,12 +22,13 @@ class GlossaryController extends Controller
              * Let's validate/sanitize the post data.
              * Needs to be streamlined in some way.
              */
-            $_POST['name'] = strip_tags($_POST['name']);
-            $_POST['slug'] = slugify($_POST['name']);
-            $_POST['description'] = strip_tags($_POST['description']);
-            $_POST['created_at'] = time();
-            $_POST['user_id'] = Auth::user('id');
-            $term = new Glossary($_POST);
+            $term = new Glossary();
+
+            $term->name = strip_tags($_POST['name']);
+            $term->slug = slugify($_POST['name']);
+            $term->description = strip_tags($_POST['description']);
+            $term->user_id = Auth::user('id');
+
             $term->save();
 
             send_message('success', "Term was successfully created.");
@@ -48,13 +49,11 @@ class GlossaryController extends Controller
         $term = Glossary::find_by_slug($slug);
         if( $_POST ) 
         {
-
             $term->name = strip_tags($_POST['name']);
             $term->slug = slugify($_POST['name']);
             $term->description = strip_tags($_POST['description']);
             $term->updated_at = time();
             $term->user_id = Auth::user('id');
-
             $term->save();
 
             send_message('success', "Term was successfully updated.");
