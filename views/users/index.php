@@ -1,6 +1,6 @@
 <?php echo render('_header') ?>
-<h1>Glossary Index</h1>
-<div class="add-new"><a href="<?php url('user.add') ?>">Add New User</a></div>
+<h1>Users Index</h1>
+<div class="add-new"><a href="<?php url('users.add') ?>">Add New User</a></div>
 <?php echo render('_status') ?>
 
 <table cellpadding="0" cellspacing="0" border="0" class="display" id="assetlist">
@@ -18,8 +18,8 @@
         <tr>
             <td><?php echo $user->username ?></td>
             <td><?php echo $user->email ?></td>
-            <td><?php echo $user->type ?></td>
-            <td><?php echo $user->status ?></td>
+            <td><?php echo $user->type_name() ?></td>
+            <td><?php echo $user->status_name() ?></td>
             <td class="actions">
                 <a class="edit" href="<?php url('users.edit', array($user->id)) ?>"></a>
                 <a class="delete" href="<?php url('users.delete', array($user->id)) ?>" class="delete"></a>
