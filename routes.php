@@ -10,9 +10,9 @@ $routes = array(
     
     array( '^glossary/$', 'glossary.index'),
     array( '^glossary/add/$', 'glossary.add'),
-    array( '^glossary/([-a-z]+)/$', 'glossary.show'),
-    array( '^glossary/([-a-z]+)/delete/$', 'glossary.delete'),
-    array( '^glossary/([-a-z]+)/edit/$', 'glossary.edit'),
+    array( '^glossary/([-a-z0-9]+)/$', 'glossary.show'),
+    array( '^glossary/([-a-z0-9]+)/delete/$', 'glossary.delete'),
+    array( '^glossary/([-a-z0-9]+)/edit/$', 'glossary.edit'),
 
     array( '^trainees/$', 'trainees.index'),
     array( '^trainees/([0-9]+)/$', 'trainees.show'),
@@ -20,15 +20,15 @@ $routes = array(
     array( '^trainees/add/$', 'trainees.add'),
     array( '^trainees/([0-9]+)/update/$', 'trainees.update'),
 
-    array( '^performance/([-a-z]+)/$', 'performance.show'),
-    array( '^performance/([-a-z]+)/edit/$', 'performance.edit'),
-    array( '^performance/([-a-z]+)/update/$', 'performance.update'),
+    array( '^performances/$', 'performances.index'),
+    array( '^performances/([0-9]+)/$', 'performances.show'),
+    array( '^performances/([0-9]+)/update/$', 'performances.update'),
 
     array( '^module/([-a-z]+)/$', 'module.show'),
     array( '^module/([-a-z]+)/edit/$', 'module.edit'),
     array( '^module/([-a-z]+)/update/$', 'module.update'),
 
-    array( '^log/([-a-z]+)/$', 'log.show'),
+    array( '^log/$', 'log.index'),
     
     array( '^users/$', 'users.index'),
     array( '^users/add/$', 'users.add'),
