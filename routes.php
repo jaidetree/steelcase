@@ -20,8 +20,9 @@ $routes = array(
     array( '^trainees/add/$', 'trainees.add'),
     array( '^trainees/([0-9]+)/update/$', 'trainees.update'),
 
-    array( '^performance/([0-9]+)/$', 'performances.show'),
-    array( '^performance/([0-9]+)/update/$', 'performances.update'),
+    array( '^performances/$', 'performances.index'),
+    array( '^performances/([0-9]+)/$', 'performances.show'),
+    array( '^performances/([0-9]+)/update/$', 'performances.update'),
 
     array( '^module/([-a-z]+)/$', 'module.show'),
     array( '^module/([-a-z]+)/edit/$', 'module.edit'),
