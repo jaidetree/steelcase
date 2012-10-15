@@ -24,9 +24,10 @@ $routes = array(
     array( '^performances/([0-9]+)/$', 'performances.show'),
     array( '^performances/([0-9]+)/update/$', 'performances.update'),
 
-    array( '^module/([-a-z]+)/$', 'module.show'),
-    array( '^module/([-a-z]+)/edit/$', 'module.edit'),
-    array( '^module/([-a-z]+)/update/$', 'module.update'),
+    array( '^module/$', 'modules.index'),
+    array( '^module/([0-9]+)/edit/$', 'modules.edit'),
+    array( '^module/([0-9]+)/delete/$', 'modules.delete'),
+    array( '^module/add/$', 'modules.add'),
 
     array( '^log/$', 'log.index'),
     

@@ -1,29 +1,24 @@
 <?php echo render('_header') ?>
-<h1>Performances Index</h1>
+<h1>Modules Index</h1>
+<div class="add-new"><a href="<?php url('modules.add') ?>">Add Module</a></div>
 <?php echo render('_status') ?>
 
 <table cellpadding="0" cellspacing="0" border="0" class="display" id="assetlist">
     <thead>
         <tr>
-            <th>Trainee</th>
-            <th>Module</th>
-            <th>Score</th>
-            <th>Duration</th>
-            <th>Time Started</th>
+            <th>ID</th>
+            <th>Name</th>
             <th>Actions</th>
         </tr>
     </thead>
     <tbody>
-    <?php foreach($performances as $performance): ?>
+    <?php foreach($modules as $module): ?>
         <tr>
-            <td><?php echo $performance->trainee ?></td>
-            <td><?php echo $performance->module->name ?></td>
-            <td><?php echo $performance->score ?></td>
-            <td><?php echo $performance->duration ?></td>
-            <td><?php echo $performance->created_at->format("F j, Y h:i a") ?></td>
+            <td><?php echo $module->id ?></td>
+            <td><?php echo $module->name ?></td>
             <td class="actions">
-                <a class="view" href="<?php url('performances.show', array($performance->id)) ?>"></a>
-                <a class="edit" href="<?php url('performances.edit', array($performance->id)) ?>"></a>
+                <a class="edit" href="<?php url('modules.edit', array($module->id)) ?>"></a>
+                <a class="delete" href="<?php url('modules.delete', array($module->id)) ?>"></a>
             </td>
         </tr>
     <?php endforeach; ?>
@@ -49,8 +44,9 @@
                 { "sType": 'string-case', "aTargets": [ 2 ] }
             ],
         "aoColumns": [
-                null, null,
-                null, null, { "bSortable": false }
+                null, 
+                null, 
+                { "bSortable": false }
             ]
     } );    
     

@@ -15,6 +15,8 @@ class PerformancesController extends Controller
         @login_required();
 
         $performance = Performance::find($id);
+        $modules = Modules::find('all', array('order' => 'name ASC'));
+        $trainees = Trainee::find('all', array('order' => 'employee_id ASC'));
 
         if( $_POST ) 
         {
@@ -36,7 +38,7 @@ class PerformancesController extends Controller
         }
         else
         { 
-            return new TemplateResponse('performances/edit', array('performance' => $performance));
+            return new TemplateResponse('performances/edit', array('performance' => $performance, 'modules' => $modules));
         }
     }
 

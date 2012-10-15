@@ -11,7 +11,7 @@
         </tr>
         <tr>
             <td>Module</td>
-            <td><?php echo $performance->module_id ?></td>
+            <td><?php echo $performance->module->name ?></td>
         </tr>
         <tr>
             <td>Score</td>

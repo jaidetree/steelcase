@@ -1,6 +1,6 @@
 <?php echo render('_header') ?>
-<h1>User Edit <?php echo $user->username ?></h1>
-<form action="<?php url('users.edit',array($user->id)); ?>" method="post">
-    <?php echo render('users/_form', array('user' => $user)) ?>
+<h1>Performance Edit <?php echo $performance->id ?></h1>
+<form action="<?php url('performances.edit',array($performance->id)); ?>" method="post">
+    <?php echo render('performances/_form', array('performance' => $performance, 'trainees' => $trainees, 'modules' => $modules)) ?>
 </form>
 <?php echo render('_footer') ?>
