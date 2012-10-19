@@ -3,31 +3,33 @@
 <div class="add-new"><a href="<?php url('users.add') ?>">Add New User</a></div>
 <?php echo render('_status') ?>
 
-<table cellpadding="0" cellspacing="0" border="0" class="display" id="assetlist">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Type</th>
-            <th>Status</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-    <?php foreach($users as $user): ?>
-        <tr>
-            <td><?php echo $user->username ?></td>
-            <td><?php echo $user->email ?></td>
-            <td><?php echo $user->type_name() ?></td>
-            <td><?php echo $user->status_name() ?></td>
-            <td class="actions">
-                <a class="edit" href="<?php url('users.edit', array($user->id)) ?>"></a>
-                <a class="reset-password" href="<?php url('users.reset', array($user->id)) ?>"></a>
-            </td>
-        </tr>
-    <?php endforeach; ?>
-    </tbody>
-</table>
+<div class="page">
+    <table cellpadding="0" cellspacing="0" border="0" class="display" id="assetlist">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Type</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php foreach($users as $user): ?>
+            <tr>
+                <td><?php echo $user->username ?></td>
+                <td><?php echo $user->email ?></td>
+                <td><?php echo $user->type_name() ?></td>
+                <td><?php echo $user->status_name() ?></td>
+                <td class="actions">
+                    <a class="edit" href="<?php url('users.edit', array($user->id)) ?>"></a>
+                    <a class="reset-password" href="<?php url('users.reset', array($user->id)) ?>"></a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
 
 <script type="text/javascript" charset="utf-8">
 

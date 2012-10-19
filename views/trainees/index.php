@@ -3,31 +3,33 @@
 <div class="add-new"><a href="<?php url('trainees.add') ?>">Add new trainee</a></div>
 <?php echo render('_status') ?>
 
-<table cellpadding="0" cellspacing="0" border="0" class="display" id="assetlist">
-    <thead>
-        <tr>
-            <th>Trainee ID</th>
-            <th>Created At</th>
-            <th>Last Login At</th>
-            <th>Status</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-    <?php foreach($trainees as $trainee): ?>
-        <tr>
-            <td><?php echo $trainee->employee_id ?></td>
-            <td><?php echo $trainee->created_at->format("F j, Y") ?></td>
-            <td><?php echo $trainee->last_visited_at() ?></td>
-            <td><?php echo $trainee->status ?></td>
-            <td class="actions">
-                <a class="edit" href="<?php url('trainees.edit', array($trainee->id)) ?>"></a>
-                <a class="delete" href="<?php url('trainees.delete', array($trainee->id)) ?>" class="delete"></a>
-            </td>
-        </tr>
-    <?php endforeach; ?>
-    </tbody>
-</table>
+<div class="page">
+    <table cellpadding="0" cellspacing="0" border="0" class="display" id="assetlist">
+        <thead>
+            <tr>
+                <th>Trainee ID</th>
+                <th>Created At</th>
+                <th>Last Login At</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php foreach($trainees as $trainee): ?>
+            <tr>
+                <td><?php echo $trainee->employee_id ?></td>
+                <td><?php echo $trainee->created_at->format("F j, Y") ?></td>
+                <td><?php echo $trainee->last_visited_at() ?></td>
+                <td><?php echo $trainee->status ?></td>
+                <td class="actions">
+                    <a class="edit" href="<?php url('trainees.edit', array($trainee->id)) ?>"></a>
+                    <a class="delete" href="<?php url('trainees.delete', array($trainee->id)) ?>" class="delete"></a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
 
 <script type="text/javascript" charset="utf-8">
 

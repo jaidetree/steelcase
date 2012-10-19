@@ -15,3 +15,13 @@
     </head>
     <body>
         <div id="wrapper">
+            <nav>
+                <ul>
+                    <li><a href="<?php static_url(); ?>/../../secure/">Dashboard</a></li>
+                    <li><a href="<?php static_url(); ?>/../../users/">Admin Users</a></li>
+                    <li><a href="<?php static_url(); ?>/../../glossary/">Glossary</a></li>
+                    <li><a href="<?php static_url(); ?>/../../trainees/">Trainees</a></li>
+                    <li><a href="<?php static_url(); ?>/../../module/">Modules</a></li>
+                </ul>
+            </nav>
+            <div class="content">

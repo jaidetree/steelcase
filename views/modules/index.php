@@ -3,27 +3,29 @@
 <div class="add-new"><a href="<?php url('modules.add') ?>">Add Module</a></div>
 <?php echo render('_status') ?>
 
-<table cellpadding="0" cellspacing="0" border="0" class="display" id="assetlist">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-    <?php foreach($modules as $module): ?>
-        <tr>
-            <td><?php echo $module->id ?></td>
-            <td><?php echo $module->name ?></td>
-            <td class="actions">
-                <a class="edit" href="<?php url('modules.edit', array($module->id)) ?>"></a>
-                <a class="delete" href="<?php url('modules.delete', array($module->id)) ?>"></a>
-            </td>
-        </tr>
-    <?php endforeach; ?>
-    </tbody>
-</table>
+<div class="page">
+    <table cellpadding="0" cellspacing="0" border="0" class="display" id="assetlist">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php foreach($modules as $module): ?>
+            <tr>
+                <td><?php echo $module->id ?></td>
+                <td><?php echo $module->name ?></td>
+                <td class="actions">
+                    <a class="edit" href="<?php url('modules.edit', array($module->id)) ?>"></a>
+                    <a class="delete" href="<?php url('modules.delete', array($module->id)) ?>"></a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
 
 <script type="text/javascript" charset="utf-8">
 
