@@ -15,33 +15,39 @@ function slugify($str)
 
 function is_page($controller)
 {
-   if( is_url($controller) )
-   {
-       echo "active ";
-   }
+    if( is_url($controller) )
+    {
+        echo "active ";
+    }
 }
 function is_url($controller)
 {
-   $test_url = APP::url($controller);
-   $uri = preg_replace('/\?.*$/', '', $_SERVER['REQUEST_URI']);
-   $url = 'http://' . $_SERVER['HTTP_HOST'] . $uri;
+    $test_url = APP::url($controller);
+    $uri = preg_replace('/\?.*$/', '', $_SERVER['REQUEST_URI']);
+    $url = 'http://' . $_SERVER['HTTP_HOST'] . $uri;
 
-   if( $url == $test_url )
-   {
-       return true;
-   }
-   else
-   {
-       return false;
-   }
+    if( $url == $test_url )
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 function url($path, $data=array())
 {
-  echo APP::url($path, $data);
+    echo APP::url($path, $data);
 }
-
 function bodyclass()
 {
     return "";
+}
+function is_selected($i, $value)
+{
+    if( $i == $value )
+    {
+        echo ' selected';    
+    }
 }
 ?>

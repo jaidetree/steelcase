@@ -1,30 +1,30 @@
 <?php echo render('_header') ?>
-<h1>Glossary Index</h1>
-<div class="add-new"><a href="<?php url('glossary.add') ?>">Add new glossary item</a></div>
+<h1>Performances Index</h1>
 <?php echo render('_status') ?>
+
 <div class="page">
     <table cellpadding="0" cellspacing="0" border="0" class="display" id="assetlist">
         <thead>
             <tr>
-                <th>Term</th>
-                <th>Definition</th>
-                <th>User</th>
-                <th>Created At</th>
-                <th>Updated At</th>
+                <th>Trainee</th>
+                <th>Module</th>
+                <th>Score</th>
+                <th>Duration</th>
+                <th>Time Started</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-        <?php foreach($terms as $term): ?>
+        <?php foreach($performances as $performance): ?>
             <tr>
-                <td><?php echo $term->name ?></td>
-                <td><?php echo $term->description ?></td>
-                <td><?php echo $term->user->username ?></td>
-                <td><?php echo $term->created_at->format("F j, Y"); ?></td>
-                <td><?php echo $term->updated_at->format("F j, Y"); ?></td>
+                <td><?php echo $performance->trainee ?></td>
+                <td><?php echo $performance->module->name ?></td>
+                <td><?php echo $performance->score ?></td>
+                <td><?php echo $performance->duration ?></td>
+                <td><?php echo $performance->created_at->format("F j, Y h:i a") ?></td>
                 <td class="actions">
-                    <a class="edit" href="<?php url('glossary.edit', array($term->slug)) ?>"></a>
-                    <a class="delete" href="<?php url('glossary.delete', array($term->slug)) ?>"></a>
+                    <a class="view" href="<?php url('performances.show', array($performance->id)) ?>"></a>
+                    <a class="edit" href="<?php url('performances.edit', array($performance->id)) ?>"></a>
                 </td>
             </tr>
         <?php endforeach; ?>
@@ -52,11 +52,10 @@
             ],
         "aoColumns": [
                 null, null,
-                null, null,
-                null, { "bSortable": false }
+                null, null, { "bSortable": false }
             ]
     } );    
     
 </script>
-    
+
 <?php echo render('_footer') ?>
