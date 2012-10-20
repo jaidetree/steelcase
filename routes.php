@@ -4,6 +4,7 @@
  * to which URLS using regex patterns.
  */
 $routes = array(
+    array( '^api/(.*)', 'api.route'),
     array( '^$', 'pages.home' ),
     array( '^secure/$', 'pages.secure' ),
     array( '^login/$', 'account.login'),

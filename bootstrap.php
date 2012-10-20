@@ -42,6 +42,7 @@ $files = array(
     "standardauth.class.php",
     "html.php",
     "fields.php",
+    "api.php"
 );
 
 /**
