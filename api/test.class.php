@@ -3,7 +3,7 @@ class TestAPI extends APIModule
 {
     protected function test($data=array())
     {
-        $this->respond($data);
+        $this->respond(array( 'data' => $data ));
     }
 }
 ?>

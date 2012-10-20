@@ -95,7 +95,19 @@ abstract class APIModule
 
     private function process_input($raw_input)
     {
-        return $raw_input;
+        if( is_array( $raw_input ) && array_key_exists('data', $raw_input) )
+        {
+            $raw_input = $raw_input['data'];
+        }
+
+        if( is_string($raw_input) && preg_match('/^\{.*\}$/', $raw_input) )
+        {
+            return json_decode($raw_input, true);
+        }
+        else
+        {
+            return $raw_input;
+        }
     }
 
     /**
@@ -105,6 +117,7 @@ abstract class APIModule
      * @param  string  $message     Message to send back.
      * @param  boolean  $status     True/False for weather it's a success or failure.
      * @param  integer $code        Just a unqiue number to identify where.
+     * @todo  Use subclass of to turn a model into an array.
      */
     protected function respond($data, $message=false, $status=true, $code=0)
     {

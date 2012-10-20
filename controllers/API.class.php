@@ -34,11 +34,8 @@ class APIController extends Controller
             if( $route_module == $module ) {
                 if( $route_action == $action )
                 {
-                    $_POST = array(
-                        'employee_id' => '0000-000',
-                    );
 
-                    $response = new $route_class($route_action, array($_POST));
+                    $response = new $route_class($route_action, $_POST);
 
                     echo $response;
                     return;
