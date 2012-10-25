@@ -114,7 +114,7 @@ class StandardAuth extends AuthDriver
     public function encrypt($password)
     {
         $bcrypt = new BCrypt(15);
-        return $bcrypt->hash($value);
+        return $bcrypt->hash($password);
     }
 
     private function create_session($user)
