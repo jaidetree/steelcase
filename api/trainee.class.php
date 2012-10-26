@@ -1,14 +1,14 @@
 <?php 
 class TraineeAPI extends APIModule
 {
-    function login($employee_id)
+    function login($data)
     {
-        $trainee = Trainee::find_by_employee_id($employee_id);
+        $trainee = Trainee::find_by_employee_id($data->employee_id);
 
         if( ! $trainee ) 
         {
             $trainee = new Trainee();
-            $trainee->employee_id = $employee_id;
+            $trainee->employee_id = $data->employee_id;
             $message = "A trainee was created.";
         }
         else
