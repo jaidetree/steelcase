@@ -1,14 +1,19 @@
 <?php 
-class TraineeAPI extends APIModule
+namespace API;
+class Trainees extends Module
 {
     function login($data)
     {
-        $trainee = Trainee::find_by_employee_id($data->employee_id);
+        if( ! array_key_exists('employee_id', $data) )
+        {
+            $this->respond('No valid employee id.', true);
+        }
+        $trainee = \Trainee::find_by_employee_id($data['employee_id']);
 
         if( ! $trainee ) 
         {
-            $trainee = new Trainee();
-            $trainee->employee_id = $data->employee_id;
+            $trainee = new \Trainee();
+            $trainee->employee_id = $data['employee_id'];
             $message = "A trainee was created.";
         }
         else
@@ -20,7 +25,7 @@ class TraineeAPI extends APIModule
         $trainee->save();
 
 
-        $this->respond(array( 
+        return $this->respond(array( 
             'trainee_id' => $trainee->id,
             'employee_id' => $trainee->employee_id,
             'last_visited_at' => $trainee->last_visited_at->format("F j, Y h:i a")

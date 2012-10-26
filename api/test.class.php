@@ -1,7 +1,8 @@
 <?php
-class TestAPI extends APIModule
+namespace API;
+class Test extends Module
 {
-    protected function test($data=array())
+    public function test($data=array())
     {
         $this->respond(array( 'data' => $data ));
     }

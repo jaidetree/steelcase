@@ -8,8 +8,7 @@ class Response
 
     public function __toString()
     {
-        $this->render();
-        return '';
+        return $this->render();
     }
 }
 
@@ -70,7 +69,7 @@ class Error404Response extends TemplateResponse
 }
 class JSONResponse extends Response
 {
-    private $_data = array();
+    protected $_data = array();
 
     public function __construct($data) 
     {

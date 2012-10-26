@@ -1,21 +1,49 @@
 <?php
+namespace API;
 /**
  * API Response that gets sent to the browser.
  */
-class APIResponse 
+class Response extends \JSONResponse
 {
-    const PASS = "ok";
-    const FAIL = "error";
+    const message = "Command ran successfully.";
+    const status_pass = "ok";
+    const status_fail = "error";
+    const default_error_code = -1;
 
-    private $_data = array( 
-        'action_status' => APIResponse::PASS,
-        'action_message' => 'Task ran successfully.',
-        'action_code' => 0
+    protected $_data = array( 
+        'message' => Response::message, 
+        'error_code' => Response::default_error_code, 
+        'status' => Response::status_pass 
     );
 
-    public function __construct($data=array()) 
+    public function __construct($content=array(), $is_error=false, $error_code=null) 
     {
+        $this->build_response($content, $is_error, $error_code);
+    }
+
+    private function build_response($content, $is_error, $error_code)
+    {
+        if( $is_error === true )
+        {
+            $data = array();
+            $data['status'] = Response::status_fail;
+            $data['message'] = $content;
+            $data['error_code'] = $error_code;
+        }
+        else
+        {
+            $data = $content;
+            $data['status'] = Response::status_pass;
+            $data['message'] = Response::message;
+            $data['error_code'] = Response::default_error_code;
+        }
+        
         $this->_data = array_merge($this->_data, $data);
+    }
+
+    public function error($message, $error_code=0)
+    {
+        $this->build_response($message, true, $error_code);
     }
 
     public function __set($name, $value)
@@ -27,87 +55,89 @@ class APIResponse
     {
         return $this->_data[$name];
     }
-
-    public function status($status, $message=null, $code=0)
-    {
-        if( $status === true )
-        {
-            $status = APIResponse::PASS;
-        }
-        else
-        {
-            $status = APIResponse::FAIL;
-        }
-
-        $status_array = array( 
-            'action_status' => $status,
-        );
-
-        if( $message )
-        {
-            $status_array['action_message'] = $message;
-        }
-
-        if( $code )
-        {
-            $status_array['code'] = $code;
-        }
-
-        $this->_data = array_merge( $this->_data, $status_array);
-    }
-
-    public function __toString()
-    {
-        $response = new JSONResponse($this->_data);
-        return $response->render();
-    }
 }
-/**
- * API Module for processing an API response.
- */
-abstract class APIModule 
+class ModuleFactory
 {
-    protected $response = null;
-
     /**
-     * Handle the action, and process the raw input.
+     * Factory Method for creating API Modules.
      */
-    public function __construct($action, $raw_input)
+    public static function create($route)
     {
-        $input = $this->process_input($raw_input);
+        list($class_name, $method) = explode('.', $route);
 
-        if( method_exists($this, $action) )
+        if( ! class_exists($class_name) )
         {
-            call_user_func_array(array($this, $action), $input);
+           require_once ROOT . 'api/' . strtolower($class_name) . '.class.php'; 
+        }
+
+        $class_name = 'API\\' . $class_name;
+
+        $class = new $class_name();
+
+        if( method_exists($class, $method) )
+        {
+            call_user_func_array(array($class, $method), self::process_input($_POST) );
         }
         else
         {
             throw new JSONException('There is no action named "' . $action . '".');
         }
 
-        return $this->response;
+        return $class;
+    }
+
+    private static function process_input($input)
+    {
+        if( is_string( $input ) )
+        {
+            return json_decode($input, true);
+        }
+
+        if( is_array( $input ) )
+        {
+            if( ! array_key_exists('data', $input) )
+            {
+                $data = array( 'data' => $input);
+                $input = $data;
+            }
+            else
+            {
+                if( is_string($input['data']) ) 
+                {
+                    $input['data'] =  self::process_input($input['data']) ;
+                }
+            }
+            return $input;
+        }
+        if( is_object( $input ) )
+        {
+            return (array)$input;
+        }
+    }
+}
+/**
+ * API Module for processing an API response.
+ */
+abstract class Module 
+{
+    protected $response = null;
+
+
+    /**
+     * Handle the action, and process the raw input.
+     */
+    public function __construct()
+    {
+        set_error_handler(array( $this, 'exception_error_handler' ));
+    }
+
+    public function exception_error_handler($errno, $errstr, $errfile, $errline) {
+        throw new JSONException($errstr . " " . $errfile . " " . $errline);
     }
 
     public function __toString()
     {
         return (string)$this->response;
-    }
-
-    private function process_input($raw_input)
-    {
-        if( is_array( $raw_input ) && array_key_exists('data', $raw_input) )
-        {
-            $raw_input = $raw_input['data'];
-        }
-
-        if( is_string($raw_input) && preg_match('/^\{.*\}$/', $raw_input) )
-        {
-            return json_decode($raw_input, true);
-        }
-        else
-        {
-            return $raw_input;
-        }
     }
 
     /**
@@ -119,19 +149,23 @@ abstract class APIModule
      * @param  integer $code        Just a unqiue number to identify where.
      * @todo  Use subclass of to turn a model into an array.
      */
-    protected function respond($data, $message=false, $status=true, $code=0)
+    protected function respond($data, $is_error=false, $code=0)
     {
-        $this->response = new APIResponse($data);
-        $this->response->status($status, $message, $code);
-    }
+        if( is_subclass_of($data, 'ActiveRecord\Model') )
+        {
+            $data_array = array();
 
-    /**
-     * Is the session valid? Should we run our 
-     * secret handshake?
-     * @return Boolean
-     */
-    protected function validate_session()
-    {
+            foreach(get_object_vars($data) as $name => $value)
+            {
+                $data_array[$name] = $value;
+            }
+
+            $data = $data_array;
+        }
+
+        echo new Response($data, $is_error, $code);
+        die();
+
         return true;
     }
 }
@@ -139,18 +173,15 @@ abstract class APIModule
  * Our exception for handling any error
  * that happens from within an API Request.
  */
-class JSONException extends Exception
+class JSONException extends \Exception
 {
-    private $response = null;
-
     public function __construct($message, $code=0, Exception $previous=null) 
     {
-        $this->response = new APIResponse();
-        $this->response->status(false, $message, $code);
+        $response = new Response();
+        $response->error($message, $code);
 
-        //parent::__construct($message, $code, $previous);
+        echo $response;
 
-        echo $this->response;
         die();
         // Override here
     }
