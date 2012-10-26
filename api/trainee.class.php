@@ -1,13 +1,13 @@
 <?php 
 namespace API;
-class Trainees extends Module
+class Trainee extends Module
 {
     function login($data)
     {
 
-        if( ! array_key_exists('employee_id', $data) )
+        if( ! array_key_exists('employee_id', $data) or ! $data['employee_id'] )
         {
-            return $this->error_response('No valid employee id.');
+            $this->error('No valid employee id.');
         }
 
         $trainee = \Trainee::find_by_employee_id($data['employee_id']);
@@ -27,7 +27,7 @@ class Trainees extends Module
         $trainee->save();
 
 
-        return $this->data_response($trainee, $message);
+        $this->respond($trainee, $message);
     }   
 }
 ?>

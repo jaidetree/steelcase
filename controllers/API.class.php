@@ -13,9 +13,7 @@ class APIController extends \Controller
 
             if( preg_match( '@' . $route_path . '@', $request ) )
             {
-                $api_module = API\ModuleFactory::create( $module_action );
-                echo $api_module;
-                die();
+                API\ModuleFactory::create( $module_action );
             } 
         }
 

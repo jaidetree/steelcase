@@ -16,37 +16,35 @@ class Response extends \JSONResponse
         'error_code' => Response::default_error_code 
     );
 
-    public function __construct($content=array(), $is_error=false, $error_code=null) 
+    public function __construct($content=array(), $message=null, $is_error=false, $error_code=null) 
     {
-        $this->build_response($content, $is_error, $error_code);
+        $this->build_response($content, $message, $is_error, $error_code);
     }
 
-    private function build_response($content, $is_error, $error_code)
+    /**
+     * Create our response packet with a status, message, and code.
+     * @param  mixed $content    [description]
+     * @param  boolean $is_error   [description]
+     * @param  integer $error_code [description]
+     */
+    private function build_response($content, $message, $is_error, $error_code)
     {
         if( $is_error === true )
         {
             $data = array();
             $data['status'] = Response::status_fail;
-            $data['message'] = $content;
+            $data['message'] = $message;
             $data['error_code'] = $error_code;
         }
         else
         {
-            $data = $content;
             $data['status'] = Response::status_pass;
-            if( ! array_key_exists('message', $data) or ! $data['message'] )
-            {
-                $data['message'] = Response::message;
-            }
             $data['error_code'] = Response::default_error_code;
+            $data['data'] = $content;
+            $data['message'] = $message ? $message : Response::message;
         }
         
         $this->_data = array_merge($this->_data, $data);
-    }
-
-    public function error($message, $error_code=0)
-    {
-        $this->build_response($message, true, $error_code);
     }
 
     public function __set($name, $value)
@@ -59,10 +57,14 @@ class Response extends \JSONResponse
         return $this->_data[$name];
     }
 }
+/**
+ * ModuleFactory
+ *
+ * Responsible for generating module objects and running
+ * running the proper API Module method.
+ */
 class ModuleFactory
 {
-
-
     /**
      * Handle any internal errors as JSON messages.
      */
@@ -75,10 +77,10 @@ class ModuleFactory
      */
     public static function create($route)
     {
-        set_error_handler(__CLASS__ . '::exception_error_handler');
+        set_error_handler(__CLASS__ . '::exception_error_handler', E_ALL & ~E_NOTICE );
         list($class_name, $method) = explode('.', $route);
 
-        if( ! class_exists($class_name) )
+        if( ! class_exists('API\\' . $class_name) )
         {
            require_once ROOT . 'api/' . strtolower($class_name) . '.class.php'; 
         }
@@ -160,13 +162,20 @@ abstract class Module
      * @param  boolean  $status     True/False for weather it's a success or failure.
      * @param  integer $code        Just a unqiue number to identify where.
      */
-    protected function data_response($data, $message)
+    protected function respond($data, $message=null)
     {
+        /**
+         * If we have a model object, turn it into an array.
+         */
         if( is_subclass_of($data, 'ActiveRecord\Model') )
         {
             $data = $data->attributes();            
             foreach($data as $key => $value)
             {
+                /**
+                 * If property is a datetime object then
+                 * format it as a string date.
+                 */
                 if( method_exists($value, 'format') )
                 {
                     $data[$key]  = $value->format("F j, Y h:i a");
@@ -174,9 +183,8 @@ abstract class Module
             }
         }
 
-        $data['message'] = $message;
 
-        $this->response = new Response($data);
+        $this->send( new Response($data, $message) );
     }
     /**
      * Show an error response from within a 
@@ -184,9 +192,15 @@ abstract class Module
      * @param  string  $message    [description]
      * @param  integer $error_code [description]
      */
-    protected function error_response($message, $error_code=0)
+    protected function error($message, $error_code=0)
     {
-       $this->response = new Response($message, true, $error_code);
+       $this->send( new Response(null, $message, true, $error_code) );
+    }
+
+    public function send($response)
+    {
+        echo $response;
+        die();
     }
 }
 /**
@@ -197,21 +211,10 @@ class JSONException extends \Exception
 {
     public function __construct($message, $code=0, Exception $previous=null) 
     {
-        $response = new Response();
-        $response->error($message, $code);
-
+        $response = new Response(null, $message, true, $code);
         echo $response;
-
         die();
         // Override here
-    }
-
-    public function __toString() {
-
-        return json_encode(array( 
-            'status' => $this->response->status,
-            'message' => $this->response->message
-        ));
     }
 }
 ?>

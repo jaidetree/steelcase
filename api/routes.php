@@ -1,8 +1,8 @@
 <?php
 $api_routes = array(
     array( 'test/test/$', 'Test.test' ),
-    array( 'trainees/login/$', 'Trainees.login'),
-    array( 'performance/add/$', 'PerformanceAPI.add'),
+    array( 'trainee/login/$', 'Trainee.login'),
+    array( 'performance/add/$', 'Performance.add'),
     array( 'glossary/get/$', 'GlossaryAPI.get'),
 );
 ?>
