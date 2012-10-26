@@ -61,11 +61,21 @@ class Response extends \JSONResponse
 }
 class ModuleFactory
 {
+
+
+    /**
+     * Handle any internal errors as JSON messages.
+     */
+    public static function exception_error_handler($errno, $errstr, $errfile, $errline) {
+        throw new JSONException($errstr . " " . $errfile . " " . $errline);
+    }
+
     /**
      * Factory Method for creating API Modules.
      */
     public static function create($route)
     {
+        set_error_handler(__CLASS__ . '::exception_error_handler');
         list($class_name, $method) = explode('.', $route);
 
         if( ! class_exists($class_name) )
@@ -89,6 +99,10 @@ class ModuleFactory
         return $class;
     }
 
+    /**
+     * Turn all input data into a consistently
+     * structured array to send to an API Module.
+     */
     private static function process_input($input)
     {
         if( ! $input )
@@ -129,19 +143,10 @@ abstract class Module
 {
     protected $response = null;
 
-
     /**
-     * Handle the action, and process the raw input.
+     * Return a string version of the response.
+     * Results in a JSON formatted string.
      */
-    public function __construct()
-    {
-        set_error_handler(array( $this, 'exception_error_handler' ));
-    }
-
-    public function exception_error_handler($errno, $errstr, $errfile, $errline) {
-        throw new JSONException($errstr . " " . $errfile . " " . $errline);
-    }
-
     public function __toString()
     {
         return (string)$this->response;
@@ -154,7 +159,6 @@ abstract class Module
      * @param  string  $message     Message to send back.
      * @param  boolean  $status     True/False for weather it's a success or failure.
      * @param  integer $code        Just a unqiue number to identify where.
-     * @todo  Use subclass of to turn a model into an array.
      */
     protected function data_response($data, $message)
     {
@@ -174,6 +178,12 @@ abstract class Module
 
         $this->response = new Response($data);
     }
+    /**
+     * Show an error response from within a 
+     * API Module subclass.
+     * @param  string  $message    [description]
+     * @param  integer $error_code [description]
+     */
     protected function error_response($message, $error_code=0)
     {
        $this->response = new Response($message, true, $error_code);
