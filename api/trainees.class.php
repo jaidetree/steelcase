@@ -4,10 +4,12 @@ class Trainees extends Module
 {
     function login($data)
     {
+
         if( ! array_key_exists('employee_id', $data) )
         {
-            $this->respond('No valid employee id.', true);
+            return $this->error_response('No valid employee id.');
         }
+
         $trainee = \Trainee::find_by_employee_id($data['employee_id']);
 
         if( ! $trainee ) 
@@ -25,11 +27,7 @@ class Trainees extends Module
         $trainee->save();
 
 
-        return $this->respond(array( 
-            'trainee_id' => $trainee->id,
-            'employee_id' => $trainee->employee_id,
-            'last_visited_at' => $trainee->last_visited_at->format("F j, Y h:i a")
-        ),$message);
+        return $this->data_response($trainee, $message);
     }   
 }
 ?>

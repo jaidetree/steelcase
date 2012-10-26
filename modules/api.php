@@ -11,9 +11,9 @@ class Response extends \JSONResponse
     const default_error_code = -1;
 
     protected $_data = array( 
+        'status' => Response::status_pass,
         'message' => Response::message, 
-        'error_code' => Response::default_error_code, 
-        'status' => Response::status_pass 
+        'error_code' => Response::default_error_code 
     );
 
     public function __construct($content=array(), $is_error=false, $error_code=null) 
@@ -34,7 +34,10 @@ class Response extends \JSONResponse
         {
             $data = $content;
             $data['status'] = Response::status_pass;
-            $data['message'] = Response::message;
+            if( ! array_key_exists('message', $data) or ! $data['message'] )
+            {
+                $data['message'] = Response::message;
+            }
             $data['error_code'] = Response::default_error_code;
         }
         
@@ -88,6 +91,10 @@ class ModuleFactory
 
     private static function process_input($input)
     {
+        if( ! $input )
+        {
+            return array( 'data' => array() );
+        }
         if( is_string( $input ) )
         {
             return json_decode($input, true);
@@ -149,24 +156,27 @@ abstract class Module
      * @param  integer $code        Just a unqiue number to identify where.
      * @todo  Use subclass of to turn a model into an array.
      */
-    protected function respond($data, $is_error=false, $code=0)
+    protected function data_response($data, $message)
     {
         if( is_subclass_of($data, 'ActiveRecord\Model') )
         {
-            $data_array = array();
-
-            foreach(get_object_vars($data) as $name => $value)
+            $data = $data->attributes();            
+            foreach($data as $key => $value)
             {
-                $data_array[$name] = $value;
+                if( method_exists($value, 'format') )
+                {
+                    $data[$key]  = $value->format("F j, Y h:i a");
+                }
             }
-
-            $data = $data_array;
         }
 
-        echo new Response($data, $is_error, $code);
-        die();
+        $data['message'] = $message;
 
-        return true;
+        $this->response = new Response($data);
+    }
+    protected function error_response($message, $error_code=0)
+    {
+       $this->response = new Response($message, true, $error_code);
     }
 }
 /**
