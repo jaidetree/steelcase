@@ -27,7 +27,7 @@ class Trainee extends Module
         $trainee->save();
 
 
-        $this->respond($trainee, $message);
+        $this->respond($data, $message);
     }   
 }
 ?>

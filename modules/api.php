@@ -1,6 +1,9 @@
 <?php
 namespace API;
 /**
+ * PHP Token Class
+ */
+/**
  * API Response that gets sent to the browser.
  */
 class Response extends \JSONResponse
@@ -68,7 +71,8 @@ class ModuleFactory
     /**
      * Handle any internal errors as JSON messages.
      */
-    public static function exception_error_handler($errno, $errstr, $errfile, $errline) {
+    public static function exception_error_handler($errno, $errstr, $errfile, $errline) 
+    {
         throw new JSONException($errstr . " " . $errfile . " " . $errline);
     }
 

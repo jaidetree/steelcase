@@ -3,8 +3,8 @@ class APIController extends \Controller
 {
     function route($action, $args) 
     {
+        session_cache_expire(30);
         $request = $args[0];
-
         require_once(ROOT . "api/routes.php");
 
         foreach($api_routes as $route)
