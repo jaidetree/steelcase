@@ -3,6 +3,59 @@ namespace API;
 /**
  * PHP Token Class
  */
+class Tokenizer
+{
+    public static function generate($value)
+    {
+        $bcrypt = new \Bcrypt(4);
+        $key = $bcrypt->hash( '@R()ck3tt' . ( time() / 5 ) );
+        $raw = hash_hmac( 'sha256', $value, $key );
+
+        $start = rand(0, 47);
+        $left = substr($raw, $start, strlen($raw) / 8);
+        $token = self::_generate_token($left);
+
+        return $token;
+    } 
+
+    private static function _generate_token($chars)
+    {
+        $bcrypt = new \Bcrypt(5);
+        $right_chars = str_split($chars);
+        $right = "";
+
+        foreach($right_chars as $char)
+        {
+            $char = hexdec($char) * 3 + 1;
+            $right .= dechex($char);
+        }
+
+
+        $right = hash_hmac( 'sha256', $right, 'BR4keTM@5k');
+        $right = substr($right, 10, strlen($chars));
+
+        return $chars . $right;
+    }
+
+    public static function process_key($time)
+    {
+       return ($time + 4) * 4 / 10;
+    }
+
+    public static function verify_token($token)
+    {
+        $token_raw = substr($token, 0, 8);
+
+        if( $token == self::_generate_token($token_raw) )
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+}
 /**
  * API Response that gets sent to the browser.
  */
@@ -206,6 +259,16 @@ abstract class Module
         echo $response;
         die();
     }
+
+    protected function token_required($token)
+    {
+        if( $token and $_SESSION['token'] == $token and Tokenizer::verify_token($token) )
+        {
+            return true;
+        }
+
+        $this->error("Authenticated token required.");
+    } 
 }
 /**
  * Our exception for handling any error

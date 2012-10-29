@@ -4,6 +4,7 @@ class Trainee extends Module
 {
     function login($data)
     {
+        $this->token_required($data['token']);
 
         if( ! array_key_exists('employee_id', $data) or ! $data['employee_id'] )
         {
@@ -26,8 +27,7 @@ class Trainee extends Module
         $trainee->last_visited_at = date('c');
         $trainee->save();
 
-
-        $this->respond($data, $message);
+        $this->respond($trainee, $message);
     }   
 }
 ?>

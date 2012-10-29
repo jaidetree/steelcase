@@ -25,6 +25,7 @@ class TemplateResponse extends Response
     public function render()
     {
         echo render($this->template, $this->data);
+        return '';
     }
 }
 

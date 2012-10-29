@@ -4,6 +4,8 @@ class Performance extends Module
 {
     function add($data)
     {
+        $this->token_required($data['token']);
+
         $performance = new \Performance();
 
         if( ! is_numeric($data['module_id']) or ! $data['module_id'] )
