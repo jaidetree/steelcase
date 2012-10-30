@@ -10,7 +10,7 @@ class Performance extends Module
 
         if( ! is_numeric($data['module_id']) or ! $data['module_id'] )
         {
-            $this->error('Not a valid module_id. Must be a number');
+            $this->error('{'.$data['module_id'].'} is not a valid module_id. Must be a number');
         }
 
         if( ! is_numeric($data['score']) or ! $data['score'] )
