@@ -70,7 +70,6 @@ ActiveRecord\Config::initialize(function($cfg)
     ));
 });
 
-Auth::init()->set_driver( new StandardAuth() );
 /** 
  * Load our Controllers 
  */
@@ -99,5 +98,5 @@ while( ($file = $dir->read()) !== false )
 /**
  * Authentication initialization
  */
-Auth::init()->start();
+Auth::get('StandardAuth')->start();
 ?>

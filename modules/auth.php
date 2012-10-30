@@ -4,49 +4,20 @@ class Auth
     private static $instance;
     private static $driver;
 
-    public static function init()
+    public static function get($class_name="")
     {
         if( ! self::$instance )
         {
-            $class = __CLASS__;
+            $class = 'Auth';
             self::$instance = new $class();
+
+            if( $class_name )
+            {
+                self::$driver = new $class_name();
+            }
         }
 
         return self::$instance;
-    }
-
-    public function __construct()
-    {
-    }
-
-    public function set_driver($driver)
-    {
-        if( self::$driver )
-        {
-            return false;
-        }
-
-        self::$driver = new $driver();
-    }
-
-    public static function is_logged_in()
-    {
-        return self::$driver->is_logged_in();
-    }
-
-    public static function login($username, $password)
-    {
-        return self::$driver->login($username, $password);
-    }
-
-    public static function logout()
-    {
-        return self::$driver->logout();
-    }
-
-    public static function encrypt($password)
-    {
-        return self::$driver->encrypt($password);
     }
 
     public static function user($key=false, $default=false)
@@ -66,14 +37,24 @@ class Auth
         }
     }
 
-    public static function start()
+    public static function __callStatic($name, $arguments=array())
     {
-        if( method_exists( self::$driver, 'start' ) )
+        if( method_exists( self::$driver, $name ) )
         {
-            self::$driver->start();
+            return call_user_func_array(array( self::$driver, $name ), $arguments);
         }
     }
+
+    public function __call($name, $arguments=array())
+    {
+        if( method_exists( self::$driver, $name ) )
+        {
+            return call_user_func_array(array( self::$driver, $name ), $arguments);
+        }
+    }
+
 }
+
 abstract class AuthDriver
 {
     abstract public function login($username, $password);

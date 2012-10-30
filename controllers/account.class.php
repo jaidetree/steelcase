@@ -11,7 +11,7 @@ class AccountController extends Controller
         }
         else
         {
-            if( Auth::init()->login($username, $password) )
+            if( Auth::login($username, $password) )
             {
                 return new RedirectResponse('pages.secure');
             }
