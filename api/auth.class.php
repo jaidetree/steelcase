@@ -40,8 +40,7 @@ class Auth extends Module
                 $params["secure"], $params["httponly"]
             );
         }
-        session_destroy();
-        session_start();
+        $_SESSION['token'] = 0;
         $this->respond(array( 'logged_out' => 1 ), 'Successfully logged out.')
     }
 
