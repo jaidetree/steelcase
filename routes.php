@@ -7,6 +7,7 @@ $routes = array(
     array( '^$', 'pages.home' ),
     array( '^secure/$', 'pages.secure' ),
     array( '^login/$', 'account.login'),
+    array( '^logout/$', 'account.logout'),
     
     array( '^glossary/$', 'glossary.index'),
     array( '^glossary/add/$', 'glossary.add'),
@@ -28,8 +29,6 @@ $routes = array(
     array( '^module/([0-9]+)/edit/$', 'modules.edit'),
     array( '^module/([0-9]+)/delete/$', 'modules.delete'),
     array( '^module/add/$', 'modules.add'),
-
-    array( '^log/$', 'log.index'),
     
     array( '^users/$', 'users.index'),
     array( '^users/add/$', 'users.add'),
