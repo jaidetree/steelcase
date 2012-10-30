@@ -65,7 +65,7 @@ class Error404Response extends TemplateResponse
     public function render()
     {
         header('HTTP/1.0 404 Not Found');
-        parent::render();
+        return parent::render();
     }
 }
 class JSONResponse extends Response
