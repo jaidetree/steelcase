@@ -85,15 +85,6 @@ while( ($file = $dir->read()) !== false )
         continue;
     }
     require_once $controller_dir . $file;
-    $name = ucwords(basename($file, ".class.php"));
-    $class_name = $name . "Controller";
-
-    if( class_exists( $class_name ) )
-    {
-        $object = new $class_name();
-
-        APP::add_controller($name, $object);
-    }
 }
 /**
  * Authentication initialization
