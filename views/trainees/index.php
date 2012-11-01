@@ -30,6 +30,8 @@
         </tbody>
     </table>
 </div>
+<div align="right"> <img width="50%" src="../../static/images/images/user.png">
+</div>
 
 <script type="text/javascript" charset="utf-8">
 
