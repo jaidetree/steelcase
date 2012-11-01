@@ -1,3 +1,6 @@
+API Functions
+=============
+
 .. toctree::
    :maxdepth: 2
 

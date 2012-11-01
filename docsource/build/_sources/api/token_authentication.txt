@@ -7,21 +7,38 @@ The purpose of the token is to make sure unauthorized apps can not access the da
 
 All examples will be based on using our library and will be called at the start of the app.
 
-Requesting a Token
-------------------
+Usage
+-----
+::
 
-Request URI
-    **/api/auth/create**
+    request_token(<keyA>, <keyB>, <callback>);
 
-Required Parameters: 
+
+Parameters
+----------
     keyA 
         A numerical representation of the time.
     keyB 
         An expected number resulting from manipulation.
+    callback
+        | A function to receive and process a response.
+        | Example: function(response){ trace( response.data.token ); }
 
-Example
-""""""""
+Request URI
+"""""""""""
+**/api/auth/create**
+
+Response
+--------
+The response data will be a simple JSON object:
+
 ::
 
-    request_token();
-
+    {
+        'status': 'ok',
+        'message': 'Glossary items retrieved',
+        'error_code': -1,
+        'data': {
+            'token': '<token_string>',
+        }
+    }

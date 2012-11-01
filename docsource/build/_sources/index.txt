@@ -12,11 +12,5 @@ These docs describe how to access the API to communicate between two seperate sy
    :maxdepth: 2
 
    json
-   api
+   api_list
    models/models
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`search`

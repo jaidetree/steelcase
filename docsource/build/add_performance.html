@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Adding a Performance &mdash; Steelcase API 1.0 documentation</title>
+    <title>Add Performance &mdash; Steelcase API 1.0 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -25,8 +25,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Steelcase API 1.0 documentation" href="index.html" />
-    <link rel="prev" title="Trainee Logins" href="trainee_logins.html" /> 
+    <link rel="top" title="Steelcase API 1.0 documentation" href="index.html" /> 
   </head>
   <body>
     <div class="related">
@@ -35,9 +34,6 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="trainee_logins.html" title="Trainee Logins"
-             accesskey="P">previous</a> |</li>
         <li><a href="index.html">Steelcase API 1.0 documentation</a> &raquo;</li> 
       </ul>
     </div>  
@@ -47,8 +43,46 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="adding-a-performance">
-<h1>Adding a Performance<a class="headerlink" href="#adding-a-performance" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="add-performance">
+<h1>Add Performance<a class="headerlink" href="#add-performance" title="Permalink to this headline">¶</a></h1>
+<p>Record a score, duration, and meta data for a given trainee in a given module.</p>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><pre>steelcaseapi.performance_add(&lt;trainee_id&gt;, &lt;module_id&gt;, &lt;score&gt;, &lt;duration&gt;, &lt;meta&gt;, function(response){
+    trace(response.data.trainee_id);
+});</pre>
+</div>
+</div>
+<div class="section" id="parameters">
+<h2>Parameters:<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><dl class="docutils">
+<dt>trainee_id</dt>
+<dd><div class="first last line-block">
+<div class="line">String to use as the trainee id.</div>
+<div class="line">Example: 555555-555</div>
+</div>
+</dd>
+<dt>module_id</dt>
+<dd><div class="first last line-block">
+<div class="line">Integer refering to a named module.</div>
+<div class="line">Example: 0, 1, 2, 3 - 6</div>
+<div class="line">See ref:<cite>models/module</cite> for more information.</div>
+</div>
+</dd>
+<dt>callback</dt>
+<dd><div class="first last line-block">
+<div class="line">Function to run when response is returned. Will always be a JSON object. ref:<cite>working_json</cite></div>
+<div class="line">Example: function(response){ trace(response.data.trainee); }</div>
+</div>
+</dd>
+</dl>
+</div></blockquote>
+</div>
+<div class="section" id="returns">
+<h2>Returns:<a class="headerlink" href="#returns" title="Permalink to this headline">¶</a></h2>
+<p>This api will return true if it ran successfully but will forward the response from the web API to the callback.</p>
+</div>
 </div>
 
 
@@ -57,9 +91,16 @@
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="trainee_logins.html"
-                        title="previous chapter">Trainee Logins</a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Add Performance</a><ul>
+<li><a class="reference internal" href="#usage">Usage</a></li>
+<li><a class="reference internal" href="#parameters">Parameters:</a></li>
+<li><a class="reference internal" href="#returns">Returns:</a></li>
+</ul>
+</li>
+</ul>
+
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/add_performance.txt"
@@ -88,9 +129,6 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              >index</a></li>
-        <li class="right" >
-          <a href="trainee_logins.html" title="Trainee Logins"
-             >previous</a> |</li>
         <li><a href="index.html">Steelcase API 1.0 documentation</a> &raquo;</li> 
       </ul>
     </div>

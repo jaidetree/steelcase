@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Add Performance &mdash; Steelcase API 1.0 documentation</title>
+    <title>User &mdash; Steelcase API 1.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -26,9 +26,8 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="Steelcase API 1.0 documentation" href="../index.html" />
-    <link rel="up" title="API Functions" href="../api_list.html" />
-    <link rel="next" title="Retrieving Glossary Terms" href="glossary_terms.html" />
-    <link rel="prev" title="Trainee Logins" href="trainee_logins.html" /> 
+    <link rel="up" title="Models" href="models.html" />
+    <link rel="prev" title="Trainee" href="trainee.html" /> 
   </head>
   <body>
     <div class="related">
@@ -38,13 +37,10 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="glossary_terms.html" title="Retrieving Glossary Terms"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="trainee_logins.html" title="Trainee Logins"
+          <a href="trainee.html" title="Trainee"
              accesskey="P">previous</a> |</li>
         <li><a href="../index.html">Steelcase API 1.0 documentation</a> &raquo;</li>
-          <li><a href="../api_list.html" accesskey="U">API Functions</a> &raquo;</li> 
+          <li><a href="models.html" accesskey="U">Models</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -53,49 +49,60 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="add-performance">
-<h1>Add Performance<a class="headerlink" href="#add-performance" title="Permalink to this headline">¶</a></h1>
-<p>Record a score, duration, and meta data for a given trainee in a given module.</p>
-<div class="section" id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><pre>steelcaseapi.performance_add(&lt;token&gt;, &lt;trainee_id&gt;, &lt;module_id&gt;, &lt;score&gt;, &lt;duration&gt;, &lt;meta&gt;, function(response){
-    trace(response.data.message);
-});</pre>
-</div>
-</div>
-<div class="section" id="parameters">
-<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
-<blockquote>
-<div><dl class="docutils">
-<dt>token</dt>
+  <div class="section" id="user">
+<h1>User<a class="headerlink" href="#user" title="Permalink to this headline">¶</a></h1>
+<p>The User admin module is only used in the Administrative CMS and completely ignored by the API.</p>
+<div class="section" id="fields">
+<h2>Fields<a class="headerlink" href="#fields" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>id</dt>
 <dd><div class="first last line-block">
-<div class="line">Valid token from a generate token request. See <a class="reference internal" href="token_authentication.html"><em>Token Authentication</em></a></div>
+<div class="line">Integer representing the unique id of the entry.</div>
 </div>
 </dd>
-<dt>trainee_id</dt>
+<dt>username</dt>
 <dd><div class="first last line-block">
-<div class="line">String to use as the trainee id.</div>
-<div class="line">Example: 555555-555</div>
+<div class="line">Username to identify the administrators.</div>
 </div>
 </dd>
-<dt>module_id</dt>
+<dt>password</dt>
 <dd><div class="first last line-block">
-<div class="line">Integer refering to a named module.</div>
-<div class="line">Example: 0, 1, 2, 3 - 6</div>
-<div class="line">See ref:<cite>models/module</cite> for more information.</div>
+<div class="line">A salted, blowfish encrypted password.</div>
 </div>
 </dd>
-<dt>callback</dt>
+<dt>email</dt>
 <dd><div class="first last line-block">
-<div class="line">Function to run when response is returned. Will always be a JSON object. ref:<cite>working_json</cite></div>
-<div class="line">Example: function(response){ trace(response.data.trainee); }</div>
+<div class="line">Email of the administrative user.</div>
+</div>
+</dd>
+<dt>type</dt>
+<dd><div class="first last line-block">
+<div class="line">Integer representing the administrative level/powers of the user.</div>
+</div>
+</dd>
+<dt>status</dt>
+<dd><div class="first last line-block">
+<div class="line">Integer representing the status of this user and whether they can log in or not. See <a class="reference internal" href="models.html#status-fields"><em>Status Fields</em></a> for more information.</div>
 </div>
 </dd>
 </dl>
-</div></blockquote>
-<div class="section" id="request-uri">
-<h3>Request URI<a class="headerlink" href="#request-uri" title="Permalink to this headline">¶</a></h3>
-<p><strong>/api/performance/add</strong></p>
+</div>
+<div class="section" id="sql">
+<h2>SQL<a class="headerlink" href="#sql" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><pre>--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(12) NOT NULL AUTO_INCREMENT,
+  `username` varchar(100) COLLATE utf8_bin NOT NULL,
+  `password` varchar(255) COLLATE utf8_bin NOT NULL,
+  `email` varchar(255) COLLATE utf8_bin NOT NULL,
+  `type` int(3) NOT NULL DEFAULT '0',
+  `status` int(3) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1;</pre>
 </div>
 </div>
 </div>
@@ -108,25 +115,19 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Add Performance</a><ul>
-<li><a class="reference internal" href="#usage">Usage</a></li>
-<li><a class="reference internal" href="#parameters">Parameters</a><ul>
-<li><a class="reference internal" href="#request-uri">Request URI</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#">User</a><ul>
+<li><a class="reference internal" href="#fields">Fields</a></li>
+<li><a class="reference internal" href="#sql">SQL</a></li>
 </ul>
 </li>
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="trainee_logins.html"
-                        title="previous chapter">Trainee Logins</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="glossary_terms.html"
-                        title="next chapter">Retrieving Glossary Terms</a></p>
+  <p class="topless"><a href="trainee.html"
+                        title="previous chapter">Trainee</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
-    <li><a href="../_sources/api/add_performance.txt"
+    <li><a href="../_sources/models/user.txt"
            rel="nofollow">Show Source</a></li>
   </ul>
 <div id="searchbox" style="display: none">
@@ -153,13 +154,10 @@
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="glossary_terms.html" title="Retrieving Glossary Terms"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="trainee_logins.html" title="Trainee Logins"
+          <a href="trainee.html" title="Trainee"
              >previous</a> |</li>
         <li><a href="../index.html">Steelcase API 1.0 documentation</a> &raquo;</li>
-          <li><a href="../api_list.html" >API Functions</a> &raquo;</li> 
+          <li><a href="models.html" >Models</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

@@ -27,6 +27,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="Steelcase API 1.0 documentation" href="../index.html" />
     <link rel="up" title="Models" href="models.html" />
+    <link rel="next" title="Module" href="module.html" />
     <link rel="prev" title="Models" href="models.html" /> 
   </head>
   <body>
@@ -36,6 +37,9 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="module.html" title="Module"
+             accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="models.html" title="Models"
              accesskey="P">previous</a> |</li>
@@ -51,6 +55,72 @@
             
   <div class="section" id="glossary">
 <h1>Glossary<a class="headerlink" href="#glossary" title="Permalink to this headline">¶</a></h1>
+<p>Contains all the terms and definitions.</p>
+<div class="section" id="fields">
+<h2>Fields<a class="headerlink" href="#fields" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>id</dt>
+<dd><div class="first last line-block">
+<div class="line">Integer representing the unique id of the term.</div>
+</div>
+</dd>
+<dt>name</dt>
+<dd><div class="first last line-block">
+<div class="line">The term name</div>
+</div>
+</dd>
+<dt>slug</dt>
+<dd><div class="first last line-block">
+<div class="line">URL Friendly version of term name.</div>
+</div>
+</dd>
+<dt>description</dt>
+<dd><div class="first last line-block">
+<div class="line">The definition of the term.</div>
+</div>
+</dd>
+<dt>status</dt>
+<dd><div class="first last line-block">
+<div class="line">Status of the term. See <a class="reference internal" href="models.html#status-fields"><em>Status Fields</em></a> for more information.</div>
+</div>
+</dd>
+<dt>user_id</dt>
+<dd><div class="first last line-block">
+<div class="line">Integer refering to a user in the users module. See <a class="reference internal" href="user.html"><em>User</em></a> for more information.</div>
+</div>
+</dd>
+<dt>created_at</dt>
+<dd><div class="first last line-block">
+<div class="line">Timestamp representing when the entry was created.</div>
+</div>
+</dd>
+<dt>updated_at</dt>
+<dd><div class="first last line-block">
+<div class="line">Timestamp representing when the entry was last modified.</div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="sql">
+<h2>SQL<a class="headerlink" href="#sql" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><pre>--
+-- Table structure for table `glossary`
+--
+
+DROP TABLE IF EXISTS `glossary`;
+CREATE TABLE IF NOT EXISTS `glossary` (
+  `id` int(12) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) COLLATE utf8_bin NOT NULL,
+  `slug` varchar(100) COLLATE utf8_bin NOT NULL,
+  `description` text COLLATE utf8_bin NOT NULL,
+  `status` int(3) NOT NULL DEFAULT '0',
+  `user_id` int(12) NOT NULL DEFAULT '0',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1;</pre>
+</div>
+</div>
 </div>
 
 
@@ -59,9 +129,21 @@
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Glossary</a><ul>
+<li><a class="reference internal" href="#fields">Fields</a></li>
+<li><a class="reference internal" href="#sql">SQL</a></li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
   <p class="topless"><a href="models.html"
                         title="previous chapter">Models</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="module.html"
+                        title="next chapter">Module</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../_sources/models/glossary.txt"
@@ -90,6 +172,9 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="module.html" title="Module"
+             >next</a> |</li>
         <li class="right" >
           <a href="models.html" title="Models"
              >previous</a> |</li>

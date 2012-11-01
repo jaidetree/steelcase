@@ -1,2 +1,31 @@
-Adding a Performance
-====================
+Add Performance
+===============
+
+Record a score, duration, and meta data for a given trainee in a given module.
+
+Usage
+"""""
+::
+
+    steelcaseapi.performance_add(<trainee_id>, <module_id>, <score>, <duration>, <meta>, function(response){ 
+        trace(response.data.trainee_id);
+    });
+
+Parameters:
+"""""""""""
+
+    trainee_id
+        | String to use as the trainee id. 
+        | Example: 555555-555
+    module_id
+        | Integer refering to a named module.
+        | Example: 0, 1, 2, 3 - 6
+        | See ref:`models/module` for more information.
+    callback
+        | Function to run when response is returned. Will always be a JSON object. ref:`working_json`
+        | Example: function(response){ trace(response.data.trainee); }
+
+Returns:
+""""""""
+
+This api will return true if it ran successfully but will forward the response from the web API to the callback.

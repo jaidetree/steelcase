@@ -27,7 +27,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="Steelcase API 1.0 documentation" href="../index.html" />
     <link rel="next" title="Glossary" href="glossary.html" />
-    <link rel="prev" title="Retrieving Glossary Terms" href="../glossary_terms.html" /> 
+    <link rel="prev" title="Retrieving Glossary Terms" href="../api/glossary_terms.html" /> 
   </head>
   <body>
     <div class="related">
@@ -40,7 +40,7 @@
           <a href="glossary.html" title="Glossary"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="../glossary_terms.html" title="Retrieving Glossary Terms"
+          <a href="../api/glossary_terms.html" title="Retrieving Glossary Terms"
              accesskey="P">previous</a> |</li>
         <li><a href="../index.html">Steelcase API 1.0 documentation</a> &raquo;</li> 
       </ul>
@@ -55,8 +55,63 @@
 <h1>Models<a class="headerlink" href="#models" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="glossary.html#fields">Fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="glossary.html#sql">SQL</a></li>
 </ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="module.html">Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="module.html#fields">Fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module.html#sql">SQL</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="performance.html">Performance</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="performance.html#fields">Fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="performance.html#sql">SQL</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="trainee.html">Trainee</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="trainee.html#fields">Fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trainee.html#sql">SQL</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="user.html">User</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="user.html#fields">Fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user.html#sql">SQL</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="what-are-models">
+<h2>What are Models?<a class="headerlink" href="#what-are-models" title="Permalink to this headline">¶</a></h2>
+<p>Models are handled using the php-activerecord Database Object Relational Mapper (ORM) to create objects that represent database tables. The API uses models to retrieve data in the database before returning the JSON.</p>
+<p>Models are the representation of database data and make up the &#8220;M&#8221; in the &#8220;MVC&#8221; application framework pattern.</p>
+<div class="section" id="php-example">
+<h3>PHP Example<a class="headerlink" href="#php-example" title="Permalink to this headline">¶</a></h3>
+<p>In the following example we will use the <a class="reference internal" href="glossary.html"><em>Glossary</em></a> Model to retrieve all terms, and the <a class="reference internal" href="user.html"><em>User</em></a> to retrieve a specific user. You can learn more about active record at <a class="reference external" href="http://www.phpactiverecord.org/">http://www.phpactiverecord.org/</a></p>
+<div class="section" id="retrieving-all-glossary-terms">
+<h4>Retrieving all Glossary Terms<a class="headerlink" href="#retrieving-all-glossary-terms" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-python"><pre>$terms = Glossary:all();</pre>
+</div>
+</div>
+<div class="section" id="retrieving-a-single-user">
+<h4>Retrieving a single User<a class="headerlink" href="#retrieving-a-single-user" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-python"><pre>$user = User::find(1); // Queries the database for a user with a primary key (id) of 1.</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="status-fields">
+<span id="id1"></span><h2>Status Fields<a class="headerlink" href="#status-fields" title="Permalink to this headline">¶</a></h2>
+<p>Many models have a status field which is an integer field with a value that refers to one of the following:</p>
+<dl class="docutils">
+<dt>0</dt>
+<dd>Active and public</dd>
+<dt>1</dt>
+<dd>Deleted</dd>
+<dt>2</dt>
+<dd>Hidden</dd>
+</dl>
 </div>
 </div>
 
@@ -66,8 +121,24 @@
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Models</a><ul>
+<li><a class="reference internal" href="#what-are-models">What are Models?</a><ul>
+<li><a class="reference internal" href="#php-example">PHP Example</a><ul>
+<li><a class="reference internal" href="#retrieving-all-glossary-terms">Retrieving all Glossary Terms</a></li>
+<li><a class="reference internal" href="#retrieving-a-single-user">Retrieving a single User</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#status-fields">Status Fields</a></li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
-  <p class="topless"><a href="../glossary_terms.html"
+  <p class="topless"><a href="../api/glossary_terms.html"
                         title="previous chapter">Retrieving Glossary Terms</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="glossary.html"
@@ -104,7 +175,7 @@
           <a href="glossary.html" title="Glossary"
              >next</a> |</li>
         <li class="right" >
-          <a href="../glossary_terms.html" title="Retrieving Glossary Terms"
+          <a href="../api/glossary_terms.html" title="Retrieving Glossary Terms"
              >previous</a> |</li>
         <li><a href="../index.html">Steelcase API 1.0 documentation</a> &raquo;</li> 
       </ul>
