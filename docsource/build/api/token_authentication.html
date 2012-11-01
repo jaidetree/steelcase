@@ -1,0 +1,171 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Token Authentication &mdash; Steelcase API 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Steelcase API 1.0 documentation" href="../index.html" />
+    <link rel="up" title="API Functions" href="../api_list.html" />
+    <link rel="next" title="Trainee Logins" href="trainee_logins.html" />
+    <link rel="prev" title="API Functions" href="../api_list.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="trainee_logins.html" title="Trainee Logins"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../api_list.html" title="API Functions"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Steelcase API 1.0 documentation</a> &raquo;</li>
+          <li><a href="../api_list.html" accesskey="U">API Functions</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="token-authentication">
+<span id="index-0"></span><h1>Token Authentication<a class="headerlink" href="#token-authentication" title="Permalink to this headline">¶</a></h1>
+<p>When working with the web service API. Each request you send must be accompanied by a token. <strong>If you use our library, the token will be handled automatically for you.</strong> The token is a string containing two parts. The first part is the data randomly generated with a unix timestamp. The second part involves some mathmatical representation.</p>
+<p>The purpose of the token is to make sure unauthorized apps can not access the data within the database. If there is no token or an unvalid one with an API request then the web API server will return an error.</p>
+<p>All examples will be based on using our library and will be called at the start of the app.</p>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><pre>request_token(&lt;keyA&gt;, &lt;keyB&gt;, &lt;callback&gt;);</pre>
+</div>
+</div>
+<div class="section" id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><dl class="docutils">
+<dt>keyA</dt>
+<dd>A numerical representation of the time.</dd>
+<dt>keyB</dt>
+<dd>An expected number resulting from manipulation.</dd>
+<dt>callback</dt>
+<dd><div class="first last line-block">
+<div class="line">A function to receive and process a response.</div>
+<div class="line">Example: function(response){ trace( response.data.token ); }</div>
+</div>
+</dd>
+</dl>
+</div></blockquote>
+<div class="section" id="request-uri">
+<h3>Request URI<a class="headerlink" href="#request-uri" title="Permalink to this headline">¶</a></h3>
+<p><strong>/api/auth/create</strong></p>
+</div>
+</div>
+<div class="section" id="response">
+<h2>Response<a class="headerlink" href="#response" title="Permalink to this headline">¶</a></h2>
+<p>The response data will be a simple JSON object:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span>
+    <span class="s">&#39;status&#39;</span><span class="p">:</span> <span class="s">&#39;ok&#39;</span><span class="p">,</span>
+    <span class="s">&#39;message&#39;</span><span class="p">:</span> <span class="s">&#39;Glossary items retrieved&#39;</span><span class="p">,</span>
+    <span class="s">&#39;error_code&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+    <span class="s">&#39;data&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">&#39;token&#39;</span><span class="p">:</span> <span class="s">&#39;&lt;token_string&gt;&#39;</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Token Authentication</a><ul>
+<li><a class="reference internal" href="#usage">Usage</a></li>
+<li><a class="reference internal" href="#parameters">Parameters</a><ul>
+<li><a class="reference internal" href="#request-uri">Request URI</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#response">Response</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../api_list.html"
+                        title="previous chapter">API Functions</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="trainee_logins.html"
+                        title="next chapter">Trainee Logins</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/api/token_authentication.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="trainee_logins.html" title="Trainee Logins"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../api_list.html" title="API Functions"
+             >previous</a> |</li>
+        <li><a href="../index.html">Steelcase API 1.0 documentation</a> &raquo;</li>
+          <li><a href="../api_list.html" >API Functions</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Jay Zawrotny, Wes Kempa.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

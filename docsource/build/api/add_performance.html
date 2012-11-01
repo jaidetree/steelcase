@@ -1,0 +1,170 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Add Performance &mdash; Steelcase API 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Steelcase API 1.0 documentation" href="../index.html" />
+    <link rel="up" title="API Functions" href="../api_list.html" />
+    <link rel="next" title="Retrieving Glossary Terms" href="glossary_terms.html" />
+    <link rel="prev" title="Trainee Logins" href="trainee_logins.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="glossary_terms.html" title="Retrieving Glossary Terms"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="trainee_logins.html" title="Trainee Logins"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Steelcase API 1.0 documentation</a> &raquo;</li>
+          <li><a href="../api_list.html" accesskey="U">API Functions</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="add-performance">
+<span id="index-0"></span><h1>Add Performance<a class="headerlink" href="#add-performance" title="Permalink to this headline">¶</a></h1>
+<p>Record a score, duration, and meta data for a given trainee in a given module.</p>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><pre>steelcaseapi.performance_add(&lt;token&gt;, &lt;trainee_id&gt;, &lt;module_id&gt;, &lt;score&gt;, &lt;duration&gt;, &lt;meta&gt;, function(response){
+    trace(response.data.message);
+});</pre>
+</div>
+</div>
+<div class="section" id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><dl class="docutils">
+<dt>token</dt>
+<dd><div class="first last line-block">
+<div class="line">Valid token from a generate token request. See <a class="reference internal" href="token_authentication.html"><em>Token Authentication</em></a></div>
+</div>
+</dd>
+<dt>trainee_id</dt>
+<dd><div class="first last line-block">
+<div class="line">String to use as the trainee id.</div>
+<div class="line">Example: 555555-555</div>
+</div>
+</dd>
+<dt>module_id</dt>
+<dd><div class="first last line-block">
+<div class="line">Integer refering to a named module.</div>
+<div class="line">Example: 0, 1, 2, 3 - 6</div>
+<div class="line">See ref:<cite>models/module</cite> for more information.</div>
+</div>
+</dd>
+<dt>callback</dt>
+<dd><div class="first last line-block">
+<div class="line">Function to run when response is returned. Will always be a JSON object. ref:<cite>working_json</cite></div>
+<div class="line">Example: function(response){ trace(response.data.trainee); }</div>
+</div>
+</dd>
+</dl>
+</div></blockquote>
+<div class="section" id="request-uri">
+<h3>Request URI<a class="headerlink" href="#request-uri" title="Permalink to this headline">¶</a></h3>
+<p><strong>/api/performance/add</strong></p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Add Performance</a><ul>
+<li><a class="reference internal" href="#usage">Usage</a></li>
+<li><a class="reference internal" href="#parameters">Parameters</a><ul>
+<li><a class="reference internal" href="#request-uri">Request URI</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="trainee_logins.html"
+                        title="previous chapter">Trainee Logins</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="glossary_terms.html"
+                        title="next chapter">Retrieving Glossary Terms</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/api/add_performance.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="glossary_terms.html" title="Retrieving Glossary Terms"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="trainee_logins.html" title="Trainee Logins"
+             >previous</a> |</li>
+        <li><a href="../index.html">Steelcase API 1.0 documentation</a> &raquo;</li>
+          <li><a href="../api_list.html" >API Functions</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Jay Zawrotny, Wes Kempa.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
