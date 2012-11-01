@@ -7,6 +7,7 @@ body{
 	font-size: 14px;
 	line-height: 1.4em;
 	margin: 0;
+	background-color: #999;
 }
 .content{
 	width:85%;
@@ -18,14 +19,22 @@ nav{
 	left:0;
 	width:15%;
 	height:100%;
-	background-color: lightgrey;
+	background-color: #719028;
+	color:#FFF;
 	font-size:1.2em;
+	background-image: url(../images/images/steel_logo.png);
+	background-repeat:no-repeat;
+	background-size: 100%;
+	background-position: bottom;
+	
+	
+	
 }
 nav li a,
 nav li a:visited,
 nav li a:hover,
 nav li a:active{
-	color:#333;
+	color: #FFF;
 	font-weight: bold;
 	display: block;
 	padding:8px 15px;
@@ -35,8 +44,10 @@ nav li a:active{
 nav li a:hover,
 nav li a:active{
 	background-color:#EEE;
-	color:#666;
-	border-left: 5px solid #777; 
+	color:#333;
+	border-left: 5px solid #777;	
+	box-shadow:-2px 2px 3px #333;
+ 
 }
 form td.label{
 	width:100px;
@@ -48,8 +59,8 @@ form textarea {
 	width:350px;
 }
 h1{
-	background-color: #333;
-	color:white;
+	background-color: #b8c894;
+	color: #333;
 	margin: -2em -2em 1em -2em;
 }
 h1,
@@ -67,7 +78,9 @@ table td{
 	margin: 0;
 }
 .add-new{
-	background-color: #8CF;
+	background-color: #719028;
+	background-image:url(../images/images/plus.png);
+	background-repeat:no-repeat;
 	color:white;
 	margin-bottom:20px;
 }
@@ -109,7 +122,7 @@ table.display {
 	font-size: 130%;
 }
 .messages li.success {
-	background: #3fb98d;
+	background: #FFF;
 	border-radius: 10px;
 	padding: 5px 15px;
 	color: #fff;
@@ -223,3 +236,4 @@ table.display {
 a:hover{
 	text-decoration: underline;
 }
+
