@@ -1,0 +1,203 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Understanding JSON &mdash; Steelcase API 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Steelcase API 1.0 documentation" href="index.html" />
+    <link rel="next" title="Working with JSON in ActionScript 3" href="json/working_json.html" />
+    <link rel="prev" title="Welcome to steelcaseapi’s documentation!" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="json/working_json.html" title="Working with JSON in ActionScript 3"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to steelcaseapi’s documentation!"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Steelcase API 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="understanding-json">
+<h1>Understanding JSON<a class="headerlink" href="#understanding-json" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="what-is-json">
+<h2>What is JSON?<a class="headerlink" href="#what-is-json" title="Permalink to this headline">¶</a></h2>
+<p>JSON is a machine and human readable format to transfer information between various systems. In the Steelcase API JSON is used to transfer data to and from the Flash interface.</p>
+<p>JSON can contain a number of data types from strings, objects, numbers, and arrays. However all JSON data is stored as a string but can get decoded back into the appropriate formats in the recieiving interface.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span>
+    <span class="s">&#39;status&#39;</span><span class="p">:</span> <span class="s">&#39;ok&#39;</span><span class="p">,</span>
+    <span class="s">&#39;message&#39;</span><span class="p">:</span> <span class="s">&#39;This is a json mesage string.&#39;</span><span class="p">,</span>
+    <span class="s">&#39;code&#39;</span><span class="p">:</span> <span class="mi">201</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="where-is-it-used">
+<h2>Where is it used?<a class="headerlink" href="#where-is-it-used" title="Permalink to this headline">¶</a></h2>
+<p>There are two places where JSON objects should be created and sent.</p>
+<blockquote>
+<div><ul class="simple">
+<li>Sent to the webserver from a Flash file to an API URI</li>
+<li>From the Webserver from a requested URI such as /api/&lt;module&gt;/&lt;method&gt;</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="typical-response-structure">
+<h2>Typical Response Structure<a class="headerlink" href="#typical-response-structure" title="Permalink to this headline">¶</a></h2>
+<p>All JSON objects returned from the web API server will contain the following structure:</p>
+<div class="highlight-python"><pre>{
+    'status': 'ok'
+    'message': '',
+    'error_code': -1,
+    'data': { 'employee_id': '555555-555', 'last_updated': 'November 2, 2012' }
+}</pre>
+</div>
+<div class="section" id="response-breakdown">
+<h3>Response Breakdown<a class="headerlink" href="#response-breakdown" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>status</dt>
+<dd><div class="first last line-block">
+<div class="line">Status refers to there being errors or not.</div>
+<div class="line">&#8220;ok&#8221; means the command was processed successfully.</div>
+<div class="line">&#8220;error&#8221; means the command failed somewhere on the server.</div>
+</div>
+</dd>
+<dt>message</dt>
+<dd><div class="first last line-block">
+<div class="line">A string used to explain what happened.</div>
+<div class="line">May explain if the command created an object or updated an object, or if an error occurred.</div>
+</div>
+</dd>
+<dt>error_code</dt>
+<dd><div class="first last line-block">
+<div class="line">An integer used to uniquely identify the message.</div>
+<div class="line">If the command ran successfully the error_code is -1, upon error it may be equal to or greater than 0.</div>
+</div>
+</dd>
+<dt>data</dt>
+<dd><div class="first last line-block">
+<div class="line">An object containing the data like the previous structure example or an array of objects like all the terms from the glossary.</div>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="working-with-json">
+<h2>Working with JSON<a class="headerlink" href="#working-with-json" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="json/working_json.html">Working with JSON in ActionScript 3</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="json/working_json.html#receiving-json">Receiving JSON</a></li>
+<li class="toctree-l2"><a class="reference internal" href="json/working_json.html#sending-json">Sending JSON</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Understanding JSON</a><ul>
+<li><a class="reference internal" href="#what-is-json">What is JSON?</a></li>
+<li><a class="reference internal" href="#where-is-it-used">Where is it used?</a></li>
+<li><a class="reference internal" href="#typical-response-structure">Typical Response Structure</a><ul>
+<li><a class="reference internal" href="#response-breakdown">Response Breakdown</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#working-with-json">Working with JSON</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Welcome to steelcaseapi&#8217;s documentation!</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="json/working_json.html"
+                        title="next chapter">Working with JSON in ActionScript 3</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/json.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="json/working_json.html" title="Working with JSON in ActionScript 3"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to steelcaseapi’s documentation!"
+             >previous</a> |</li>
+        <li><a href="index.html">Steelcase API 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Jay Zawrotny, Wes Kempa.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

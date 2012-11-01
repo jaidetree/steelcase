@@ -1,0 +1,29 @@
+Receiving JSON Objects in ActionScript 3
+========================================
+
+Using Raw ActionScript 3
+^^^^^^^^^^^^^^^^^^^^^^^^
+To work with a JSON Object outside of our JSON library the process is still fairly simple: ::
+
+    var json_string:String = '{ 
+        "status": "ok", 
+        "message": "This is a test.", 
+        "error_code": -1,
+        "employee_id": "555555-555", 
+        last_visited: "November 2, 2012" 
+    }';
+    var Data:Object = JSON.parse( json_string );
+    trace( Data.employee_id );
+
+In this example we're creating a basic json_string that contains a JSON formatted string. Normally it would be recieved as part of a URLLoader callback.
+
+Using the Library
+^^^^^^^^^^^^^^^^^
+
+To use our Library to work with JSON just do as follows: ::
+
+    trainee_login('555555-555', function(response){ 
+        trace( response.data.employee_id ); 
+    });
+
+In this function we are logging in a trainee by sending the employee_id as a string. Realistically this would come from user input. The callback is then called with the data after processing the response within the library with data that contains the employee_id attribute of the JSON response object.
