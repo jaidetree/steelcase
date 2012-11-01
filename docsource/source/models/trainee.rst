@@ -1,3 +1,5 @@
+.. index:: Trainee Model
+
 Trainee
 =======
 

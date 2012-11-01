@@ -1,3 +1,5 @@
+.. index:: Models Index
+
 Models
 ======
 .. toctree::

@@ -1,3 +1,5 @@
+.. index:: Token Authentication API
+
 Token Authentication
 ====================
 

@@ -1,3 +1,5 @@
+.. index:: Performance API
+
 Add Performance
 ===============
 

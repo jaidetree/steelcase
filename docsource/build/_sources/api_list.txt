@@ -1,3 +1,5 @@
+.. index:: API Index
+
 API Functions
 =============
 

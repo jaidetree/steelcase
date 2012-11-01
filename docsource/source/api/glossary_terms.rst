@@ -1,3 +1,5 @@
+.. index:: Glossary API
+
 Retrieving Glossary Terms
 =========================
 

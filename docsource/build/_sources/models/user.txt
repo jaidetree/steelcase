@@ -1,3 +1,5 @@
+.. index:: User Model
+
 User
 ====
 

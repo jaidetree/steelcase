@@ -1,3 +1,5 @@
+.. index:: Glossary Model
+
 Glossary
 ========
 

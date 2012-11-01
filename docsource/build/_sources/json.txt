@@ -1,3 +1,5 @@
+.. index:: JSON
+
 Understanding JSON
 ==================
 

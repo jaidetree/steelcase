@@ -1,3 +1,5 @@
+.. index:: Working with JSON
+
 Working with JSON in ActionScript 3
 ====================================
 

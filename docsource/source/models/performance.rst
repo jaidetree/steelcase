@@ -1,3 +1,5 @@
+.. index:: Performance Model
+
 Performance
 ===========
 
