@@ -15,6 +15,7 @@
     </head>
     <body>
         <div id="wrapper">
+        <?php if (Auth::is_logged_in()): ?>
             <nav>
                 <ul>
                     <li><a href="<?php static_url(); ?>/../../secure/">Dashboard</a></li>
@@ -23,5 +24,5 @@
                     <li><a href="<?php static_url(); ?>/../../trainees/">Trainees</a></li>
                     <li><a href="<?php static_url(); ?>/../../module/">Modules</a></li>
                 </ul>
-            </nav>
+            </nav><?php endif; ?>
             <div class="content">

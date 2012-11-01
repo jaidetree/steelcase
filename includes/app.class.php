@@ -7,6 +7,7 @@ class APP
 {
     static $data = array();
     static $urls = array();
+    static $controllers = array();
 
     public static $db;
 
@@ -46,6 +47,19 @@ class APP
         self::call_action( 'errors', 'notfound_404', array() );
     }
 
+    public static function add_controller( $name, $object )
+    {
+        $name = strtolower( $name );
+        self::$controllers[ $name ] = &$object;
+    }
+
+    /**
+     * Grab the controller from our controllers array.
+     */
+    public static function controller( $controller_name )
+    {
+        return self::$controllers[ $controller_name ];
+    }
 
 
     /**
@@ -53,11 +67,7 @@ class APP
      */
     public static function call_action( $controller_name, $action, $args )
     {
-        if( class_exists( $controller_name . 'Controller') )
-        {
-            $controller_name .= "Controller";
-        }
-        $controller = new $controller_name;
+        $controller = self::controller( $controller_name );
         $controller->route( $action, $args );
     }
 
@@ -68,7 +78,7 @@ class APP
     {
         foreach( self::$urls as $idx => $route )
         {
-            if( strtolower($route[2]) == strtolower($path) or strtolower($route[1]) === strtolower($path) )
+            if( $route[1] === $path )
             {
                 $url = $route[0];
                 $url = preg_replace("/(\(.+\)+)/Ums", "%s", $url);

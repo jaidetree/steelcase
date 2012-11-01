@@ -4,36 +4,36 @@
  * to which URLS using regex patterns.
  */
 $routes = array(
-    array( '^api/(.*)', 'api.route'),
-    array( '^$', 'Pages.home' ),
-    array( '^secure/$', 'Pages.secure'),
-    array( '^login/$', 'Account.login'),
-    array( '^logout/$', 'Account.logout'),
+    array( '^$', 'pages.home' ),
+    array( '^secure/$', 'pages.secure' ),
+    array( '^login/$', 'account.login'),
     
-    array( '^glossary/$', 'Glossary.index'),
-    array( '^glossary/add/$', 'Glossary.add'),
-    array( '^glossary/([-a-z0-9]+)/$', 'Glossary.show'),
-    array( '^glossary/([-a-z0-9]+)/delete/$', 'Glossary.delete'),
-    array( '^glossary/([-a-z0-9]+)/edit/$', 'Glossary.edit'),
+    array( '^glossary/$', 'glossary.index'),
+    array( '^glossary/add/$', 'glossary.add'),
+    array( '^glossary/([-a-z0-9]+)/$', 'glossary.show'),
+    array( '^glossary/([-a-z0-9]+)/delete/$', 'glossary.delete'),
+    array( '^glossary/([-a-z0-9]+)/edit/$', 'glossary.edit'),
 
-    array( '^trainees/$', 'Trainees.index'),
-    array( '^trainees/([0-9]+)/$', 'Trainees.show'),
-    array( '^trainees/([0-9]+)/edit/$', 'Trainees.edit'),
-    array( '^trainees/add/$', 'Trainees.add'),
-    array( '^trainees/([0-9]+)/update/$', 'Trainees.update'),
+    array( '^trainees/$', 'trainees.index'),
+    array( '^trainees/([0-9]+)/$', 'trainees.show'),
+    array( '^trainees/([0-9]+)/edit/$', 'trainees.edit'),
+    array( '^trainees/add/$', 'trainees.add'),
+    array( '^trainees/([0-9]+)/update/$', 'trainees.update'),
 
-    array( '^performances/$', 'Performances.index'),
-    array( '^performances/([0-9]+)/$', 'Performances.show'),
-    array( '^performances/([0-9]+)/update/$', 'Performances.update'),
+    array( '^performances/$', 'performances.index'),
+    array( '^performances/([0-9]+)/$', 'performances.show'),
+    array( '^performances/([0-9]+)/update/$', 'performances.update'),
 
-    array( '^module/$', 'Modules.index'),
-    array( '^module/([0-9]+)/edit/$', 'Modules.edit'),
-    array( '^module/([0-9]+)/delete/$', 'Modules.delete'),
-    array( '^module/add/$', 'Modules.add'),
+    array( '^module/$', 'modules.index'),
+    array( '^module/([0-9]+)/edit/$', 'modules.edit'),
+    array( '^module/([0-9]+)/delete/$', 'modules.delete'),
+    array( '^module/add/$', 'modules.add'),
+
+    array( '^log/$', 'log.index'),
     
-    array( '^users/$', 'Users.index'),
-    array( '^users/add/$', 'Users.add'),
-    array( '^users/([0-9]+)/edit/$', 'Users.edit'),
-    array( '^users/([0-9]+)/reset/$', 'Users.reset'),
+    array( '^users/$', 'users.index'),
+    array( '^users/add/$', 'users.add'),
+    array( '^users/([0-9]+)/edit/$', 'users.edit'),
+    array( '^users/([0-9]+)/reset/$', 'users.reset'),
 );
 ?>

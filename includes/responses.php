@@ -8,7 +8,8 @@ class Response
 
     public function __toString()
     {
-        return $this->render();
+        $this->render();
+        return '';
     }
 }
 
@@ -25,7 +26,6 @@ class TemplateResponse extends Response
     public function render()
     {
         echo render($this->template, $this->data);
-        return '';
     }
 }
 
@@ -65,12 +65,12 @@ class Error404Response extends TemplateResponse
     public function render()
     {
         header('HTTP/1.0 404 Not Found');
-        return parent::render();
+        parent::render();
     }
 }
 class JSONResponse extends Response
 {
-    protected $_data = array();
+    private $_data = array();
 
     public function __construct($data) 
     {
@@ -79,7 +79,7 @@ class JSONResponse extends Response
     public function render()
     {
         header('Content-Type: text/json');
-        return json_encode($this->_data);
+        echo json_encode($this->_data);
     }
 }
 ?>
