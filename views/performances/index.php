@@ -17,14 +17,13 @@
         <tbody>
         <?php foreach($performances as $performance): ?>
             <tr>
-                <td><?php echo $performance->trainee ?></td>
+                <td><?php echo $performance->trainee->employee_id ?></td>
                 <td><?php echo $performance->module->name ?></td>
                 <td><?php echo $performance->score ?></td>
                 <td><?php echo $performance->duration ?></td>
                 <td><?php echo $performance->created_at->format("F j, Y h:i a") ?></td>
                 <td class="actions">
-                    <a class="view" href="<?php url('performances.show', array($performance->id)) ?>"></a>
-                    <a class="edit" href="<?php url('performances.edit', array($performance->id)) ?>"></a>
+                    <a class="view" href="<?php url('performances.show', array($performance->id)) ?>">View</a>
                 </td>
             </tr>
         <?php endforeach; ?>

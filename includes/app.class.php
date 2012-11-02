@@ -47,7 +47,7 @@ class APP
             return false;
         }
 
-        call_user_func_array(self::get_function($name), $arguments);
+        return call_user_func_array(self::get_function($name), $arguments);
     }
 
     public static function function_exists($name)
@@ -72,7 +72,7 @@ class APP
             $short_name = $function;
         }
 
-        self::$functions[$short_name] = array( $object, $function );
+        self::$functions[$short_name] = array( $class, $function );
     }
 
     public static function get_function($name)
