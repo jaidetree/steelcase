@@ -9,23 +9,26 @@ Usage
 -----
 ::
 
-    steelcaseapi.glossary_get(<token>, function(response){ 
-        trace(response.data[0].name);
+    var steelcaseapi:SteelcaseAPI = new SteelcaseAPI();
+    steelcaseapi.ready(function(){ 
+        steelcaseapi.glossary_get(function(response){ 
+            trace(response.data[0].name);
+        });
     });
 
 Parameters
 ----------
 
-    token
-        | Valid token from a generate token request. See :doc:`/api/token_authentication`
+    callback
+        | A function to call once the response is receieved. 
 
 Request URI
 """""""""""
-**/api/glossary/get**
+**/api/glossary/get/**
 
 Response
 --------
-The response data will be an array of objects like so:
+The response data will be a :ref:`json-response` with an array of objects like so:
 
 ::
 

@@ -26,9 +26,9 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="Steelcase API 1.0 documentation" href="../index.html" />
-    <link rel="up" title="API Functions" href="../api_list.html" />
+    <link rel="up" title="Flash API Library" href="../api_list.html" />
     <link rel="next" title="Trainee Logins" href="trainee_logins.html" />
-    <link rel="prev" title="API Functions" href="../api_list.html" /> 
+    <link rel="prev" title="Flash API Library" href="../api_list.html" /> 
   </head>
   <body>
     <div class="related">
@@ -41,10 +41,10 @@
           <a href="trainee_logins.html" title="Trainee Logins"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="../api_list.html" title="API Functions"
+          <a href="../api_list.html" title="Flash API Library"
              accesskey="P">previous</a> |</li>
         <li><a href="../index.html">Steelcase API 1.0 documentation</a> &raquo;</li>
-          <li><a href="../api_list.html" accesskey="U">API Functions</a> &raquo;</li> 
+          <li><a href="../api_list.html" accesskey="U">Flash API Library</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -58,19 +58,26 @@
 <p>When working with the web service API. Each request you send must be accompanied by a token. <strong>If you use our library, the token will be handled automatically for you.</strong> The token is a string containing two parts. The first part is the data randomly generated with a unix timestamp. The second part involves some mathmatical representation.</p>
 <p>The purpose of the token is to make sure unauthorized apps can not access the data within the database. If there is no token or an unvalid one with an API request then the web API server will return an error.</p>
 <p>All examples will be based on using our library and will be called at the start of the app.</p>
+<div class="section" id="ready-method">
+<span id="id1"></span><h2>Ready Method<a class="headerlink" href="#ready-method" title="Permalink to this headline">¶</a></h2>
+<p>Before calling any other API method you must first wait until the token is stored and ready for use. You can do so by using the ready method.</p>
+</div>
 <div class="section" id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><pre>request_token(&lt;keyA&gt;, &lt;keyB&gt;, &lt;callback&gt;);</pre>
+<div class="highlight-python"><pre>var steelcaseapi:SteelcaseAPI = new SteelcaseAPI();
+steelcaseapi.ready(function(){
+    // Code to execute once the token is received.
+});</pre>
+</div>
+<p>However it is also possible to request the token externally and store it elsewhere.</p>
+<div class="highlight-python"><pre>var steelcaseapi:SteelcaseAPI = new SteelcaseAPI();
+steelcaseapi.request_token(&lt;callback&gt;);</pre>
 </div>
 </div>
 <div class="section" id="parameters">
 <h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
 <blockquote>
 <div><dl class="docutils">
-<dt>keyA</dt>
-<dd>A numerical representation of the time.</dd>
-<dt>keyB</dt>
-<dd>An expected number resulting from manipulation.</dd>
 <dt>callback</dt>
 <dd><div class="first last line-block">
 <div class="line">A function to receive and process a response.</div>
@@ -81,12 +88,12 @@
 </div></blockquote>
 <div class="section" id="request-uri">
 <h3>Request URI<a class="headerlink" href="#request-uri" title="Permalink to this headline">¶</a></h3>
-<p><strong>/api/auth/create</strong></p>
+<p><strong>/api/auth/create/</strong></p>
 </div>
 </div>
 <div class="section" id="response">
 <h2>Response<a class="headerlink" href="#response" title="Permalink to this headline">¶</a></h2>
-<p>The response data will be a simple JSON object:</p>
+<p>The response data will be a simple <a class="reference internal" href="../api_list.html#json-response"><em>JSONResponse</em></a> object:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="p">{</span>
     <span class="s">&#39;status&#39;</span><span class="p">:</span> <span class="s">&#39;ok&#39;</span><span class="p">,</span>
     <span class="s">&#39;message&#39;</span><span class="p">:</span> <span class="s">&#39;Glossary items retrieved&#39;</span><span class="p">,</span>
@@ -109,6 +116,7 @@
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Token Authentication</a><ul>
+<li><a class="reference internal" href="#ready-method">Ready Method</a></li>
 <li><a class="reference internal" href="#usage">Usage</a></li>
 <li><a class="reference internal" href="#parameters">Parameters</a><ul>
 <li><a class="reference internal" href="#request-uri">Request URI</a></li>
@@ -121,7 +129,7 @@
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="../api_list.html"
-                        title="previous chapter">API Functions</a></p>
+                        title="previous chapter">Flash API Library</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="trainee_logins.html"
                         title="next chapter">Trainee Logins</a></p>
@@ -157,10 +165,10 @@
           <a href="trainee_logins.html" title="Trainee Logins"
              >next</a> |</li>
         <li class="right" >
-          <a href="../api_list.html" title="API Functions"
+          <a href="../api_list.html" title="Flash API Library"
              >previous</a> |</li>
         <li><a href="../index.html">Steelcase API 1.0 documentation</a> &raquo;</li>
-          <li><a href="../api_list.html" >API Functions</a> &raquo;</li> 
+          <li><a href="../api_list.html" >Flash API Library</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

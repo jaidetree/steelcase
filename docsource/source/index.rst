@@ -14,5 +14,9 @@ These docs describe how to access the API to communicate between two seperate sy
    :maxdepth: 2
 
    json
+
+.. toctree::
+   :maxdepth: 3
+
    api_list
    models/models

@@ -9,8 +9,11 @@ Usage
 -----
 ::
 
-    steelcaseapi.performance_add(<token>, <trainee_id>, <module_id>, <score>, <duration>, <meta>, function(response){ 
-        trace(response.data.message);
+    var steelcaseapi:SteelcaseAPI = new SteelcaseAPI();
+    steelcaseapi.ready(function(){ 
+        steelcaseapi.performance_add(<trainee_id>, <module_id>, <score>, <duration>, <meta>, function(response){ 
+            trace(response.data.message);
+        });
     });
 
 Parameters
@@ -25,10 +28,16 @@ Parameters
         | Integer refering to a named module.
         | Example: 0, 1, 2, 3 - 6
         | See ref:`models/module` for more information.
+    score
+        | Score is a decimal value representing their performance on the module.
+    duration
+        | The time it took in seconds to complete the module.
+    meta
+        | Optional: An ActionScript 3 Object containing assorted keys and values.
     callback
         | Function to run when response is returned. Will always be a JSON object. ref:`working_json`
         | Example: function(response){ trace(response.data.trainee); }
 
 Request URI
 """""""""""
-**/api/performance/add**
+**/api/performance/add/**
