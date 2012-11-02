@@ -24,7 +24,9 @@ $routes = array(
 
     array( '^performances/$', 'Performances.index'),
     array( '^performances/([0-9]+)/$', 'Performances.show'),
-    array( '^performances/([0-9]+)/update/$', 'Performances.update'),
+
+    array( '^performanceobjects/$', 'PerformanceObjects.index'),
+    array( '^performanceobjects/([0-9]+)/$', 'PerformanceObjects.show'),
 
     array( '^module/$', 'Modules.index'),
     array( '^module/([0-9]+)/edit/$', 'Modules.edit'),
