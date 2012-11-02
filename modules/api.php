@@ -221,6 +221,13 @@ abstract class Module
      */
     protected function respond($data, $message=null)
     {
+
+        $data = $this->model2array($data);
+        $this->send( new Response($data, $message) );
+    }
+
+    private function model2array($data)
+    {
         /**
          * If we have a model object, turn it into an array.
          */
@@ -237,11 +244,13 @@ abstract class Module
                 {
                     $data[$key]  = $value->format("F j, Y h:i a");
                 }
+                if( is_subclass_of($value, 'ActiveRecord\Model') )
+                {
+                    $data[$key] = $this->model2array($value);
+                }
             }
         }
-
-
-        $this->send( new Response($data, $message) );
+        return $data;
     }
     /**
      * Show an error response from within a 

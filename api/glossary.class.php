@@ -5,6 +5,7 @@ class Glossary extends Module
     public function get($data)
     {
         $this->token_required($data['token']);
+
         $terms = array();
         foreach( \Glossary::all() as $term )
         {
