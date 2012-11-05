@@ -6,18 +6,18 @@
     <table cellpadding="0" cellspacing="0" border="0" class="display" id="assetlist">
         <thead>
             <tr>
+                <th>Performance ID</th>
                 <th>Key</th>
                 <th>Value</th>
-                <th>Performance ID</th>
                 <th>Time Started</th>
             </tr>
         </thead>
         <tbody>
         <?php foreach($performanceobjects as $performanceobject): ?>
             <tr>
+                <td><?php echo $performanceobject->performance_id ?></td>
                 <td><?php echo $performanceobject->key ?></td>
                 <td><?php echo $performanceobject->value ?></td>
-                <td><?php echo $performanceobject->performance_id ?></td>
                 <td><?php echo $performanceobject->created_at->format("F j, Y h:i a") ?></td>
             </tr>
         <?php endforeach; ?>
