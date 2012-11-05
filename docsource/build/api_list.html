@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>API Functions &mdash; Steelcase API 1.0 documentation</title>
+    <title>Flash API Library &mdash; Steelcase API 1.0 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -51,11 +51,30 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="api-functions">
-<span id="index-0"></span><h1>API Functions<a class="headerlink" href="#api-functions" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="flash-api-library">
+<span id="index-0"></span><h1>Flash API Library<a class="headerlink" href="#flash-api-library" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="jsonresponse">
+<span id="json-response"></span><h2>JSONResponse<a class="headerlink" href="#jsonresponse" title="Permalink to this headline">¶</a></h2>
+<p>When making an API call you will recieve objects that are a instance of the JSONResponse class contained within the steelcaseapi.as library. These behave just like objects parsed from JSON except for the <tt class="docutils literal"><span class="pre">is_ok</span></tt> method helper.</p>
+<p>Example</p>
+<div class="highlight-python"><pre>var steelcaseapi:SteelcaseAPI = new SteelcaseAPI();
+steelcaseapi.trainee_login('555555-555', function(response){
+    if (response.is_ok())
+    {
+        trace( response.data.employee_id );
+    }else{
+        trace( response.message + ' ERROR CODE: ' + response.error_code );
+    }
+}):</pre>
+</div>
+<p>The <tt class="docutils literal"><span class="pre">is_ok</span></tt> method returns a boolean if the response is a valid json response and the status sent back was &#8216;ok&#8217; as in the API call ran successfully.</p>
+</div>
+<div class="section" id="api-functions">
+<h2>API Functions<a class="headerlink" href="#api-functions" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="api/token_authentication.html">Token Authentication</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/token_authentication.html#ready-method">Ready Method</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/token_authentication.html#usage">Usage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/token_authentication.html#parameters">Parameters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/token_authentication.html#response">Response</a></li>
@@ -64,6 +83,8 @@
 <li class="toctree-l1"><a class="reference internal" href="api/trainee_logins.html">Trainee Logins</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="api/trainee_logins.html#usage">Usage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/trainee_logins.html#parameters">Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/trainee_logins.html#logging-out">Logging Out</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/trainee_logins.html#id1">Parameters</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="api/add_performance.html">Add Performance</a><ul>
@@ -80,6 +101,7 @@
 </ul>
 </div>
 </div>
+</div>
 
 
           </div>
@@ -87,6 +109,17 @@
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Flash API Library</a><ul>
+<li><a class="reference internal" href="#jsonresponse">JSONResponse</a></li>
+<li><a class="reference internal" href="#api-functions">API Functions</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
   <p class="topless"><a href="json/working_json.html"
                         title="previous chapter">Working with JSON in ActionScript 3</a></p>

@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="Steelcase API 1.0 documentation" href="../index.html" />
-    <link rel="up" title="API Functions" href="../api_list.html" />
+    <link rel="up" title="Flash API Library" href="../api_list.html" />
     <link rel="next" title="Add Performance" href="add_performance.html" />
     <link rel="prev" title="Token Authentication" href="token_authentication.html" /> 
   </head>
@@ -44,7 +44,7 @@
           <a href="token_authentication.html" title="Token Authentication"
              accesskey="P">previous</a> |</li>
         <li><a href="../index.html">Steelcase API 1.0 documentation</a> &raquo;</li>
-          <li><a href="../api_list.html" accesskey="U">API Functions</a> &raquo;</li> 
+          <li><a href="../api_list.html" accesskey="U">Flash API Library</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -58,9 +58,12 @@
 <p>A function to login the trainee. Takes the string parameter &#8216;trainee_id&#8217; to either create a new trainee record or update an existing trainee with that user id.</p>
 <div class="section" id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><pre>steelcaseapi.trainee_login(&lt;token&gt;, &lt;trainee_id&gt;, function(response){
-    // Code to handle the response goes here.
-    trace(response.data.trainee_id);
+<div class="highlight-python"><pre>var steelcaseapi:SteelcaseAPI = new SteelcaseAPI();
+steelcaseapi.ready(function(){
+    steelcaseapi.trainee_login(&lt;trainee_id&gt;, function(response){
+        // Code to handle the response goes here.
+        trace(response.data.trainee_id);
+    });
 });</pre>
 </div>
 </div>
@@ -68,11 +71,6 @@
 <h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
 <blockquote>
 <div><dl class="docutils">
-<dt>token</dt>
-<dd><div class="first last line-block">
-<div class="line">Valid token from a generate token request. See <a class="reference internal" href="token_authentication.html"><em>Token Authentication</em></a></div>
-</div>
-</dd>
 <dt>trainee_id</dt>
 <dd><div class="first last line-block">
 <div class="line">String to use as the trainee id.</div>
@@ -89,7 +87,34 @@
 </div></blockquote>
 <div class="section" id="request-uri">
 <h3>Request URI<a class="headerlink" href="#request-uri" title="Permalink to this headline">¶</a></h3>
-<p><strong>/api/trainee/new</strong></p>
+<p><strong>/api/trainee/new/</strong></p>
+</div>
+</div>
+<div class="section" id="logging-out">
+<h2>Logging Out<a class="headerlink" href="#logging-out" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><pre>var steelcaseapi:SteelcaseAPI = new SteelcaseAPI();
+steelcaseapi.ready(function(){
+    steelcaseapi.trainee_logout(function(response){
+        trace("Logged out!");
+    });
+});</pre>
+</div>
+</div>
+<div class="section" id="id1">
+<h2>Parameters<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><dl class="docutils">
+<dt>callback</dt>
+<dd><div class="first last line-block">
+<div class="line">Function to run when response is returned. Will always be a JSON object. ref:<cite>working_json</cite></div>
+<div class="line">Example: function(response){ trace(response.data.trainee); }</div>
+</div>
+</dd>
+</dl>
+</div></blockquote>
+<div class="section" id="id2">
+<h3>Request URI<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p><strong>/api/trainee/logout/</strong></p>
 </div>
 </div>
 </div>
@@ -106,6 +131,11 @@
 <li><a class="reference internal" href="#usage">Usage</a></li>
 <li><a class="reference internal" href="#parameters">Parameters</a><ul>
 <li><a class="reference internal" href="#request-uri">Request URI</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#logging-out">Logging Out</a></li>
+<li><a class="reference internal" href="#id1">Parameters</a><ul>
+<li><a class="reference internal" href="#id2">Request URI</a></li>
 </ul>
 </li>
 </ul>
@@ -153,7 +183,7 @@
           <a href="token_authentication.html" title="Token Authentication"
              >previous</a> |</li>
         <li><a href="../index.html">Steelcase API 1.0 documentation</a> &raquo;</li>
-          <li><a href="../api_list.html" >API Functions</a> &raquo;</li> 
+          <li><a href="../api_list.html" >Flash API Library</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

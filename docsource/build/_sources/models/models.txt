@@ -2,6 +2,17 @@
 
 Models
 ======
+
+What are Models?
+----------------
+
+Models are handled using the php-activerecord Database Object Relational Mapper (ORM) to create objects that represent database tables. The API uses models to retrieve data in the database before returning the JSON.
+
+Models are the representation of database data and make up the "M" in the "MVC" application framework pattern.
+
+Application Models
+------------------
+
 .. toctree::
    :maxdepth: 2
 
@@ -10,13 +21,6 @@ Models
    performance
    trainee
    user
-
-What are Models?
-----------------
-
-Models are handled using the php-activerecord Database Object Relational Mapper (ORM) to create objects that represent database tables. The API uses models to retrieve data in the database before returning the JSON.
-
-Models are the representation of database data and make up the "M" in the "MVC" application framework pattern.
 
 PHP Example
 ^^^^^^^^^^^

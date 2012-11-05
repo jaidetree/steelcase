@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="Steelcase API 1.0 documentation" href="../index.html" />
-    <link rel="up" title="API Functions" href="../api_list.html" />
+    <link rel="up" title="Flash API Library" href="../api_list.html" />
     <link rel="next" title="Retrieving Glossary Terms" href="glossary_terms.html" />
     <link rel="prev" title="Trainee Logins" href="trainee_logins.html" /> 
   </head>
@@ -44,7 +44,7 @@
           <a href="trainee_logins.html" title="Trainee Logins"
              accesskey="P">previous</a> |</li>
         <li><a href="../index.html">Steelcase API 1.0 documentation</a> &raquo;</li>
-          <li><a href="../api_list.html" accesskey="U">API Functions</a> &raquo;</li> 
+          <li><a href="../api_list.html" accesskey="U">Flash API Library</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -58,8 +58,11 @@
 <p>Record a score, duration, and meta data for a given trainee in a given module.</p>
 <div class="section" id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><pre>steelcaseapi.performance_add(&lt;token&gt;, &lt;trainee_id&gt;, &lt;module_id&gt;, &lt;score&gt;, &lt;duration&gt;, &lt;meta&gt;, function(response){
-    trace(response.data.message);
+<div class="highlight-python"><pre>var steelcaseapi:SteelcaseAPI = new SteelcaseAPI();
+steelcaseapi.ready(function(){
+    steelcaseapi.performance_add(&lt;trainee_id&gt;, &lt;module_id&gt;, &lt;score&gt;, &lt;duration&gt;, &lt;meta&gt;, function(response){
+        trace(response.data.message);
+    });
 });</pre>
 </div>
 </div>
@@ -85,6 +88,21 @@
 <div class="line">See ref:<cite>models/module</cite> for more information.</div>
 </div>
 </dd>
+<dt>score</dt>
+<dd><div class="first last line-block">
+<div class="line">Score is a decimal value representing their performance on the module.</div>
+</div>
+</dd>
+<dt>duration</dt>
+<dd><div class="first last line-block">
+<div class="line">The time it took in seconds to complete the module.</div>
+</div>
+</dd>
+<dt>meta</dt>
+<dd><div class="first last line-block">
+<div class="line">Optional: An ActionScript 3 Object containing assorted keys and values.</div>
+</div>
+</dd>
 <dt>callback</dt>
 <dd><div class="first last line-block">
 <div class="line">Function to run when response is returned. Will always be a JSON object. ref:<cite>working_json</cite></div>
@@ -95,7 +113,7 @@
 </div></blockquote>
 <div class="section" id="request-uri">
 <h3>Request URI<a class="headerlink" href="#request-uri" title="Permalink to this headline">¶</a></h3>
-<p><strong>/api/performance/add</strong></p>
+<p><strong>/api/performance/add/</strong></p>
 </div>
 </div>
 </div>
@@ -159,7 +177,7 @@
           <a href="trainee_logins.html" title="Trainee Logins"
              >previous</a> |</li>
         <li><a href="../index.html">Steelcase API 1.0 documentation</a> &raquo;</li>
-          <li><a href="../api_list.html" >API Functions</a> &raquo;</li> 
+          <li><a href="../api_list.html" >Flash API Library</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

@@ -9,30 +9,47 @@ The purpose of the token is to make sure unauthorized apps can not access the da
 
 All examples will be based on using our library and will be called at the start of the app.
 
+.. _ready-method:
+
+Ready Method
+------------
+
+Before calling any other API method you must first wait until the token is stored and ready for use. You can do so by using the ready method.
+
+
 Usage
 -----
+
 ::
 
-    request_token(<keyA>, <keyB>, <callback>);
+    var steelcaseapi:SteelcaseAPI = new SteelcaseAPI();
+    steelcaseapi.ready(function(){ 
+        // Code to execute once the token is received.
+    });
+
+
+However it is also possible to request the token externally and store it elsewhere.
+
+::
+
+    var steelcaseapi:SteelcaseAPI = new SteelcaseAPI();
+    steelcaseapi.request_token(<callback>);
+
 
 
 Parameters
 ----------
-    keyA 
-        A numerical representation of the time.
-    keyB 
-        An expected number resulting from manipulation.
     callback
         | A function to receive and process a response.
         | Example: function(response){ trace( response.data.token ); }
 
 Request URI
 """""""""""
-**/api/auth/create**
+**/api/auth/create/**
 
 Response
 --------
-The response data will be a simple JSON object:
+The response data will be a simple :ref:`json-response` object:
 
 ::
 

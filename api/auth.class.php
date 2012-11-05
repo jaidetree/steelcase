@@ -6,22 +6,22 @@ class Auth extends Module
     {
         if( ! array_key_exists('keyA', $data) || ! array_key_exists('keyB', $data) )
         {
-           $this->error('Bad request. No data for you!');
+           $this->error('Bad request. No data for you!', 0);
         }
 
         if( strlen($data['keyA']) != strlen(time()) )
         {
-           $this->error('Bad request. No data for you!');
+           $this->error('Bad request. No data for you!', 1);
         }
 
         if( strlen($data['keyB']) < strlen(time()) - 1 )
         {
-           $this->error('Bad request. No data for you!');
+           $this->error('Bad request. No data for you!', 2);
         }
 
         if( Tokenizer::process_key($data['keyA']) != $data['keyB'] )
         {
-           $this->error('Bad request. No data for you!');
+           $this->error('Bad request. No data for you!', 3);
         }
 
         $token = Tokenizer::generate($data['keyB']);
