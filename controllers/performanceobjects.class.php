@@ -6,7 +6,7 @@ class PerformanceObjectsController extends Controller
     {
         @login_required();
 
-        $performanceobjects = PerformanceObject::find('all', array('order' => 'created_at DESC'));
+        $performanceobjects = PerformanceObject::find('all', array('order' => 'performance_id DESC'));
         return new TemplateResponse('performanceobjects/index', array( 'performanceobjects' => $performanceobjects ));
     }   
 

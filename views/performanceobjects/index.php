@@ -17,7 +17,7 @@
             <tr>
                 <td><?php echo $performanceobject->key ?></td>
                 <td><?php echo $performanceobject->value ?></td>
-                <td><?php echo $performanceobject->performace_id ?></td>
+                <td><?php echo $performanceobject->performance_id ?></td>
                 <td><?php echo $performanceobject->created_at->format("F j, Y h:i a") ?></td>
             </tr>
         <?php endforeach; ?>
@@ -45,7 +45,7 @@
             ],
         "aoColumns": [
                 null, null,
-                null, null, { "bSortable": false }
+                null, null
             ]
     } );    
     
