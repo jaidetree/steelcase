@@ -41,8 +41,11 @@ $files = array(
     "auth.php",
     "standardauth.class.php",
     "html.php",
+    "validators.php",
+    "fieldwidgets.php",
     "fields.php",
-    "api.php"
+    "api.php",
+    "forms.php"
 );
 
 /**
@@ -90,5 +93,6 @@ while( ($file = $dir->read()) !== false )
 /**
  * Authentication initialization
  */
-Auth::get('StandardAuth')->start();
+Auth::driver(new StandardAuth());
+Auth::driver()->start();
 ?>

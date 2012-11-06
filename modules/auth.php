@@ -4,17 +4,21 @@ class Auth
     private static $instance;
     private static $driver;
 
-    public static function get($class_name="")
+    public static function driver($driver=null)
+    {
+        if( $driver )
+        {
+            self::$driver = $driver;
+        }else{
+            return self::$driver;
+        }
+    }
+    public static function get()
     {
         if( ! self::$instance )
         {
-            $class = 'Auth';
+            $class = __CLASS__;
             self::$instance = new $class();
-
-            if( $class_name )
-            {
-                self::$driver = new $class_name();
-            }
         }
 
         return self::$instance;

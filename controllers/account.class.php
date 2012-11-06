@@ -6,7 +6,7 @@ class AccountController extends Controller
         $username = $_POST['username'];
         $password = $_POST['password'];
 
-        if( ( ! $username or ! $password ) and ! Auth::init()->is_logged_in() ) {
+        if( ( ! $username or ! $password ) and ! Auth::is_logged_in() ) {
             return new TemplateResponse('account/login');
         }
         else
@@ -17,7 +17,8 @@ class AccountController extends Controller
             }
             else
             {
-                
+                send_message('error', "Account email/password did not match.");
+                return new TemplateResponse('account/login');
             }
         }
     }
