@@ -18,11 +18,13 @@
         <?php if (Auth::is_logged_in()): ?>
             <nav>
                 <ul>
-                    <li><a href="<?php static_url(); ?>/../../secure/">Dashboard</a></li>
-                    <li><a href="<?php static_url(); ?>/../../users/">Admin Users</a></li>
-                    <li><a href="<?php static_url(); ?>/../../glossary/">Glossary</a></li>
-                    <li><a href="<?php static_url(); ?>/../../trainees/">Trainees</a></li>
-                    <li><a href="<?php static_url(); ?>/../../module/">Modules</a></li>
+                    <li><a href="<?php url('Pages.secure'); ?>">Dashboard</a></li>
+                    <li><a href="<?php url('Glossary.index'); ?>">Glossary</a></li>
+                    <li><a href="<?php url('Trainees.index'); ?>">Trainees</a></li>
+                    <li><a href="<?php url('Performances.index'); ?>">Performance</a></li>
+                    <li><a href="<?php url('PerformanceObjects.index'); ?>">Performance Objects</a></li>
+                    <li><a href="<?php url('Modules.index'); ?>">Modules</a></li>
+                    <li><a href="<?php url('Users.index'); ?>">Admin Users</a></li>
                 </ul>
             </nav><?php endif; ?>
             <div class="content">

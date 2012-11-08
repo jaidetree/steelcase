@@ -6,11 +6,10 @@
     <table cellpadding="0" cellspacing="0" border="0" class="display" id="assetlist">
         <thead>
             <tr>
-                <th>Term</th>
+                <th width="100">Term</th>
                 <th>Definition</th>
                 <th>User</th>
-                <th>Created At</th>
-                <th>Updated At</th>
+                <th width="90">Updated At</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -20,8 +19,7 @@
                 <td><?php echo $term->name ?></td>
                 <td><?php echo $term->description ?></td>
                 <td><?php echo $term->user->username ?></td>
-                <td><?php echo $term->created_at->format("F j, Y"); ?></td>
-                <td><?php echo $term->updated_at->format("F j, Y"); ?></td>
+                <td><?php echo $term->updated_at->format("M j, Y"); ?></td>
                 <td class="actions">
                     <a class="edit" href="<?php url('glossary.edit', array($term->slug)) ?>"></a>
                     <a class="delete" href="<?php url('glossary.delete', array($term->slug)) ?>"></a>
@@ -54,7 +52,7 @@
             ],
         "aoColumns": [
                 null, null,
-                null, null,
+                null, 
                 null, { "bSortable": false }
             ]
     } );    

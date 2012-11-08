@@ -1,28 +1,24 @@
 <?php echo render('_header') ?>
-<h1>Performances Index</h1>
+<h1>Performance Objects Index</h1>
 <?php echo render('_status') ?>
-
 <br/>
 <div class="page">
     <table cellpadding="0" cellspacing="0" border="0" class="display" id="assetlist">
         <thead>
             <tr>
-                <th>Trainee</th>
-                <th>Module</th>
-                <th>Score</th>
-                <th>Duration</th>
+                <th>Performance ID</th>
+                <th>Key</th>
+                <th>Value</th>
                 <th>Time Started</th>
             </tr>
         </thead>
         <tbody>
-        <?php foreach($performances as $performance): ?>
-
+        <?php foreach($performanceobjects as $performanceobject): ?>
             <tr>
-                <td><?php echo $performance->trainee->employee_id ?></td>
-                <td><?php echo $performance->module->name ?></td>
-                <td><?php echo $performance->score ?></td>
-                <td><?php echo $performance->duration ?></td>
-                <td><?php echo $performance->created_at->format("F j, Y h:i a") ?></td>
+                <td><?php echo $performanceobject->performance_id ?></td>
+                <td><?php echo $performanceobject->key ?></td>
+                <td><?php echo $performanceobject->value ?></td>
+                <td><?php echo $performanceobject->created_at->format("F j, Y h:i a") ?></td>
             </tr>
         <?php endforeach; ?>
         </tbody>
@@ -49,7 +45,7 @@
             ],
         "aoColumns": [
                 null, null,
-                null, null, { "bSortable": false }
+                null, null
             ]
     } );    
     
