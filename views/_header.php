@@ -25,6 +25,7 @@
                     <li><a href="<?php url('PerformanceObjects.index'); ?>">Performance Objects</a></li>
                     <li><a href="<?php url('Modules.index'); ?>">Modules</a></li>
                     <li><a href="<?php url('Users.index'); ?>">Admin Users</a></li>
+                    <li><a href="<?php url('Account.logout'); ?>">Logout</a></li>
                 </ul>
             </nav><?php endif; ?>
             <div class="content">

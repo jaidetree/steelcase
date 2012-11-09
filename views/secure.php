@@ -1,7 +1,7 @@
 <?php echo render('_header') ?>
-<h1>You can now see the secure content!</h1>
+<h1>Steelcase Administration Panel</h1>
 <div class="page">
-	<br/>
-	<iframe width="560" height="315" src="http://www.youtube.com/embed/9bZkp7q19f0" frameborder="0" allowfullscreen></iframe>
+    <h2>Welcome</h2>
+    <p>You are now logged into the Steelcase Administration system. Use the navigation on the left to work with the administrative modules.</p>
 </div>
 <?php echo render('_footer') ?>

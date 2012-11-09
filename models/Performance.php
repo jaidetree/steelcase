@@ -2,7 +2,7 @@
 class Performance extends ActiveRecord\Model
 {
     static $has_many = array(
-        array('performanceobjects'),
+        array('performance_objects'),
     );
     static $belongs_to = array(
         array('trainee'),
