@@ -94,7 +94,10 @@ class APP
     {
         return self::$modules[$name];
     }
-
+    public static function get($name)
+    {
+        return self::module($name);
+    }
 }
 APP::init();
 ?>
