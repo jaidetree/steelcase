@@ -4,30 +4,38 @@
  * to which URLS using regex patterns.
  */
 $routes = array(
-    array( '^$', 'pages.home' ),
-    array( '^secure/$', 'pages.secure' ),
-    array( '^login/$', 'account.login'),
+    array( '^api/(.*)', 'api.route'),
+    array( '^$', 'Pages.home' ),
+    array( '^secure/$', 'Pages.secure'),
+    array( '^login/$', 'Account.login'),
+    array( '^logout/$', 'Account.logout'),
     
-    array( '^glossary/$', 'glossary.index'),
-    array( '^glossary/add/$', 'glossary.add'),
-    array( '^glossary/([-a-z]+)/$', 'glossary.show'),
-    array( '^glossary/([-a-z]+)/delete/$', 'glossary.delete'),
-    array( '^glossary/([-a-z]+)/edit/$', 'glossary.edit'),
+    array( '^glossary/$', 'Glossary.index'),
+    array( '^glossary/add/$', 'Glossary.add'),
+    array( '^glossary/([-a-z0-9]+)/$', 'Glossary.show'),
+    array( '^glossary/([-a-z0-9]+)/delete/$', 'Glossary.delete'),
+    array( '^glossary/([-a-z0-9]+)/edit/$', 'Glossary.edit'),
 
-    array( '^trainee/$', 'trainee.index'),
-    array( '^trainee/([-a-z]+)/$', 'trainee.show'),
-    array( '^trainee/([-a-z]+)/edit/$', 'trainee.edit'),
-    array( '^trainee/add/$', 'trainee.add'),
-    array( '^trainee/([-a-z]+)/update/$', 'trainee.update'),
+    array( '^trainees/$', 'Trainees.index'),
+    array( '^trainees/([0-9]+)/$', 'Trainees.show'),
+    array( '^trainees/([0-9]+)/edit/$', 'Trainees.edit'),
+    array( '^trainees/add/$', 'Trainees.add'),
+    array( '^trainees/([0-9]+)/update/$', 'Trainees.update'),
 
-    array( '^performance/([-a-z]+)/$', 'performance.show'),
-    array( '^performance/([-a-z]+)/edit/$', 'performance.edit'),
-    array( '^performance/([-a-z]+)/update/$', 'performance.update'),
+    array( '^performances/$', 'Performances.index'),
+    array( '^performances/([0-9]+)/$', 'Performances.show'),
 
-    array( '^module/([-a-z]+)/$', 'module.show'),
-    array( '^module/([-a-z]+)/edit/$', 'module.edit'),
-    array( '^module/([-a-z]+)/update/$', 'module.update'),
+    array( '^performanceobjects/$', 'PerformanceObjects.index'),
+    array( '^performanceobjects/([0-9]+)/$', 'PerformanceObjects.show'),
 
-    array( '^log/([-a-z]+)/$', 'log.show'),
+    array( '^module/$', 'Modules.index'),
+    array( '^module/([0-9]+)/edit/$', 'Modules.edit'),
+    array( '^module/([0-9]+)/delete/$', 'Modules.delete'),
+    array( '^module/add/$', 'Modules.add'),
+    
+    array( '^users/$', 'Users.index'),
+    array( '^users/add/$', 'Users.add'),
+    array( '^users/([0-9]+)/edit/$', 'Users.edit'),
+    array( '^users/([0-9]+)/reset/$', 'Users.reset'),
 );
 ?>

@@ -12,7 +12,7 @@ class PagesController extends Controller
          * Is used as our homepage. It's job is to render the homepage content
          * and display the latest comic.
          */
-        return new TemplateResponse('home');
+        return new TemplateResponse('account/login');
     }        
 
     function secure()

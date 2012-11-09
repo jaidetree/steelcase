@@ -3,6 +3,9 @@
  * This page basically loads everything.
  */
 error_reporting( E_ALL & ~E_NOTICE );
+@ini_set("display_errors", 1);
+@ini_set('date.timezone', 'America/Detroit');
+
 define( 'ROOT', dirname( __FILE__ ) . '/' );
 
 require_once ROOT . "includes/app.class.php";
@@ -39,7 +42,11 @@ $files = array(
     "auth.php",
     "standardauth.class.php",
     "html.php",
+    "validators.php",
+    "fieldwidgets.php",
     "fields.php",
+    "api.php",
+    "forms.php"
 );
 
 /**
@@ -68,7 +75,6 @@ ActiveRecord\Config::initialize(function($cfg)
     ));
 });
 
-Auth::init()->set_driver( new StandardAuth() );
 /** 
  * Load our Controllers 
  */
@@ -84,18 +90,10 @@ while( ($file = $dir->read()) !== false )
         continue;
     }
     require_once $controller_dir . $file;
-    $name = ucwords(basename($file, ".class.php"));
-    $class_name = $name . "Controller";
-
-    if( class_exists( $class_name ) )
-    {
-        $object = new $class_name();
-
-        APP::add_controller($name, $object);
-    }
 }
 /**
  * Authentication initialization
  */
-Auth::init()->start();
+Auth::driver(new StandardAuth());
+Auth::driver()->start();
 ?>

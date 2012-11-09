@@ -1,0 +1,178 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Performance &mdash; Steelcase API 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Steelcase API 1.0 documentation" href="../index.html" />
+    <link rel="up" title="Models" href="models.html" />
+    <link rel="next" title="Trainee" href="trainee.html" />
+    <link rel="prev" title="Module" href="module.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="trainee.html" title="Trainee"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="module.html" title="Module"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Steelcase API 1.0 documentation</a> &raquo;</li>
+          <li><a href="models.html" accesskey="U">Models</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="performance">
+<span id="index-0"></span><h1>Performance<a class="headerlink" href="#performance" title="Permalink to this headline">¶</a></h1>
+<p>Contains the performances for each module through out a session.</p>
+<div class="section" id="fields">
+<h2>Fields<a class="headerlink" href="#fields" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>id</dt>
+<dd><div class="first last line-block">
+<div class="line">Integer representing the unique id of the entry.</div>
+</div>
+</dd>
+<dt>score</dt>
+<dd><div class="first last line-block">
+<div class="line">Decimal the score earned on each module.</div>
+</div>
+</dd>
+<dt>duration</dt>
+<dd><div class="first last line-block">
+<div class="line">Float duration in seconds of time it took to complete module.</div>
+</div>
+</dd>
+<dt>module_id</dt>
+<dd><div class="first last line-block">
+<div class="line">Integer refering to a module in the modules model. See <a class="reference internal" href="module.html"><em>Module</em></a> for more information.</div>
+</div>
+</dd>
+<dt>trainee_id</dt>
+<dd><div class="first last line-block">
+<div class="line">Integer refering to a trainee in the trainee model. See <a class="reference internal" href="trainee.html"><em>Trainee</em></a> for more information.</div>
+</div>
+</dd>
+<dt>created_at</dt>
+<dd><div class="first last line-block">
+<div class="line">Timestamp representing when the entry was created.</div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="sql">
+<h2>SQL<a class="headerlink" href="#sql" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><pre>--
+-- Table structure for table `performances`
+--
+
+DROP TABLE IF EXISTS `performances`;
+CREATE TABLE IF NOT EXISTS `performances` (
+  `id` int(12) NOT NULL AUTO_INCREMENT,
+  `score` decimal(10,3) NOT NULL,
+  `duration` float NOT NULL,
+  `module_id` int(12) NOT NULL,
+  `trainee_id` int(12) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1;</pre>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Performance</a><ul>
+<li><a class="reference internal" href="#fields">Fields</a></li>
+<li><a class="reference internal" href="#sql">SQL</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="module.html"
+                        title="previous chapter">Module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="trainee.html"
+                        title="next chapter">Trainee</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/models/performance.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="trainee.html" title="Trainee"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="module.html" title="Module"
+             >previous</a> |</li>
+        <li><a href="../index.html">Steelcase API 1.0 documentation</a> &raquo;</li>
+          <li><a href="models.html" >Models</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Jay Zawrotny, Wes Kempa.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

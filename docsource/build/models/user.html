@@ -1,0 +1,168 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>User &mdash; Steelcase API 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Steelcase API 1.0 documentation" href="../index.html" />
+    <link rel="up" title="Models" href="models.html" />
+    <link rel="prev" title="Trainee" href="trainee.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="trainee.html" title="Trainee"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Steelcase API 1.0 documentation</a> &raquo;</li>
+          <li><a href="models.html" accesskey="U">Models</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="user">
+<span id="index-0"></span><h1>User<a class="headerlink" href="#user" title="Permalink to this headline">¶</a></h1>
+<p>The User admin module is only used in the Administrative CMS and completely ignored by the API.</p>
+<div class="section" id="fields">
+<h2>Fields<a class="headerlink" href="#fields" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>id</dt>
+<dd><div class="first last line-block">
+<div class="line">Integer representing the unique id of the entry.</div>
+</div>
+</dd>
+<dt>username</dt>
+<dd><div class="first last line-block">
+<div class="line">Username to identify the administrators.</div>
+</div>
+</dd>
+<dt>password</dt>
+<dd><div class="first last line-block">
+<div class="line">A salted, blowfish encrypted password.</div>
+</div>
+</dd>
+<dt>email</dt>
+<dd><div class="first last line-block">
+<div class="line">Email of the administrative user.</div>
+</div>
+</dd>
+<dt>type</dt>
+<dd><div class="first last line-block">
+<div class="line">Integer representing the administrative level/powers of the user.</div>
+</div>
+</dd>
+<dt>status</dt>
+<dd><div class="first last line-block">
+<div class="line">Integer representing the status of this user and whether they can log in or not. See <a class="reference internal" href="models.html#status-fields"><em>Status Fields</em></a> for more information.</div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="sql">
+<h2>SQL<a class="headerlink" href="#sql" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><pre>--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(12) NOT NULL AUTO_INCREMENT,
+  `username` varchar(100) COLLATE utf8_bin NOT NULL,
+  `password` varchar(255) COLLATE utf8_bin NOT NULL,
+  `email` varchar(255) COLLATE utf8_bin NOT NULL,
+  `type` int(3) NOT NULL DEFAULT '0',
+  `status` int(3) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1;</pre>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">User</a><ul>
+<li><a class="reference internal" href="#fields">Fields</a></li>
+<li><a class="reference internal" href="#sql">SQL</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="trainee.html"
+                        title="previous chapter">Trainee</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/models/user.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="trainee.html" title="Trainee"
+             >previous</a> |</li>
+        <li><a href="../index.html">Steelcase API 1.0 documentation</a> &raquo;</li>
+          <li><a href="models.html" >Models</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Jay Zawrotny, Wes Kempa.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

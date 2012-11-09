@@ -9,7 +9,23 @@
         <link rel="stylesheet" href="<?php static_url(); ?>css/style.css">
         <script src="<?php static_url(); ?>js/jquery-1.8.2.min.js"></script>
         <script src="<?php static_url(); ?>js/jquery.dataTables.min.js"></script>
+        <script src="<?php static_url(); ?>js/ZeroClipboard.min.js"></script>
+        <script src="<?php static_url(); ?>js/modal.js"></script>
         <script src="<?php static_url(); ?>js/crud.js"></script>
     </head>
     <body>
         <div id="wrapper">
+        <?php if (Auth::is_logged_in()): ?>
+            <nav>
+                <ul>
+                    <li><a href="<?php url('Pages.secure'); ?>">Dashboard</a></li>
+                    <li><a href="<?php url('Glossary.index'); ?>">Glossary</a></li>
+                    <li><a href="<?php url('Trainees.index'); ?>">Trainees</a></li>
+                    <li><a href="<?php url('Performances.index'); ?>">Performance</a></li>
+                    <li><a href="<?php url('PerformanceObjects.index'); ?>">Performance Objects</a></li>
+                    <li><a href="<?php url('Modules.index'); ?>">Modules</a></li>
+                    <li><a href="<?php url('Users.index'); ?>">Admin Users</a></li>
+                    <li><a href="<?php url('Account.logout'); ?>">Logout</a></li>
+                </ul>
+            </nav><?php endif; ?>
+            <div class="content">

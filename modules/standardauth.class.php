@@ -91,7 +91,8 @@ class StandardAuth extends AuthDriver
 
     public function logout()
     {
-        session_destroy();
+        unset($_SESSION['user']);
+        send_message('info', 'You are now logged out.');
         Context::response(new RedirectResponse('account.login'));
     }
 
@@ -109,6 +110,12 @@ class StandardAuth extends AuthDriver
              */
             return new stdClass();
         }
+    }
+
+    public function encrypt($password)
+    {
+        $bcrypt = new BCrypt(15);
+        return $bcrypt->hash($password);
     }
 
     private function create_session($user)

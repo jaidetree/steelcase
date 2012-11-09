@@ -1,0 +1,183 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Working with JSON in ActionScript 3 &mdash; Steelcase API 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Steelcase API 1.0 documentation" href="../index.html" />
+    <link rel="up" title="Understanding JSON" href="../json.html" />
+    <link rel="next" title="API Functions" href="../api_list.html" />
+    <link rel="prev" title="Understanding JSON" href="../json.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../api_list.html" title="API Functions"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../json.html" title="Understanding JSON"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Steelcase API 1.0 documentation</a> &raquo;</li>
+          <li><a href="../json.html" accesskey="U">Understanding JSON</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="working-with-json-in-actionscript-3">
+<span id="index-0"></span><h1>Working with JSON in ActionScript 3<a class="headerlink" href="#working-with-json-in-actionscript-3" title="Permalink to this headline">¶</a></h1>
+<p>In order to use Flash ActionScript 3&#8217;s <tt class="docutils literal"><span class="pre">JSON</span></tt> class you will need to be using Flash CS6 or later.</p>
+<div class="section" id="receiving-json">
+<h2>Receiving JSON<a class="headerlink" href="#receiving-json" title="Permalink to this headline">¶</a></h2>
+<p>Instructions for processing a response from the web API server.</p>
+<div class="section" id="in-raw-as3">
+<h3>In Raw AS3<a class="headerlink" href="#in-raw-as3" title="Permalink to this headline">¶</a></h3>
+<p>To work with a JSON Object outside of our JSON library the process is still fairly simple:</p>
+<div class="highlight-python"><pre>var json_string:String = '{
+    "status": "ok",
+    "message": "This is a test.",
+    "error_code": -1,
+    "employee_id": "555555-555",
+    last_visited: "November 2, 2012"
+}';
+var Data:Object = JSON.parse( json_string );
+trace( Data.employee_id );</pre>
+</div>
+<p>In this example we&#8217;re creating a basic json_string that contains a JSON formatted string. Normally it would be recieved as part of a URLLoader callback.</p>
+</div>
+<div class="section" id="with-the-library">
+<h3>With the Library<a class="headerlink" href="#with-the-library" title="Permalink to this headline">¶</a></h3>
+<p>To use our Library to work with JSON just do as follows:</p>
+<div class="highlight-python"><pre>trainee_login('555555-555', function(response){
+    trace( response.data.employee_id );
+});</pre>
+</div>
+<p>In this function we are logging in a trainee by sending the employee_id as a string. Realistically this would come from user input. The callback is then called with the data after processing the response within the library with data that contains the employee_id attribute of the JSON response object.</p>
+</div>
+</div>
+<div class="section" id="sending-json">
+<h2>Sending JSON<a class="headerlink" href="#sending-json" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3>In Raw AS3<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>Preparing a JSON response in AS3 is fairly simple and starts with regular flash objects.</p>
+<div class="highlight-python"><pre>var raw_data:Object = {
+    employee_id: '555555-555',
+};
+var json_message:String = JSON.stringify(raw_data);
+trace( raw_data );</pre>
+</div>
+</div>
+<div class="section" id="id2">
+<h3>With the Library<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>To use our Library to work with JSON just do as follows:</p>
+<div class="highlight-python"><pre>trainee_login('555555-555', function(response){
+    trace( response.data.employee_id );
+});</pre>
+</div>
+<p>The code for this is the same as the recieving example because our library allows you to handle sending and receiving a response within the same function.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Working with JSON in ActionScript 3</a><ul>
+<li><a class="reference internal" href="#receiving-json">Receiving JSON</a><ul>
+<li><a class="reference internal" href="#in-raw-as3">In Raw AS3</a></li>
+<li><a class="reference internal" href="#with-the-library">With the Library</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#sending-json">Sending JSON</a><ul>
+<li><a class="reference internal" href="#id1">In Raw AS3</a></li>
+<li><a class="reference internal" href="#id2">With the Library</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../json.html"
+                        title="previous chapter">Understanding JSON</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../api_list.html"
+                        title="next chapter">API Functions</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/json/working_json.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../api_list.html" title="API Functions"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../json.html" title="Understanding JSON"
+             >previous</a> |</li>
+        <li><a href="../index.html">Steelcase API 1.0 documentation</a> &raquo;</li>
+          <li><a href="../json.html" >Understanding JSON</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Jay Zawrotny, Wes Kempa.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

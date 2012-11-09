@@ -7,7 +7,9 @@ class APP
 {
     static $data = array();
     static $urls = array();
-    static $controllers = array();
+    static $modules = array();
+    static $functions = array();
+    private static $errors_handled = false;
 
     public static $db;
 
@@ -16,93 +18,83 @@ class APP
         return self::$data[$section][$key];
     }
 
+    /**
+     * Init
+     */
     public static function init()
     {
         include ROOT . "config.php";
         self::$data = $config;
-        include ROOT . "routes.php";
-        self::$urls = $routes;
-
     }
 
-    public static function load_route($url)
+    /**
+     * Allows shortcut functions through the app.
+     */
+    public static function __callStatic($name, $arguments)
     {
-        $url = preg_replace('/\?.*$/', '', $url);
-        foreach( self::$urls as $route )
+        if( ! self::function_exists($name) )
         {
-            if( preg_match( '#' . $route[0] . '#', $url, $args ) )
+            $error_msg = 'Module function does not exist: ' . $name;
+
+            if( ! self::$errors_handled )
             {
-                array_shift($args);
-
-                $data = explode(".", $route[1]);
-
-                $controller = $data[0];
-                $action = $data[1];
-
-                self::call_action( $controller, $action, $args ); 
-                return;
+                trigger_error($error_msg);
             }
+            else
+            {
+                throw new Exception($error_msg);
+            }
+            return false;
         }
 
-        self::call_action( 'errors', 'notfound_404', array() );
+        return call_user_func_array(self::get_function($name), $arguments);
     }
 
-    public static function add_controller( $name, $object )
+    public static function function_exists($name)
     {
-        $name = strtolower( $name );
-        self::$controllers[ $name ] = &$object;
-    }
-
-    /**
-     * Grab the controller from our controllers array.
-     */
-    public static function controller( $controller_name )
-    {
-        return self::$controllers[ $controller_name ];
-    }
-
-
-    /**
-     * Call the method on the controller.
-     */
-    public static function call_action( $controller_name, $action, $args )
-    {
-        $controller = self::controller( $controller_name );
-        $controller->route( $action, $args );
-    }
-
-    /**
-     * Reverse a URL by it's controller/view
-     */
-    public static function url($path, $args=array())
-    {
-        foreach( self::$urls as $idx => $route )
+        if( array_key_exists($name, self::$functions) )
         {
-            if( $route[1] === $path )
-            {
-                $url = $route[0];
-                $url = preg_replace("/(\(.+\)+)/Ums", "%s", $url);
-                $url = preg_replace('/[\[\]^\$\?]/', "", $url);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
-                if( ( is_array($args) && sizeof($args) > 0 ) || is_numeric($args) )
-                {
-                    $url = vsprintf( $url, $args );
-                }
-
-                $url = preg_replace('/\/$/', '', $url) . '/';
-
-                if( $url == "/" )
-                {
-                    $url = "";
-                }
-
-                return 'http://' . $_SERVER['HTTP_HOST'] . '/' . $url;
-
-            }
+    /**
+     * Register function.
+     */
+    public static function register_function($class, $function, $short_name="")
+    {
+        if( ! $short_name )
+        {
+            $short_name = $function;
         }
 
-        return "#error";
+        self::$functions[$short_name] = array( $class, $function );
     }
+
+    public static function get_function($name)
+    {
+        return self::$functions[$name];
+    }
+
+    public static function register_module($class)
+    {
+        if( ! $name )
+        {
+            $name = get_class($class);
+        }
+        $name = strtolower($name);
+        return self::$modules[$name] = $class;
+    }
+
+    public static function module($name)
+    {
+        return self::$modules[$name];
+    }
+
 }
 APP::init();
 ?>
