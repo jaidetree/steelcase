@@ -35,29 +35,36 @@ class Performance extends Module
 
         $performance->save();
 
-        $message = "A Performance was created. ";
+        $message = "A Performance was created.";
 
-
-        if( is_array($data['module_id'])==0 ){
-
-            foreach($data['meta'] as $key => $value):
-
-                $performanceobject = new \PerformanceObject();
-
-                $performanceobject->key = $key;
-                $performanceobject->value = $value;
-                $performanceobject->performance_id = $performance->id;
-
-                $performanceobject->save();
-
-            endforeach;
-
-            $message .= sizeof($data['meta'])." related Performance Objects were created.";
-
-        }
+        $this->process_meta($data['meta'],$performance->id);
 
         $this->respond($performance, $message);
 
-    }   
+    } 
+
+    function process_meta($meta,$performance_id){
+
+        foreach($meta as $key => $value){
+
+            if( ! is_numeric($value) && ! is_string($value) && ! is_bool($value) ){
+                $value = serialize($value);
+            } 
+
+            $this->add_performance($key, $value, $performance_id);
+
+        }
+
+    }
+
+    function add_performance($key,$value,$performance_id){
+        $performanceobject = new \PerformanceObject();
+
+        $performanceobject->key = $key;
+        $performanceobject->value = $value;
+        $performanceobject->performance_id = $performance_id;
+
+        $performanceobject->save();
+    }  
 }
 ?>

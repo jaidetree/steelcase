@@ -19,6 +19,7 @@ Application Models
    glossary
    module
    performance
+   performanceobject
    trainee
    user
 

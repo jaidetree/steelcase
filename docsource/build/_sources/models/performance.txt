@@ -18,6 +18,8 @@ module_id
     | Integer refering to a module in the modules model. See :doc:`/models/module` for more information.
 trainee_id
     | Integer refering to a trainee in the trainee model. See :doc:`/models/trainee` for more information.
+data
+    | JSON collection that contains the performance object keys and values. See :doc:`/models/performanceobject` for more information.
 created_at
     | Timestamp representing when the entry was created.
 

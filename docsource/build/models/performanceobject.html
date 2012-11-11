@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Performance &mdash; Steelcase API 1.0 documentation</title>
+    <title>Performance Object &mdash; Steelcase API 1.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -27,8 +27,8 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="Steelcase API 1.0 documentation" href="../index.html" />
     <link rel="up" title="Models" href="models.html" />
-    <link rel="next" title="Performance Object" href="performanceobject.html" />
-    <link rel="prev" title="Module" href="module.html" /> 
+    <link rel="next" title="Trainee" href="trainee.html" />
+    <link rel="prev" title="Performance" href="performance.html" /> 
   </head>
   <body>
     <div class="related">
@@ -38,10 +38,10 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="performanceobject.html" title="Performance Object"
+          <a href="trainee.html" title="Trainee"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="module.html" title="Module"
+          <a href="performance.html" title="Performance"
              accesskey="P">previous</a> |</li>
         <li><a href="../index.html">Steelcase API 1.0 documentation</a> &raquo;</li>
           <li><a href="models.html" accesskey="U">Models</a> &raquo;</li> 
@@ -53,9 +53,9 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="performance">
-<span id="index-0"></span><h1>Performance<a class="headerlink" href="#performance" title="Permalink to this headline">¶</a></h1>
-<p>Contains the performances for each module through out a session.</p>
+  <div class="section" id="performance-object">
+<span id="index-0"></span><h1>Performance Object<a class="headerlink" href="#performance-object" title="Permalink to this headline">¶</a></h1>
+<p>Contains the performance objects for each performance within a session allowing future data types to be stored.</p>
 <div class="section" id="fields">
 <h2>Fields<a class="headerlink" href="#fields" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
@@ -64,29 +64,19 @@
 <div class="line">Integer representing the unique id of the entry.</div>
 </div>
 </dd>
-<dt>score</dt>
+<dt>key</dt>
+<dd><div class="first last line-block">
+<div class="line">String representing the data for this performance object</div>
+</div>
+</dd>
+<dt>value</dt>
+<dd><div class="first last line-block">
+<div class="line">Data stored within this performance object</div>
+</div>
+</dd>
+<dt>performance_id</dt>
 <dd><div class="first last line-block">
 <div class="line">Decimal the score earned on each module.</div>
-</div>
-</dd>
-<dt>duration</dt>
-<dd><div class="first last line-block">
-<div class="line">Float duration in seconds of time it took to complete module.</div>
-</div>
-</dd>
-<dt>module_id</dt>
-<dd><div class="first last line-block">
-<div class="line">Integer refering to a module in the modules model. See <a class="reference internal" href="module.html"><em>Module</em></a> for more information.</div>
-</div>
-</dd>
-<dt>trainee_id</dt>
-<dd><div class="first last line-block">
-<div class="line">Integer refering to a trainee in the trainee model. See <a class="reference internal" href="trainee.html"><em>Trainee</em></a> for more information.</div>
-</div>
-</dd>
-<dt>data</dt>
-<dd><div class="first last line-block">
-<div class="line">JSON collection that contains the performance object keys and values. See <a class="reference internal" href="performanceobject.html"><em>Performance Object</em></a> for more information.</div>
 </div>
 </dd>
 <dt>created_at</dt>
@@ -99,19 +89,18 @@
 <div class="section" id="sql">
 <h2>SQL<a class="headerlink" href="#sql" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><pre>--
--- Table structure for table `performances`
+-- Table structure for table `performance_objects`
 --
 
-DROP TABLE IF EXISTS `performances`;
-CREATE TABLE IF NOT EXISTS `performances` (
-  `id` int(12) NOT NULL AUTO_INCREMENT,
-  `score` decimal(10,3) NOT NULL,
-  `duration` float NOT NULL,
-  `module_id` int(12) NOT NULL,
-  `trainee_id` int(12) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+DROP TABLE IF EXISTS `performance_objects`;
+CREATE TABLE IF NOT EXISTS `performance_objects` (
+   `id` int(12) NOT NULL AUTO_INCREMENT,
+  `key` varchar(20) COLLATE utf8_bin NOT NULL,
+  `value` text COLLATE utf8_bin NOT NULL,
+  `performance_id` int(12) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1;</pre>
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;</pre>
 </div>
 </div>
 </div>
@@ -124,7 +113,7 @@ CREATE TABLE IF NOT EXISTS `performances` (
         <div class="sphinxsidebarwrapper">
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Performance</a><ul>
+<li><a class="reference internal" href="#">Performance Object</a><ul>
 <li><a class="reference internal" href="#fields">Fields</a></li>
 <li><a class="reference internal" href="#sql">SQL</a></li>
 </ul>
@@ -132,14 +121,14 @@ CREATE TABLE IF NOT EXISTS `performances` (
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="module.html"
-                        title="previous chapter">Module</a></p>
+  <p class="topless"><a href="performance.html"
+                        title="previous chapter">Performance</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="performanceobject.html"
-                        title="next chapter">Performance Object</a></p>
+  <p class="topless"><a href="trainee.html"
+                        title="next chapter">Trainee</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
-    <li><a href="../_sources/models/performance.txt"
+    <li><a href="../_sources/models/performanceobject.txt"
            rel="nofollow">Show Source</a></li>
   </ul>
 <div id="searchbox" style="display: none">
@@ -166,10 +155,10 @@ CREATE TABLE IF NOT EXISTS `performances` (
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="performanceobject.html" title="Performance Object"
+          <a href="trainee.html" title="Trainee"
              >next</a> |</li>
         <li class="right" >
-          <a href="module.html" title="Module"
+          <a href="performance.html" title="Performance"
              >previous</a> |</li>
         <li><a href="../index.html">Steelcase API 1.0 documentation</a> &raquo;</li>
           <li><a href="models.html" >Models</a> &raquo;</li> 
