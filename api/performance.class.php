@@ -38,7 +38,7 @@ class Performance extends Module
         $message = "A Performance was created. ";
 
 
-        if( is_array($data['module_id'])==0 ){
+        if( is_array($data['meta'])==0 ){
 
             foreach($data['meta'] as $key => $value):
 
