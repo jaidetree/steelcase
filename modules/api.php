@@ -244,7 +244,7 @@ abstract class Module
                 {
                     $data[$key]  = $value->format("F j, Y h:i a");
                 }
-                if( is_subclass_of($value, 'ActiveRecord\Model') )
+                elseif( is_object($value) && is_subclass_of($value, 'ActiveRecord\Model') )
                 {
                     $data[$key] = $this->model2array($value);
                 }
