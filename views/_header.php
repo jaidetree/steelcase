@@ -12,6 +12,9 @@
         <script src="<?php static_url(); ?>js/ZeroClipboard.min.js"></script>
         <script src="<?php static_url(); ?>js/modal.js"></script>
         <script src="<?php static_url(); ?>js/crud.js"></script>
+        <script src="http://code.highcharts.com/highcharts.js"></script>
+		<script src="http://code.highcharts.com/modules/exporting.js"></script>
+        <script src="<?php static_url(); ?>js/test.js"></script>
     </head>
     <body>
         <div id="wrapper">
