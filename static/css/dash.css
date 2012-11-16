@@ -1,0 +1,94 @@
+@charset "utf-8";
+/* CSS Document */
+body {
+	background-color:#999;
+}
+	
+#main {
+	width: 550px;
+	height: 450px;
+	float: left;
+	padding-left: 10px;
+
+}
+#side {
+	width: 200px;
+	height: 800px;
+	float: left;
+	margin-left: 320px;
+
+}
+#main ul{
+	list-style:none;
+	width: 100%;
+}
+
+#main li {
+	margin: 10px;
+	background-color: #729322;
+	width:auto;
+	font-family:Arial, Helvetica, sans-serif;
+	color:#FFF;
+	font-size:18px;
+	padding: 5px;
+	border-bottom-right-radius: 5px 5px;
+}
+#main li .box {
+	width: auto;
+	height: 30px;
+	background-color:#FFF;
+	margin-left: 50px;
+	padding: 5px;
+	color: #333;
+	border-bottom-right-radius: 5px 5px;
+}
+.ribbon1 {
+	background-image:url(/static/images/images/ribbon1.png);
+	width:40px;
+	height:65px;
+	float:left;
+	margin-right:10px;
+}
+.ribbon2 {
+	background-image:url(/static/images/images/ribbon2.png);
+	width:40px;
+	height:65px;
+	float:left;
+	margin-right:10px;
+}
+.ribbon3 {
+	background-image:url(/static/images/images/ribbon3.png);
+	width:40px;
+	height:65px;
+	float:left;
+	margin-right:10px;
+}
+
+#graph {
+	width: 500px;
+ 	height: 400px;
+	background-color:#FFF;
+	margin-top: 10px;
+	float: right;
+	padding: 5px;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	border-bottom-right-radius: 5px 5px;
+
+}
+
+#prevLogin {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:18px;
+	margin-top: 50px;
+	width:450px;
+	height: 12px;
+	margin-left: 10px;
+
+}
+
+#prevLogin li {
+	background-color:#FFF;
+	color:#333;
+	border-style:none;
+}
