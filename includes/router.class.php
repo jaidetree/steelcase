@@ -30,7 +30,7 @@ class Router
             }
         }
 
-        $this->call_action( 'errors', 'notfound_404', array() );
+        $this->call_action( 'Errors.notfound_404', array() );
     }
 
 

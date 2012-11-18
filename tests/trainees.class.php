@@ -2,9 +2,9 @@
 class TraineeTest extends Test
 {
     private $data = array();
-    public function test_can_create()
+    public function test_create()
     {
-        for($i=0;$i<=20;$i++)
+        for($i=0;$i<=1000;$i++)
         {
             $trainee = new Trainee();
             $trainee->employee_id = md5($i);
@@ -19,8 +19,7 @@ class TraineeTest extends Test
         $this->assert_equal($trainee->save(true), true);
         $this->data[] = $trainee;
     }
-
-    public function teardown()
+    public function test_delete()
     {
         foreach($this->data as $trainee)
         {

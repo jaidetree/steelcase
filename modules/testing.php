@@ -1,15 +1,19 @@
 <?php
 /** 
  * Tester.
+ * Sets up the routes
+ * Loads the tests.
  */
 class Tester
 {
     private $tests;
     public function __construct()
     {
-        APP::modules()->router->append( '^test/$', 'Tests.index');
-        APP::modules()->router->append( '^test/([-_a-z]+)/$', 'Tests.run');
+        APP::modules()->router->append( '^testing/$', 'Tests.index');
+        APP::modules()->router->append( '^testing/verbose/$', 'Tests.verbose');
+        APP::modules()->router->append( '^testing/([-_a-z]+)/$', 'Tests.run');
         $this->tests = new Collection();
+
         APP::modules()->observer->attach(new TestLogger(), 'TestRunner');
     }   
 
@@ -64,20 +68,36 @@ class TestsController extends Controller
 
         $html = HTML::div();
         $ul = HTML::ul();
+        $page = HTML::div(array( 'class' => 'page', 'style' => 'margin: 1em;' ));
 
+        $ul->style = "margin: 1em;";
         foreach( APP::modules()->tester->get() as $name=>$item )
         {
             $li = HTML::li();
             $object = $item->object;
             $test = HTML::li(HTML::a(array(
                 'href' => APP::url('Tests.run', array( slugify($name) )),
-            ), $name ));
+            ), $item->name ));
 
             $li->insert($test);
             $ul->insert($li);
         }
         $html->insert(HTML::h1('Tests'));
-        $html->insert($ul);
+        $html->insert(render('_status'));
+        
+        if( $_SESSION['test_verbose'] )
+        {
+            $verbose = "on";
+        }
+        else
+        {
+            $verbose = "off";
+        }
+        $a = HTML::a(array( 'href' => APP::url('Tests.verbose') ), 'Toggle Verbose Mode');
+        $page->insert(HTML::p('Verbose mode is ' . $verbose . ' ' . $a));
+        $page->insert(HTML::p('Run any of the following tests:'));
+        $page->insert($ul);
+        $html->insert($page);
 
         echo render('_header');
         echo new HTMLResponse($html);
@@ -90,22 +110,44 @@ class TestsController extends Controller
 
         foreach( APP::modules()->tester->get() as $test)
         {
-            new TestRunner($test->object);
+            new TestRunner($test->object, $_SESSION['test_verbose']);
         }
+    }
+
+    public function verbose()
+    {
+        login_required();
+
+        if( ! $_SESSION['test_verbose'] )
+        {
+            $_SESSION['test_verbose'] = true;
+            send_message('status', 'Verbose mode activated.');
+        }
+        else
+        {
+            $_SESSION['test_verbose'] = false;
+            send_message('status', 'Verbose mode deactivated.');
+        }
+
+        return new RedirectResponse(APP::url('Tests.index'));
     }
 }
 
 class TestRunner
 {
-    public function __construct($test_object)
+    public function __construct($test_object, $verbose=false)
     {
-       $class = new ReflectionClass($test_object);
-       APP::notify(get_class(), 'start_testing', array( $class ));
-       if( is_callable(array( $test_object, 'setup')) )
-       {
-           APP::notify(get_class(), 'setup', array( $class->getMethod('setup') ));
-           $test_object->setup();
-       }
+        $class = new ReflectionClass($test_object);
+
+        $test_object->verbose($verbose);
+
+        APP::notify(get_class(), 'start_testing', array( $class ));
+
+        if( is_callable(array( $test_object, 'setup')) )
+        {
+            APP::notify(get_class(), 'setup', array( $class->getMethod('setup') ));
+            $test_object->setup();
+        }
 
        foreach($class->getMethods(ReflectionMethod::IS_PUBLIC) as $method)
        {
@@ -113,14 +155,18 @@ class TestRunner
             {
                 continue;
             }
+
             APP::notify(get_class(), 'start_test', array( $method ));
-            try{ 
+
+            try
+            { 
                 $method->invoke($test_object);
             }
             catch (Exception $e)
             {
                 $test_object->error($e->getMessage());
             }
+
             $result = $test_object->status();
             APP::notify(get_class(), 'ran', array( $method, $result));
             $test_object->reset_status();
@@ -142,7 +188,7 @@ class TestLogger
     {
         TestPrinter::start();
         self::$total_time = microtime(true);
-        TestPrinter::headline('Started Test: ' . $class->name);
+        TestPrinter::headline('STARTED TEST: ' . $class->name);
     }
     function finished_testing($class, $errors=0)
     {
@@ -174,6 +220,7 @@ class TestLogger
         }
         $time = HTML::span(array( 'style' => "font-weight: bold;color: blue;" ), round((microtime(true) - self::$timer), 5));
         TestPrinter::action($status . $tag . ' in ' . $time . ' seconds.', 2);
+        TestPrinter::rule('-');
     }
 
     function teardown()
@@ -195,14 +242,14 @@ class TestPrinter
    {
         echo $object . "\n"; 
    }
-   public static function rule()
+   public static function rule($char="=")
    {
-        self::send(new TestPrintRule());
+        self::send(new TestPrintRule($char));
    }
    public static function headline($line)
    {  
         self::send(new TestPrintRule());
-        self::send(new TestPrintHeader(date( 'h:i:s a' ) . ': ' . $line));
+        self::send(new TestPrintHeader(strtoupper(date( 'h:i:s a' )) . ': ' . $line));
         self::send(new TestPrintRule());
    }
    public static function action($line, $indent=1)
@@ -228,13 +275,19 @@ class TestPrintDisplay
 }
 class TestPrintRule extends TestPrintDisplay
 {
-    public function __construct()
+    public function __construct($char="=")
     {
+        $this->data = $char;
     }
 
     public function output()
     {
-        return str_repeat('=', 100);
+        $suffix = "";
+        if( $this->data != '=' )
+        {
+            $suffix = "\n";
+        }
+        return $suffix . str_repeat($this->data, 100) . $suffix;
     }
 }
 class TestPrintHeader extends TestPrintDisplay
@@ -245,7 +298,7 @@ class TestPrintHeader extends TestPrintDisplay
     }
     public function output()
     {
-        return strtoupper($this->data);
+        return $this->data;
     }
 }
 class TestPrintLine extends TestPrintDisplay
@@ -268,8 +321,16 @@ class TestPrintError extends TestPrintLine
         return str_repeat("\t", $this->indent) . $tag;
     }
 }
+class TestPrintLineBreak extends TestPrintDisplay
+{
+    public function output()
+    {
+        return "\n\n";
+    }
+}
 class Test
 {
+    protected $verbose = false;
     protected $status = true;
     protected $_errors = 0;
     public function status()
@@ -295,6 +356,10 @@ class Test
 
     public function output()
     {
+        if( ! $this->verbose )
+        {
+            return false;
+        }
         $args = func_get_args();
         $message = array_shift($args);
 
@@ -345,6 +410,10 @@ class Test
         }
 
         return true;
+    }
+    public function verbose($mode)
+    {
+        $this->verbose = $mode;
     }
 }
 
