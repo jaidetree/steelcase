@@ -7,7 +7,7 @@ class APP
 {
     static $data = array();
     static $urls = array();
-    static $modules = array();
+    static $extra = array();
     static $functions = array();
     private static $errors_handled = false;
 
@@ -87,16 +87,27 @@ class APP
             $name = get_class($class);
         }
         $name = strtolower($name);
-        return self::$modules[$name] = $class;
+        return self::modules()->append($name, $class);
     }
 
     public static function module($name)
     {
-        return self::$modules[$name];
+        return self::$extra['modules']->$name;
     }
-    public static function get($name)
+    public static function modules()
     {
-        return self::module($name);
+        return self::$extra['modules'];
+    }
+
+    public static function run($class, $function, $arguments=array())
+    {
+        $module = self::module($class);
+        call_user_func_array( array( $module, $function ), $arguments);
+    }
+
+    public static function set($variable, $value)
+    {
+        self::$extra[$variable] = $value;
     }
 }
 APP::init();

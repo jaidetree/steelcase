@@ -47,7 +47,8 @@ $files = array(
     "fields.php",
     "api.php",
     "forms.php",
-    "observer.class.php"
+    "observer.class.php",
+    "testing.php"
 );
 
 /**
@@ -114,4 +115,6 @@ while( ($file = $dir->read()) !== false )
  */
 Auth::driver(new StandardAuth());
 Auth::driver()->start();
+
+APP::modules()->tester->load_tests();
 ?>

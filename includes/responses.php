@@ -1,9 +1,12 @@
 <?php
 class Response
 {
+    protected $data;
+
+
     public function render() 
     {
-        return "";
+        return '';
     }
 
     public function __toString()
@@ -12,10 +15,22 @@ class Response
     }
 }
 
+class TextResponse extends Response 
+{
+    public function __construct($text)
+    {
+        $this->data = $text;
+    }
+
+    public function render()
+    {
+        echo $this->data;
+        return parent::render();
+    }
+}
 class TemplateResponse extends Response
 {
     private $template;
-    private $data;
 
     public function __construct($template, $data=array())
     {
@@ -80,6 +95,23 @@ class JSONResponse extends Response
     {
         header('Content-Type: text/json');
         echo json_encode($this->_data);
+        return parent::render();
+    }
+}
+class HTMLResponse extends Response
+{
+    public function __construct($content)
+    {
+        if( ! is_a($content, 'HTMLTag') )
+        {
+            throw new Exception('Object must be a HTMLTag type, instead it was a ' . get_class($content));
+        }
+        $this->data = $content;
+    }
+
+    public function render()
+    {
+        echo $this->data->html();
         return parent::render();
     }
 }

@@ -8,7 +8,7 @@ class Observer
         APP::register_function($this, 'notify');
     }
 
-    public function attach($subject, $object)
+    public function attach($object, $subject)
     {
         $class = new ReflectionClass($object);        
         $subject = strtolower($subject);
@@ -19,15 +19,20 @@ class Observer
         }
     }
 
-    public function notify($subject, $method)
+    public function notify($subject, $method, $args=array())
     {
         $subject = strtolower($subject);
+
+        if( ! array_key_exists($subject, $this->observers) )
+        {
+            return false;
+        }
 
         foreach( $this->observers[$subject] as $observer_method )
         {
             if( $observer_method[1] == $method )
             {
-                call_user_func($observer_method);
+                call_user_func_array($observer_method, $args);
             }
         }
     }
