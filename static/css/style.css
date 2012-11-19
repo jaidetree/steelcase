@@ -76,11 +76,16 @@ table td{
 	margin: 0;
 }
 .add-new{
-	background-color: #719028;
-	background-image:url(../images/images/plus.png);
-	background-repeat:no-repeat;
+	background: #719028 url(../images/images/plus.png) no-repeat 10% 0%;
 	color:white;
 	margin-bottom:20px;
+}
+.add-new > a {
+	color: #fff;	
+	background: url(../images/datatable/add.png) no-repeat;
+	display: block;
+	line-height: 32px;
+	padding-left: 40px;
 }
 div.page{
 	padding:0 10px;
