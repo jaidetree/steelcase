@@ -8,7 +8,14 @@ class AccountController extends Controller
         $username = $_POST['username'];
         $password = $_POST['password'];
 
-        if( ( ! $username or ! $password ) and ! Auth::is_logged_in() ) {
+
+        if( Auth::is_logged_in() ) 
+        {
+            send_message('status', "You are already logged in.");
+            return new RedirectResponse('pages.secure');
+        }
+        if( ( ! $username or ! $password ) and ! Auth::is_logged_in() ) 
+        {
             return new TemplateResponse('account/login');
         }
         else

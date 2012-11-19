@@ -12,7 +12,12 @@ class PagesController extends Controller
          * Is used as our homepage. It's job is to render the homepage content
          * and display the latest comic.
          */
-        return new TemplateResponse('account/login');
+        if( ! Auth::is_logged_in() )
+        {
+            return new RedirectResponse('account.login');
+        } else {
+            return new RedirectResponse('pages.secure');
+        }
     }        
 
     function secure()

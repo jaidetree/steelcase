@@ -42,11 +42,12 @@ function url($path, $data=array())
 function bodyclass()
 {
     $class = Context::get('bodyclass');
+
     if( $class )
     {
         $class = " " . $class;
     }
-    return $class;
+    echo $class;
 }
 function is_selected($i, $value)
 {
