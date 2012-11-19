@@ -1,42 +1,44 @@
 <?php echo render('_header') ?>
-<link href="<?php static_url(); ?>css/dash.css" rel="stylesheet" type="text/css" />
 
-<h1>You can now see the secure content!</h1>
+<h1>Steelcase Training Dashboard</h1>
 
 <div class="page">
     <div id="main">
     	<ul>
         	<li>
-                <div class="ribbon1">
-                </div>1st place
-                <div class="box" > table stuff can go
+                <div class="ribbon1"></div> 1st place
+                <div class="box" >
+                    <a href="#">Trainee 321241</a> scored <b>99.5%</b><br/>
+                    <i>Monday November 19th, 2012 at 3:15 PM</i>
                 </div>
             </li>
             <li>
-                <div class="ribbon2">
-                </div>2nd place
-                <div class="box"> more table stuff can go here
+                <div class="ribbon2"></div> 2nd place
+                <div class="box">
+                    <a href="#">Trainee 345541</a> scored <b>94.4%</b> <br/>
+                    <i>Monday November 19th, 2012 at 3:15 PM</i>
                 </div>
             </li>
         	<li>
-                <div class="ribbon3">
-                </div>3rd place
-                <div class="box"> and alas, even more table stuff
+                <div class="ribbon3"></div> 3rd place
+                <div class="box">
+                    <a href="#">Trainee 421213</a> scored <b>93.7%</b> <br/>
+                    <i>Monday November 19th, 2012 at 3:15 PM</i>
                 </div>
             </li>
     	</ul>
         
         <div id="prevLogin">
-            Previous Logins
+            <h3>Most Recent Logins</h3>
         	<ul>
             	<li>
-                    guy
+                    <a href="#">Trainee 321241</a> on Monday November 19th, 2012 at 3:15 PM
                 </li>
                 <li>
-                    guy
+                    <a href="#">Trainee 345541</a> on Monday November 19th, 2012 at 1:30 PM
                 </li>
                 <li>
-                    guy
+                    <a href="#">Trainee 421213</a> on Monday November 19th, 2012 at 10:23 AM
                 </li>
             </ul>
         </div><!-- #prevLogin -->

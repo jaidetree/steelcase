@@ -16,6 +16,24 @@ input {
 	background: #FFF;
 }
 
+form td.label{
+	width:100px;
+	font-weight:bold;
+}
+
+form label{
+	width: 115px;
+	height:35px;
+	font-weight:bold;
+	display: inline-block;
+}
+
+form input[type='text'],
+input[type="password"],
+form textarea {
+	width:350px;
+}
+
 input[type="text"], input[type="password"], input[type="file"], input[type="submit"], input[type="button"], input[type="reset"], select, textarea, .textarea, button {
 	background-image: url(../images/forms/input_shadow.png);
 	background-repeat: no-repeat;
