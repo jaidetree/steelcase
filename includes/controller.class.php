@@ -15,5 +15,10 @@ class Controller
             (string)$response;
         }
     }
+
+    function bodyclass($string)
+    {
+        Context::set('bodyclass', $string);
+    }
 }
 ?>

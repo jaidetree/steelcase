@@ -3,6 +3,8 @@ class AccountController extends Controller
 {
     function login()
     {
+        $this->bodyclass('login');
+        
         $username = $_POST['username'];
         $password = $_POST['password'];
 

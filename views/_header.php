@@ -31,4 +31,4 @@
                     <li><a href="<?php url('Account.logout'); ?>">Logout</a></li>
                 </ul>
             </nav><?php endif; ?>
-            <div class="content">
+            <div class="content<?php bodyclass(); ?>">
