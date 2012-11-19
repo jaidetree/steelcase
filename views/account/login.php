@@ -4,7 +4,7 @@
 
 <style>
 
-    .login.content {
+    .content {
         width: 500px;
         float: none;
         margin-right: auto;
