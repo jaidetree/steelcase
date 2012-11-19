@@ -1,5 +1,5 @@
 <?php echo render('_header') ?>
-<h1>Performance Objects Index</h1>
+<h1>Performance Objects <?php echo $context ?></h1>
 <?php echo render('_status') ?>
 <br/>
 <div class="page">

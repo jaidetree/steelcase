@@ -9,6 +9,7 @@
             <tr>
                 <th>ID</th>
                 <th>Name</th>
+                <th>Performance</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -17,6 +18,11 @@
             <tr>
                 <td><?php echo $module->id ?></td>
                 <td><?php echo $module->name ?></td>
+                <td>
+                    <a href="<?php url('performances.by_module', array($module->id)) ?>">
+                        <?php echo count($module->performances) ?> Records
+                    </a>
+                </td>
                 <td class="actions">
                     <a class="edit" href="<?php url('modules.edit', array($module->id)) ?>"></a>
                     <a class="delete" href="<?php url('modules.delete', array($module->id)) ?>"></a>

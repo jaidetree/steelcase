@@ -1,5 +1,5 @@
 <?php echo render('_header') ?>
-<h1>Performances Index</h1>
+<h1>Performances Index <?php echo $context ?></h1>
 <?php echo render('_status') ?>
 
 <br/>
@@ -9,6 +9,7 @@
             <tr>
                 <th>Trainee</th>
                 <th>Module</th>
+                <th width="70">Performance Objects</th>
                 <th>Score</th>
                 <th>Duration</th>
                 <th>Time Started</th>
@@ -20,6 +21,11 @@
             <tr>
                 <td><?php echo $performance->trainee->employee_id ?></td>
                 <td><?php echo $performance->module->name ?></td>
+                <td>
+                    <a href="<?php url('performanceobjects.by_performance', array($performance->id)) ?>">
+                        <?php echo count($performance->performance_objects) ?> Records
+                    </a>
+                </td>
                 <td><?php echo $performance->score ?></td>
                 <td><?php echo $performance->duration ?></td>
                 <td><?php echo $performance->created_at->format("F j, Y h:i a") ?></td>

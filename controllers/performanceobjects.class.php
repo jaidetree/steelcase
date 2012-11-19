@@ -10,6 +10,16 @@ class PerformanceObjectsController extends Controller
         return new TemplateResponse('performanceobjects/index', array( 'performanceobjects' => $performanceobjects ));
     }   
 
+    public function by_performance($performance_id)
+    {
+        @login_required();
+
+        $performance = Performance::find($performance_id);
+        return new TemplateResponse('performanceobjects/index', array(
+             'performanceobjects' => $performance->performance_objects,
+             'context' => " for Trainee ".$performance->trainee->employee_id."'s  ".$performance->module->name." performance" ));
+    }   
+
     public function show($id)
     {
         @login_required();

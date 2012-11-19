@@ -23,9 +23,12 @@ $routes = array(
     array( '^trainees/([0-9]+)/edit/$', 'Trainees.edit'),
 
     array( '^performances/$', 'Performances.index'),
+    array( '^performances/module/([0-9]+)/$', 'Performances.by_module'),
+    array( '^performances/trainee/([0-9]+)/$', 'Performances.by_trainee'),
     array( '^performances/([0-9]+)/$', 'Performances.show'),
 
     array( '^performanceobjects/$', 'PerformanceObjects.index'),
+    array( '^performanceobjects/performance/([0-9]+)/$', 'PerformanceObjects.by_performance'),
     array( '^performanceobjects/([0-9]+)/$', 'PerformanceObjects.show'),
 
     array( '^module/$', 'Modules.index'),

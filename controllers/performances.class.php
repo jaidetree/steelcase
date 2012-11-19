@@ -10,6 +10,27 @@ class PerformancesController extends Controller
         return new TemplateResponse('performances/index', array( 'performances' => $performances ));
     }   
 
+    public function by_trainee($trainee_id)
+    {
+        @login_required();
+
+        $trainee = Trainee::find($trainee_id);
+        return new TemplateResponse('performances/index', array(
+            'performances' => $trainee->performances,
+             'context' => " for Trainee ".$trainee->employee_id ));
+    }   
+
+    public function by_module($module_id)
+    {
+        @login_required();
+
+        $module = Module::find($module_id);
+        
+        return new TemplateResponse('performances/index', array(
+            'performances' => $module->performances,
+             'context' => " for ".$module->name));
+    }   
+
     public function edit($id)
     {
         @login_required();
