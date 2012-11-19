@@ -46,7 +46,9 @@ $files = array(
     "fieldwidgets.php",
     "fields.php",
     "api.php",
-    "forms.php"
+    "forms.php",
+    "observer.class.php",
+    "testing.php"
 );
 
 /**
@@ -91,9 +93,28 @@ while( ($file = $dir->read()) !== false )
     }
     require_once $controller_dir . $file;
 }
+
+/** 
+ * Load our Controllers 
+ */
+$observer_dir = ROOT . 'observers/';
+$dir = dir($observer_dir);
+
+//require_once( $controller_dir . 'context.class.php' );
+
+while( ($file = $dir->read()) !== false )
+{
+    if( ! preg_match( '/\.class\.php$/', $file ) )
+    {
+        continue;
+    }
+    require_once $observer_dir . $file;
+}
 /**
  * Authentication initialization
  */
 Auth::driver(new StandardAuth());
 Auth::driver()->start();
+
+APP::modules()->tester->load_tests();
 ?>

@@ -17,10 +17,10 @@ $routes = array(
     array( '^glossary/([-a-z0-9]+)/edit/$', 'Glossary.edit'),
 
     array( '^trainees/$', 'Trainees.index'),
-    array( '^trainees/([0-9]+)/$', 'Trainees.show'),
-    array( '^trainees/([0-9]+)/edit/$', 'Trainees.edit'),
     array( '^trainees/add/$', 'Trainees.add'),
-    array( '^trainees/([0-9]+)/update/$', 'Trainees.update'),
+    array( '^trainees/([0-9]+)/$', 'Trainees.show'),
+    array( '^trainees/([0-9]+)/delete/$', 'Trainees.delete'),
+    array( '^trainees/([0-9]+)/edit/$', 'Trainees.edit'),
 
     array( '^performances/$', 'Performances.index'),
     array( '^performances/([0-9]+)/$', 'Performances.show'),

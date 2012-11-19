@@ -15,9 +15,22 @@ class HTML
     );
     public static function __callStatic($name, $arguments)
     {
+        if( ! is_array( $arguments[0]) )
+        {
+            $arguments[1] = $arguments[0];
+            $arguments[0] = array();
+        }
+        if( ! $arguments[0] )
+        {
+            $arguments[0] = array();
+        }
+        if( ! $arguments[1] )
+        {
+            $arguments[1] = false;
+        }
         return self::tag($name, $arguments[0], $arguments[1]);
     }
-    public static function tag($tag_name, $content = false, $attributes = array()) 
+    public static function tag($tag_name, $attributes = array(), $content = false) 
     {
         $self_closing = false;
 
@@ -105,6 +118,11 @@ class HTMLTag
     public function __toString()
     {
         return $this->html();
+    }
+
+    public function content()
+    {
+        return $this->content;
     }
 
     /**

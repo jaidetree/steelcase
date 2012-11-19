@@ -11,6 +11,11 @@ class Router
         APP::register_function($this, 'reverseurl', 'url');
     }
 
+    public function append($route, $action)
+    {
+        array_push(self::$urls, array( $route, $action));
+    }
+
     public function load_route($url)
     {
         $url = preg_replace('/\?.*$/', '', $url);
@@ -20,17 +25,12 @@ class Router
             {
                 array_shift($args);
 
-                $data = explode(".", $route[1]);
-
-                $controller = $data[0];
-                $action = $data[1];
-
-                $this->call_action( $controller, $action, $args ); 
+                $this->call_action( $route[1], $args ); 
                 return;
             }
         }
 
-        $this->call_action( 'errors', 'notfound_404', array() );
+        $this->call_action( 'Errors.notfound_404', array() );
     }
 
 
@@ -38,8 +38,16 @@ class Router
     /**
      * Call the method on the controller.
      */
-    public function call_action( $controller_name, $action, $args )
+    public function call_action( $route, $args)
     {
+        if( is_callable($route) )
+        {
+            call_user_func_array($route, $args);
+            return;
+        }
+
+        list($controller_name, $action ) = explode(".", $route);
+
         if( class_exists( $controller_name . 'Controller') )
         {
             $controller_name .= "Controller";
