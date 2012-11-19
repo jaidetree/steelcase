@@ -71,6 +71,7 @@ class TestsController extends Controller
         $page = HTML::div(array( 'class' => 'page', 'style' => 'margin: 1em;' ));
 
         $ul->style = "margin: 1em;";
+
         foreach( APP::modules()->tester->get() as $name=>$item )
         {
             $li = HTML::li();
@@ -82,9 +83,10 @@ class TestsController extends Controller
             $li->insert($test);
             $ul->insert($li);
         }
+
         $html->insert(HTML::h1('Tests'));
         $html->insert(render('_status'));
-        
+
         if( $_SESSION['test_verbose'] )
         {
             $verbose = "on";
@@ -93,7 +95,9 @@ class TestsController extends Controller
         {
             $verbose = "off";
         }
+
         $a = HTML::a(array( 'href' => APP::url('Tests.verbose') ), 'Toggle Verbose Mode');
+
         $page->insert(HTML::p('Verbose mode is ' . $verbose . ' ' . $a));
         $page->insert(HTML::p('Run any of the following tests:'));
         $page->insert($ul);
@@ -328,6 +332,21 @@ class TestPrintLineBreak extends TestPrintDisplay
         return "\n\n";
     }
 }
+
+class TestError extends Exception
+{
+    public function __construct($message="", $code=0, $exception=NULL)
+    {
+        parent::__construct($message, $code, $exception);    
+    }
+
+    public function __toString()
+    {
+        TestPrinter::error( $this->message );
+        return ' ';
+    }
+}
+
 class Test
 {
     protected $verbose = false;
@@ -344,8 +363,11 @@ class Test
 
     public function error($message)
     {
+        $data = debug_backtrace();
+        $data[1]['file'] = basename( $data[1]['file'] );
+        $error_msg = vsprintf("Error in %s on line %s in %s", $data[0]);
         $this->_errors++;
-        TestPrinter::error($message);
+        TestPrinter::error( $message . "\n\t\t" . $error_msg);
         $this->status = false;
     }
 
@@ -380,7 +402,6 @@ class Test
         else
         {
             $this->error('Condition should pass but failed: ' . $error_message );
-            var_dump($condition);
             return false;
         }
     }
@@ -389,7 +410,6 @@ class Test
         if( $condition === true )
         {
             $this->error('Condition should fail but passed: ' . $error_message );
-            var_dump($condition);
             return true;
         }
         else
@@ -411,23 +431,150 @@ class Test
 
         return true;
     }
+    public function assert_not_equal()
+    {
+        $args = func_get_args();
+        foreach($args as $idx=>$arg)
+        {
+            if( $idx > 0 && $arg[$idx] === $arg[$idx-1] )
+            {
+                $this->error(sprintf('Assert failed: %s does equal %s', $arg[$idx-1], $arg[$idx]));
+                return false;
+            }
+        }
+
+        return true;
+    }
     public function verbose($mode)
     {
         $this->verbose = $mode;
     }
 }
-
-class TestError extends Exception
+class CRUDTest extends Test
 {
-    public function __construct($message="", $code=0, $exception=NULL)
+    protected $model = "stdObject";
+    protected $controller = "TraineesController";
+
+    public function test_create()
     {
-        parent::__construct($message, $code, $exception);    
+        $columns = call_user_func( $this->model . '::Table')->columns;
+        for($i=0;$i<=1000;$i++)
+        {
+            $model = new $this->model();
+            foreach($columns as $column)
+            {
+                $column_name = $column->name;
+                if( $column_name == "id" )
+                {
+                    continue;
+                }
+                $model->$column_name = md5(time());
+            }
+            $this->output("saving model: " . $this->model . ' id: ' . $columns[0]['name']);
+            $this->should_pass($model->save(), 'Saving model ' . $this->model . '.');
+            $this->data[] = $model;
+        }
     }
 
-    public function __toString()
+    public function test_read()
     {
-        TestPrinter::error( $this->message );
-        return ' ';
+        $data = call_user_func( $this->model . '::all');
+        $this->should_pass(count($data) > 0, 'The number of rows should be more than 0.');
+
+        foreach( $data as $item )
+        {
+            $this->should_pass(is_object($item), 'The collection of rows should be an item.');
+        }
+    }
+
+    public function test_update()
+    {
+        $columns = array_values(call_user_func( $this->model . '::Table')->columns);
+        $data = $this->data;
+
+        $this->should_pass(count($data) > 0, 'The number of rows should be more than 0 in test_update.');
+
+        foreach( $data as $item )
+        {
+            $name = $columns[1]->name;
+            $item->$name = base64_encode(md5(time()));
+            $this->should_pass($item->save(), 'The table ' . $this->model . ' could not be updated.');
+        }
+    }
+
+    public function test_delete()
+    {
+       foreach( $this->data as $item ) 
+       {
+            $this->should_pass($item->delete(), 'Tried deleting item ' . $item->id );
+       }
+    }
+
+    public function test_routes()
+    {
+        $controller = new ReflectionClass($this->controller);
+
+        foreach( $controller->getMethods(ReflectionMethod::IS_PUBLIC) as $method )
+        {
+            if( $method->name == "route" )
+            {
+                continue;
+            }
+
+            $method_class = str_replace('Controller', '', $method->class);
+            $method_name = trim($method->name);
+
+            $url = APP::url($method_class . '.' . $method_name ); 
+
+            if( $url == "#error" )
+            {
+                $this->error( "Could not find route to " . $method_class . ' ' . $method_name );
+            }
+            else
+            {
+                $this->should_pass( preg_match('#^http(.*)/$#i', trim($url)) == 1, 'URL reversal not working for ' . $url );
+            }
+        }
+    }
+
+    public function test_controller()
+    {
+
+        $controller = new ReflectionClass($this->controller);
+
+        foreach( $controller->getMethods(ReflectionMethod::IS_PUBLIC) as $method )
+        {
+            if( $method->name == "route" )
+            {
+                continue;
+            }
+
+            $method_class = str_replace('Controller', '', $method->class);
+            $method_name = trim($method->name);
+
+            $url = APP::url($method_class . '.' . $method_name ); 
+
+            if( $url == "#error" )
+            {
+                $this->error( "Could not find route to " . $method_class . ' ' . $method_name );
+            }
+            else
+            {
+                $this->should_pass( preg_match('#^http(.*)/$#i', trim($url)) == 1, 'URL reversal not working for ' . $url );
+            }
+
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_FRESH_CONNECT, true);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_VERBOSE, true);
+            @session_write_close();
+            $result = curl_exec($ch);
+            curl_close($ch);
+            @session_start();
+
+            $this->should_fail( preg_match( '/401|Error|Not Found/', $result) == 1, "An error occured when testing " . $url . htmlentities($result) );
+        }
     }
 }
 ?>
