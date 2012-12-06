@@ -23,9 +23,9 @@ class Performance extends Module
             $this->error('Not a valid duration. Must be a number');
         }
 
-        if( ! $data['employee_id'] or strlen($data['employee_id']) < 8  )
+        if( ! $data['employee_id'] or strlen($data['employee_id']) < 5  )
         {
-            $this->error('Not a valid trainee_id. Must contain 8 or more characters.');
+            $this->error('Not a valid trainee_id. Must contain 5 or more characters.');
         }
 
         $performance->score = $data['score'];

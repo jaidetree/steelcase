@@ -28,5 +28,23 @@ class PerformanceObjectsController extends Controller
         return new TemplateResponse('performanceobjects/show', array('performanceobjects' => $performanceobject));
 
     }
+    public function delete($id)
+    {
+        if( $_SERVER['REQUEST_METHOD'] !== "DELETE") 
+        {
+            return new Error404Response();
+        }
+        if( Auth::is_logged_in() ) 
+        {
+            $performanceobject = PerformanceObject::find($id);
+            $performanceobject->delete(); 
+            return new JSONResponse(array( 'status' => 'success' ));
+        }
+        else 
+        {
+            return new JSONResponse(array( 'status' => 'fail', 'message' => 'You are not logged in!'));
+        }
+
+    }
 }
 ?>

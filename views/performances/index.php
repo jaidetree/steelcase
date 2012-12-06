@@ -13,6 +13,7 @@
                 <th>Score</th>
                 <th>Duration</th>
                 <th>Time Started</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -29,6 +30,9 @@
                 <td><?php echo $performance->score ?></td>
                 <td><?php echo $performance->duration ?></td>
                 <td><?php echo $performance->created_at->format("F j, Y h:i a") ?></td>
+                <td class="actions">
+                    <a class="delete" href="<?php url('performances.delete', array($performance->id)) ?>"></a>
+                </td>
             </tr>
         <?php endforeach; ?>
         </tbody>
@@ -55,8 +59,13 @@
             ],
         "aoColumns": [
                 null, null,
+                null, null,
                 null, null, { "bSortable": false }
-            ]
+            ],
+        "fnDrawCallback": function( oSettings ) {
+            $('table a.delete').unbind("click")
+            $('table a.delete').click(delete_item);
+          }
     } );    
     
 </script>

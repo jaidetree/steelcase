@@ -54,7 +54,11 @@
         "aoColumns": [
                 null, null,
                 null, null, { "bSortable": false }
-            ]
+            ],
+        "fnDrawCallback": function( oSettings ) {
+            $('table a.reset-password').unbind("click")
+            $('table a.reset-password').click(reset_password);
+          }
     } );    
     
 </script>

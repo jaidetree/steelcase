@@ -74,7 +74,6 @@ class GlossaryController extends Controller
         }
         if( Auth::is_logged_in() ) 
         {
-
             $term = Glossary::find_by_slug($slug);
             $term->delete(); 
             return new JSONResponse(array( 'status' => 'success' ));

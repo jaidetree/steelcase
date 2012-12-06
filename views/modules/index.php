@@ -57,7 +57,11 @@
                 null, 
                 null, 
                 { "bSortable": false }
-            ]
+            ],
+        "fnDrawCallback": function( oSettings ) {
+            $('table a.delete').unbind("click")
+            $('table a.delete').click(delete_item);
+          }
     } );    
     
 </script>

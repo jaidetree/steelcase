@@ -24,7 +24,9 @@ class PagesController extends Controller
     {
         login_required();
 
-        return new TemplateResponse('secure');
+        $trainees = Trainee::find('all', array('order' => 'last_visited_at ASC','limit'=>3));
+        return new TemplateResponse('secure', array( 'trainees' => $trainees ));
+        
     }
 }
 ?>

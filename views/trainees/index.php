@@ -28,6 +28,7 @@
                 <td><?php echo $trainee->last_visited_at() ?></td>
                 <td><?php echo $trainee->status ?></td>
                 <td class="actions">
+                    <a class="report" href="<?php url('trainees.report', array($trainee->id)) ?>"></a>
                     <a class="edit" href="<?php url('trainees.edit', array($trainee->id)) ?>"></a>
                     <a class="delete" href="<?php url('trainees.delete', array($trainee->id)) ?>" class="delete"></a>
                 </td>
@@ -59,9 +60,13 @@
             ],
         "aoColumns": [
                 null, null,
-                null, null,
+                null, null, null,
                 { "bSortable": false }
-            ]
+            ],
+        "fnDrawCallback": function( oSettings ) {
+            $('table a.delete').unbind("click")
+            $('table a.delete').click(delete_item);
+          }
     } );    
     
 </script>

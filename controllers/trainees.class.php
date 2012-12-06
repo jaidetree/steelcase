@@ -43,7 +43,6 @@ class TraineesController extends Controller
 
     public function edit($id)
     {
-    
         @login_required();
 
         $trainee = Trainee::find($id);
@@ -63,6 +62,15 @@ class TraineesController extends Controller
         { 
             return new TemplateResponse('trainees/edit', array('trainee' => $trainee));
         }
+    }
+
+    public function report($id)
+    {
+        @login_required();
+
+        $trainee = Trainee::find($id);
+        
+        return new TemplateResponse('trainees/report', array('trainee' => $trainee));
     }
 
     public function delete($id)

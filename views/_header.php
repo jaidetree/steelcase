@@ -13,8 +13,6 @@
         <script src="<?php static_url(); ?>js/ZeroClipboard.min.js"></script>
         <script src="<?php static_url(); ?>js/modal.js"></script>
         <script src="<?php static_url(); ?>js/crud.js"></script>
-        <script src="<?php static_url(); ?>js/highcharts.js"></script>
-        <script src="<?php static_url(); ?>js/dashboard.js"></script>
     </head>
     <body>
         <div id="wrapper">

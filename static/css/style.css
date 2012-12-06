@@ -95,6 +95,7 @@ table td.actions{
 }
 a.edit,
 a.delete, 
+a.report, 
 a.reset-password {
 	width:20px;
 	height:20px;
@@ -106,6 +107,9 @@ a.edit{
 }
 a.delete{
 	background-image: url('../images/datatable/delete.png');
+}
+a.report{
+	background-image: url('../images/datatable/report.png');
 }
 a.reset-password{
 	background-image: url('../images/datatable/password_reset.png');
@@ -128,7 +132,7 @@ table.display {
 	background: #FFF;
 	border-radius: 10px;
 	padding: 5px 15px;
-	color: #fff;
+	color: #555;
 	width: 50%;
 	margin: 0 auto;
 }

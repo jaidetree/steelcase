@@ -71,5 +71,23 @@ class PerformancesController extends Controller
         return new TemplateResponse('performances/show', array('performance' => $performance));
 
     }
+    public function delete($id)
+    {
+        if( $_SERVER['REQUEST_METHOD'] !== "DELETE") 
+        {
+            return new Error404Response();
+        }
+        if( Auth::is_logged_in() ) 
+        {
+            $performance = Performance::find($id);
+            $performance->delete(); 
+            return new JSONResponse(array( 'status' => 'success' ));
+        }
+        else 
+        {
+            return new JSONResponse(array( 'status' => 'fail', 'message' => 'You are not logged in!'));
+        }
+
+    }
 }
 ?>

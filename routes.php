@@ -21,15 +21,18 @@ $routes = array(
     array( '^trainees/([0-9]+)/$', 'Trainees.show'),
     array( '^trainees/([0-9]+)/delete/$', 'Trainees.delete'),
     array( '^trainees/([0-9]+)/edit/$', 'Trainees.edit'),
+    array( '^trainees/([0-9]+)/report/$', 'Trainees.report'),
 
     array( '^performances/$', 'Performances.index'),
     array( '^performances/module/([0-9]+)/$', 'Performances.by_module'),
     array( '^performances/trainee/([0-9]+)/$', 'Performances.by_trainee'),
     array( '^performances/([0-9]+)/$', 'Performances.show'),
+    array( '^performances/([0-9]+)/delete/$', 'Performances.delete'),
 
     array( '^performanceobjects/$', 'PerformanceObjects.index'),
     array( '^performanceobjects/performance/([0-9]+)/$', 'PerformanceObjects.by_performance'),
     array( '^performanceobjects/([0-9]+)/$', 'PerformanceObjects.show'),
+    array( '^performanceobjects/([0-9]+)/delete/$', 'PerformanceObjects.delete'),
 
     array( '^module/$', 'Modules.index'),
     array( '^module/([0-9]+)/edit/$', 'Modules.edit'),
